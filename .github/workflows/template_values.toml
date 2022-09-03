@@ -1,0 +1,5 @@
+[values]
+gh-username = "cxx-gh"
+project-description = "Example of Cxx GitHub template"
+cmake-min-version = "3.23"
+cxx-standard = "23"
