@@ -19,13 +19,6 @@ jobs:
                     subfolder: template
                     template_values_file: .github/workflows/template_values.toml
 
-            -   name: Checkout old example
-                uses: actions/checkout@v3
-                with:
-                    repository: cxx-gh/cxx-gh-example
-                    path: old_example
-                    ssh-key: ${{ secrets.GH_EXAMPLE_DEPLOY_SECRET }}
-
             -   name: Deploy
                 uses: peaceiris/actions-gh-pages@v3
                 with:
