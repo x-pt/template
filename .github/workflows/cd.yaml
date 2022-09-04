@@ -26,6 +26,8 @@ jobs:
                     external_repository: cxx-gh/${{ env.PROJECT_NAME }}
                     publish_branch: main
                     publish_dir: ./${{ env.PROJECT_NAME }}
+                    # Set exclude_assets to empty for including the .github directory to deployment assets.
+                    exclude_assets: '.nojekyll'
                     user_name: 'github-actions[bot]'
                     user_email: 'github-actions[bot]@users.noreply.github.com'
                     full_commit_message: ${{ github.event.head_commit.message }}
