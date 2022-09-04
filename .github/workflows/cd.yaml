@@ -27,7 +27,8 @@ jobs:
                     publish_branch: main
                     publish_dir: ./${{ env.PROJECT_NAME }}
                     # Set exclude_assets to empty for including the .github directory to deployment assets.
-                    exclude_assets: '.nojekyll'
+                    exclude_assets: ''
+                    enable_jekyll: false
                     user_name: 'github-actions[bot]'
                     user_email: 'github-actions[bot]@users.noreply.github.com'
                     full_commit_message: ${{ github.event.head_commit.message }}
