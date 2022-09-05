@@ -22,8 +22,22 @@ type = "string"
 prompt = "Cxx standard version?"
 regex = "^[0-9]+$"
 
-#[conditional.'crate_type == "lib"']
-#ignore = [ "src/main.rs" ]
-#
-#[conditional.'crate_type == "bin"']
-#ignore = [ "src/lib.rs" ]
+[placeholders.project-type]
+type = "string"
+prompt = "Which cxx project type?"
+choices = [
+    "bin",
+    "lib"
+]
+default = "bin"
+
+[conditional.'project-type == "bin"']
+ignore = ["src/library.h", "src/library.cpp"]
+
+[conditional.'project-type == "lib"'.placeholders.lib-type]
+ignore = ["src/main.cpp"]
+type = "string"
+prompt = "Which lib type?"
+choices = ["static", "shared"]
+default = "shared"
+
