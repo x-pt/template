@@ -1,43 +1,39 @@
 [template]
 cargo_generate_version = ">=0.10.0"
 
-[placeholders.gh-username]
+[placeholders.gh_uname]
 type = "string"
 prompt = "GitHub username (or organization)?"
 # The username cannot end with a hyphen, too, but
 # this requirement is not captured by the regex at the moment.
 regex = "^[A-Za-z0-9][A-Za-z0-9-]{0,38}$"
 
-[placeholders.project-description]
+[placeholders.proj_description]
 type = "string"
 prompt = "Project description?"
 
-[placeholders.cmake-min-version]
+[placeholders.cmake_min_version]
 type = "string"
 prompt = "CMake minimum version?"
 regex = "^[0-9]+(\\.[0-9]+){0,2}$"
 
-[placeholders.cxx-standard]
+[placeholders.cxx_standard_version]
 type = "string"
 prompt = "Cxx standard version?"
 regex = "^[0-9]+$"
 
-[placeholders.project-type]
+[placeholders.proj_type]
 type = "string"
 prompt = "Which cxx project type?"
-choices = [
-    "bin",
-    "lib"
-]
+choices = ["bin", "lib"]
 default = "bin"
 
-[conditional.'project-type == "bin"']
+[conditional.'proj_type == "bin"']
 ignore = ["src/library.h", "src/library.cpp"]
 
-[conditional.'project-type == "lib"'.placeholders.lib-type]
+[conditional.'proj_type == "lib"'.placeholders.lib_type]
 ignore = ["src/main.cpp"]
 type = "string"
 prompt = "Which lib type?"
 choices = ["static", "shared"]
 default = "shared"
-
