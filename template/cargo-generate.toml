@@ -28,12 +28,14 @@ prompt = "Which cxx project type?"
 choices = ["bin", "lib"]
 default = "bin"
 
-[conditional.'proj_type == "bin"']
-ignore = ["src/library.h", "src/library.cpp"]
-
 [conditional.'proj_type == "lib"'.placeholders.lib_type]
-ignore = ["src/main.cpp"]
 type = "string"
 prompt = "Which lib type?"
 choices = ["static", "shared"]
 default = "shared"
+
+[conditional.'proj_type == "bin"']
+ignore = ["src/library.h", "src/library.cpp"]
+
+[conditional.'proj_type == "lib"']
+ignore = ["src/main.cpp"]
