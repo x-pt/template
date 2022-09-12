@@ -9,7 +9,7 @@ jobs:
     build:
         runs-on: ubuntu-latest
         env:
-            PROJECT_NAME: cxx-gh-example
+            PROJECT_NAME: example
         steps:
             -   name: Checkout repository
                 uses: actions/checkout@v3
