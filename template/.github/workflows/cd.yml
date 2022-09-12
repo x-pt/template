@@ -42,20 +42,19 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
-      - name: Install Rust toolchain
-        uses: actions-rs/toolchain@v1
-        with:
-          toolchain: {{ "${{ matrix.rust " }}}}
-          profile: minimal
-          override: true
-      - uses: Swatinem/rust-cache@v1
-      - name: Cargo build
-        uses: actions-rs/cargo@v1
-        with:
-          command: build
-          use-cross: {{ "${{ matrix.job.use-cross " }}}}
-          toolchain: {{ "${{ matrix.rust " }}}}
-          args: --release --target {{ "${{ matrix.job.target " }}}}
+      - name: CMake Build
+        run: |
+            mkdir -p ./build
+            cd build
+            cmake ..
+            cmake --build . --config Release
+#      - name: Cargo build
+#        uses: actions-rs/cargo@v1
+#        with:
+#          command: build
+#          use-cross: {{ "${{ matrix.job.use-cross " }}}}
+#          toolchain: {{ "${{ matrix.rust " }}}}
+#          args: --release --target {{ "${{ matrix.job.target " }}}}
 
       - name: install strip command
         shell: bash
