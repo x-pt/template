@@ -1,5 +1,5 @@
 [values]
-gh_uname = "cxx-gh"
+gh_uname = "gh-proj"
 proj_description = "Example of Cxx GitHub template"
 cmake_min_version = "3.23"
 cxx_standard_version = "23"

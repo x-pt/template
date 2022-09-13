@@ -23,7 +23,7 @@ jobs:
                 uses: peaceiris/actions-gh-pages@v3
                 with:
                     deploy_key: ${{ secrets.GH_EXAMPLE_DEPLOY_SECRET }}
-                    external_repository: cxx-gh/${{ env.PROJECT_NAME }}
+                    external_repository: gh-proj/${{ env.PROJECT_NAME }}
                     publish_branch: main
                     publish_dir: ./${{ env.PROJECT_NAME }}
                     # Set exclude_assets to empty for including the .github directory to deployment assets.

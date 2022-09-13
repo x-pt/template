@@ -12,7 +12,7 @@ possible.
 ## Reporting issues
 
 Before reporting an issue on the
-[issue tracker](https://github.com/cxx-gh/template/issues),
+[issue tracker](https://github.com/gh-proj/template/issues),
 please check that it has not already been reported by searching for some related
 keywords.
 
@@ -31,5 +31,5 @@ GitHub actions variable are written in the format
 Of course, when doing `cargo generate` the ugly version is replaced with the
 expected one.
 
-See [Continuous delivery](https://github.com/cxx-gh/template/blob/main/.github/workflows/cd.yml)
+See [Continuous delivery](https://github.com/gh-proj/template/blob/main/.github/workflows/cd.yml)
 as an example.
