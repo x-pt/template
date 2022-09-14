@@ -4,7 +4,7 @@ on:
         branches: [ main ]
 
 jobs:
-    synchronize_example:
+    cxx_example:
         runs-on: ubuntu-latest
         env:
             PROJECT_NAME: example
@@ -16,7 +16,7 @@ jobs:
                 uses: cargo-generate/cargo-generate-action@v0.16.0
                 with:
                     name: ${{ env.PROJECT_NAME }}
-                    subfolder: template
+                    subfolder: template/cxx
                     template_values_file: .github/workflows/template_values.toml
 
             -   name: Deploy
@@ -31,5 +31,5 @@ jobs:
                     enable_jekyll: true
                     user_name: 'github-actions[bot]'
                     user_email: 'github-actions[bot]@users.noreply.github.com'
-                    full_commit_message: "ci: deploy a cxx sample by cargo generate"
+                    full_commit_message: "ci: :art: Cxx Sample"
                     force_orphan: true
