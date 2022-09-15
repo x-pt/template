@@ -22,6 +22,18 @@ type = "string"
 prompt = "Cxx standard version?"
 regex = "^[0-9]+$"
 
+[placeholders.cxx_standard_required]
+type = "string"
+prompt = "Cxx standard required?"
+choices = ["ON", "OFF"]
+default = "ON"
+
+[placeholders.cxx_extensions]
+type = "string"
+prompt = "Enable compiler-specific features OR NOT?"
+choices = ["ON", "OFF"]
+default = "OFF"
+
 [placeholders.proj_type]
 type = "string"
 prompt = "Which cxx project type?"
