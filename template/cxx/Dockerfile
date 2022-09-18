@@ -1,6 +1,6 @@
 # BUILDING
 FROM rockylinux:9 AS builder
-LABEL author="Mystic"
+LABEL author="{{authors}}"
 WORKDIR /app
 
 # build deps
@@ -20,8 +20,6 @@ RUN cmake .. && cmake --build . --target {{project-name}} --config Release --par
 # DEPLOYING
 FROM scratch
 
-WORKDIR /
+COPY --chmod=777 --from=builder /app/build/{{project-name}} /{{project-name}}
 
-COPY --from=builder /app/build/{{project-name}} ./
-
-ENTRYPOINT ["/{{project-name}}"]
+CMD ["/{{project-name}}", "-"]
