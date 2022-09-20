@@ -9,6 +9,9 @@ set(CMAKE_EXPORT_COMPILE_COMMANDS ON) # clangd completion
 file(GLOB SOURCES CONFIGURE_DEPENDS "${CMAKE_SOURCE_DIR}/src/*.cpp")
 
 {% if proj_type == "bin" -%}
+{% if bin_type == "static" -%}
+link_libraries("-static")
+{%- endif %}
 add_executable(${PROJECT_NAME} ${SOURCES})
 {%- elsif lib_type == "static" -%}
 # static

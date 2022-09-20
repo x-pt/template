@@ -40,6 +40,12 @@ prompt = "Which cxx project type?"
 choices = ["bin", "lib"]
 default = "bin"
 
+[conditional.'proj_type == "bin"'.placeholders.bin_type]
+type = "string"
+prompt = "Which bin compile type?"
+choices = ["static", "dynamic"]
+default = "dynamic"
+
 [conditional.'proj_type == "lib"'.placeholders.lib_type]
 type = "string"
 prompt = "Which lib type?"
