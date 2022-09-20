@@ -23,7 +23,11 @@ WORKDIR ./build
 RUN cmake .. && cmake --build . --target {{project-name}} --config Release --parallel 8
 
 # DEPLOYING
+{% if bin_type == "static" -%}
 FROM scratch
+{%- else -%}
+FROM rockylinux:9-minimal
+{%- endif %}
 
 COPY --from=builder /app/build/{{project-name}} /{{project-name}}
 
