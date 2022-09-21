@@ -8,6 +8,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- introduce the issue template
+- introduce the pull request template
+
 ### Changed
 
 ### Fixed
