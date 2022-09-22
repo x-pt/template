@@ -56,4 +56,4 @@ default = "shared"
 ignore = ["src/library.h", "src/library.cpp"]
 
 [conditional.'proj_type == "lib"']
-ignore = ["src/main.cpp", "Dockerfile", "docker-compose.yml"]
+ignore = ["src/main.cpp", "Dockerfile", "docker-compose.yml", ".github/workflows/docker.yml"]

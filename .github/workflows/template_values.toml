@@ -1,9 +1,9 @@
 [values]
 gh_uname = "x-pt"
 proj_description = "Example of Cxx GitHub template"
-cmake_min_version = "3.23"
+cmake_min_version = "3.20"
 cxx_standard_version = "23"
 cxx_standard_required = "OFF"
 cxx_extensions = "OFF"
-proj_type = "lib"
+proj_type = "bin"
 lib_type = "static"
