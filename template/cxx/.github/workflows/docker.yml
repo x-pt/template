@@ -37,8 +37,8 @@ jobs:
             -
                 name: Test it before Push
                 run: |
-                    docker run --rm {{gh_uname}}/{{project-name}}:latest
-                    docker run --rm {{gh_uname}}/{{project-name}}:0.1.0-beta
+                    docker run --rm ghcr.io/{{gh_uname}}/{{project-name}}:latest
+                    docker run --rm ghcr.io/{{gh_uname}}/{{project-name}}:0.1.0-beta
             -
                 name: Build and Push
                 uses: docker/build-push-action@v3
