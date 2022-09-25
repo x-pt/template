@@ -15,6 +15,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - keep Makefile even if it is a CMake project
 - remove audit action
+- image-building only triggers when a tag is pushed
 
 ### Fixed
 
