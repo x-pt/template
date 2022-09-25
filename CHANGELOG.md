@@ -8,12 +8,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- [template] introduce renovate
+- [template] introduce release action
+- [cpp] add renovate.json
 - [template] introduce the issue template
 - [template] introduce the pull request template
 
 ### Changed
 
-- [cpp] add renovate.json
 - [cpp] image-building only triggers when a tag is pushed
 - [cpp] remove audit action
 - [cpp] keep Makefile even if it is a CMake project
