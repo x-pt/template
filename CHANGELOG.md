@@ -13,6 +13,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
+- keep Makefile even if it is a CMake project
+- remove audit action
+
 ### Fixed
 
 ## [0.1.0-beta] - 2022-09-21
