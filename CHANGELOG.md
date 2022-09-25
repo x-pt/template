@@ -8,14 +8,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
-- introduce the issue template
-- introduce the pull request template
+- [template] introduce the issue template
+- [template] introduce the pull request template
 
 ### Changed
 
-- keep Makefile even if it is a CMake project
-- remove audit action
-- image-building only triggers when a tag is pushed
+- [cpp] add renovate.json
+- [cpp] image-building only triggers when a tag is pushed
+- [cpp] remove audit action
+- [cpp] keep Makefile even if it is a CMake project
 
 ### Fixed
 
@@ -23,11 +24,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
-- cpp project distinguishes static and dynamic
-- cpp project distinguishes binary and library
-- add Dockerfile for each startup project
-- add example project [x-pt/example](https://github.com/x-pt/example)
-- :sparkles: support python project # THE VERY BEGINNING
-- :sparkles: support golang project # THE VERY BEGINNING
-- :sparkles: support cpp project    # ALMOST DONE
-- :earth_asia: `cargo generate gh:x-pt/template`
+- [cpp] distinguishes static and dynamic
+- [cpp] distinguishes binary and library
+- [all] add Dockerfile for each startup project
+- [cpp] add example project [x-pt/example](https://github.com/x-pt/example)
+- :sparkles: [template] support python project # THE VERY BEGINNING
+- :sparkles: [template] support golang project # THE VERY BEGINNING
+- :sparkles: [template] support cpp project    # ALMOST DONE
+- :earth_asia: [template] `cargo generate gh:x-pt/template`
