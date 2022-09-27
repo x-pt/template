@@ -3,7 +3,7 @@ name: Build and Push Docker Image
 on:
     push:
         tags:
-            - '*'
+            - '^v[0-9]+\.[0-9]+\.[0-9]+.*$'
 
 jobs:
     docker:
@@ -36,12 +36,12 @@ jobs:
                     load: true
                     tags: |
                         ghcr.io/{{gh_uname}}/{{project-name}}:latest
-                        ghcr.io/{{gh_uname}}/{{project-name}}:$GITHUB_REF_NAME
+                        ghcr.io/{{gh_uname}}/{{project-name}}:${GITHUB_REF_NAME:1}
             -
                 name: Test it before Push
                 run: |
                     docker run --rm ghcr.io/{{gh_uname}}/{{project-name}}:latest
-                    docker run --rm ghcr.io/{{gh_uname}}/{{project-name}}:$GITHUB_REF_NAME
+                    docker run --rm ghcr.io/{{gh_uname}}/{{project-name}}:${GITHUB_REF_NAME:1}
             -
                 name: Build and Push
                 uses: docker/build-push-action@v3
@@ -51,4 +51,4 @@ jobs:
                     push: true
                     tags: |
                         ghcr.io/{{gh_uname}}/{{project-name}}:latest
-                        ghcr.io/{{gh_uname}}/{{project-name}}:$GITHUB_REF_NAME
+                        ghcr.io/{{gh_uname}}/{{project-name}}:${GITHUB_REF_NAME:1}
