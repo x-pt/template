@@ -8,6 +8,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- [all] add some default info to CHANGELOG template
 - [template] introduce renovate
 - [template] introduce release action
 - [cpp] add renovate.json
@@ -16,6 +17,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
+- [python] replace {{project-name}} dir with src dir
 - [cpp] image-building only triggers when a tag is pushed
 - [cpp] remove audit action
 - [cpp] keep Makefile even if it is a CMake project
