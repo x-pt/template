@@ -8,6 +8,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- [go] add GitHub Action jobs
 - [all] add some default info to CHANGELOG template
 - [template] introduce renovate
 - [template] introduce release action
