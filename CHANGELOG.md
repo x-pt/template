@@ -8,6 +8,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- [cpp] add `ccache` to speed up the compile-time
 - [go] add GitHub Action jobs
 - [all] add some default info to CHANGELOG template
 - [template] introduce renovate
