@@ -1,0 +1,7 @@
+# all starts with .(dot), including files and directories
+.*
+cargo-generate.toml
+CHANGELOG.md
+CODE_OF_CONDUCT.md
+CONTRIBUTING.md
+docker-compose.yml
