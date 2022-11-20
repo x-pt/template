@@ -2,6 +2,9 @@
 .*
 cargo-generate.toml
 CHANGELOG.md
-LICENSE*
+CODE_OF_CONDUCT.md
+CONTRIBUTING.md
 docker-compose.yml
+LICENSE*
+Makefile
 README.md
