@@ -19,8 +19,7 @@ RUN dnf upgrade --refresh -y && \
 
 COPY . .
 
-WORKDIR ./build
-RUN cmake .. && cmake --build . --target {{project-name}} --config Release --parallel 8
+RUN cmake -B build && cmake --build build --target {{project-name}} --config Release --parallel 8
 
 # DEPLOYING
 {% if bin_type == "static" -%}
