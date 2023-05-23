@@ -30,7 +30,7 @@ jobs:
                     password: {{ "${{ secrets.GITHUB_TOKEN " }}}}
             -
                 name: Build and Export to Docker
-                uses: docker/build-push-action@v3
+                uses: docker/build-push-action@v4
                 with:
                     context: .
                     load: true
@@ -44,7 +44,7 @@ jobs:
                     docker run --rm ghcr.io/{{gh_uname}}/{{project-name}}:${GITHUB_REF_NAME:1}
             -
                 name: Build and Push
-                uses: docker/build-push-action@v3
+                uses: docker/build-push-action@v4
                 with:
                     context: .
                     platforms: linux/amd64,linux/arm64
