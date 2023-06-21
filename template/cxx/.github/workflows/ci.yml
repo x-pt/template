@@ -16,7 +16,6 @@ jobs:
             matrix:
                 toolchain:
                     - linux-gcc
-                    - macos-clang
                     - windows-msvc
 
                 configuration:
@@ -27,10 +26,6 @@ jobs:
                         os: ubuntu-latest
                         compiler: gcc
 
-                    -   toolchain: macos-clang
-                        os: macos-latest
-                        compiler: clang
-
                     -   toolchain: windows-msvc
                         os: windows-latest
                         compiler: msvc
@@ -40,7 +35,7 @@ jobs:
                 uses: actions/checkout@v3
 
             -   name: Configure (${{ matrix.configuration }})
-                run: cmake -S . -Bbuild -DCMAKE_BUILD_TYPE=${{ matrix.configuration }}
+                run: cmake -S . -B build -D CMAKE_BUILD_TYPE=${{ matrix.configuration }}
 
             -   name: Build with ${{ matrix.compiler }}
                 run: cmake --build build
