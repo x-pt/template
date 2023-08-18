@@ -10,5 +10,5 @@ max_line_length = 120
 tab_width = 4
 trim_trailing_whitespace = true
 
-[{*.go,*.go2}]
+[{Makefile,*.go}]
 indent_style = tab

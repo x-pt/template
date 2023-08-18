@@ -39,42 +39,12 @@ If the required subsection does not exist yet under **Unreleased**, create it!
 
 ### Set up
 
-This is no different than other Rust projects.
+This is no different from other Go projects.
 
 ```shell
 git clone https://github.com/{{gh_uname}}/{{project-name}}
 cd {{project-name}}
-cargo test
+make test
 ```
 
 ### Useful Commands
-{% if crate_type == "bin" %}
-- Build and run release version:
-
-  ```shell
-  cargo build --release && cargo run --release
-  ```
-{% endif %}
-- Run Clippy:
-
-  ```shell
-  cargo clippy --all-targets --all-features --workspace
-  ```
-
-- Run all tests:
-
-  ```shell
-  cargo test --all-features --workspace
-  ```
-
-- Check to see if there are code formatting issues
-
-  ```shell
-  cargo fmt --all -- --check
-  ```
-
-- Format the code in the project
-
-  ```shell
-  cargo fmt --all
-  ```
