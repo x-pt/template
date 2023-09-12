@@ -32,7 +32,7 @@ jobs:
 
         steps:
             -   name: Checkout Code
-                uses: actions/checkout@v3
+                uses: actions/checkout@v4
 
             -   name: Configure (${{ matrix.configuration }})
                 run: cmake -S . -B build -D CMAKE_BUILD_TYPE=${{ matrix.configuration }}
