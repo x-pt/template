@@ -1,7 +1,7 @@
 .PHONY: help
 .DEFAULT_GOAL := help
 
-APP_NAME := go
+APP_NAME := {{project-name}}
 
 # build image
 image:
