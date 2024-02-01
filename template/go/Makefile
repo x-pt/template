@@ -18,7 +18,7 @@ run:
 
 # build
 build:
-	@mkdir -p bin; go build -trimpath -ldflags="-w -s" -o bin/ $(APP_PATH)
+	@mkdir -p bin && go build -trimpath -ldflags="-w -s" -o bin/ $(APP_PATH)
 
 # Show help
 help:
