@@ -1,13 +1,24 @@
-.PHONY: help
+.PHONY: help init image run build
 .DEFAULT_GOAL := help
 
 APP_NAME := {{project-name}}
+APP_PATH=.
+
+# init
+init:
+	@go mod tidy; go get -u ./...
 
 # build image
 image:
 	@docker image build -t $(APP_NAME) .
 
-# buildx cross
+# run
+run:
+	@go run $(APP_PATH)/main.go
+
+# build
+build:
+	@mkdir -p bin; go build -trimpath -ldflags="-w -s" -o bin/ $(APP_PATH)
 
 # Show help
 help:

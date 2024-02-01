@@ -6,17 +6,17 @@
 ## Usage
 
 ```bash
+# initialize the project
+make init
+
 # run the server
 make run
 
 # build the binary
 make build
 
-# run with docker compose
-make up
-
-# stop docker compose
-make down
+# run with binary
+./bin/{{project-name}}
 ```
 
 ## License

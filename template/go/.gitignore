@@ -4,6 +4,7 @@
 
 ### Go template
 # Binaries for programs and plugins
+bin
 *.exe
 *.exe~
 *.dll
@@ -18,4 +19,3 @@
 
 # Dependency directories (remove the comment below to include it)
 # vendor/
-
