@@ -1,4 +1,4 @@
-.PHONY: help init image run build
+.PHONY: help init image run build test
 .DEFAULT_GOAL := help
 
 APP_NAME := {{project-name}}
@@ -19,6 +19,10 @@ run:
 # build
 build:
 	@mkdir -p bin && go build -trimpath -ldflags="-w -s" -o bin/ $(APP_PATH)
+
+# test
+test:
+	@go test -v ./...
 
 # Show help
 help:
