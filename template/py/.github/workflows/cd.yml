@@ -1,4 +1,4 @@
-name: CD # Continuous Deployment
+name: CD # Continuous Deployment or Delivery
 
 on:
     push:
@@ -7,6 +7,8 @@ on:
             - '[v]?[0-9]+\.[0-9]+\.[0-9]+.*'
 
 jobs:
-    todo:
-        name: TODO
+    dd:
+        name: Deploy or Delivery
         runs-on: ubuntu-latest
+        steps:
+            -   uses: actions/checkout@v4
