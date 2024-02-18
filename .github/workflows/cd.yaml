@@ -9,20 +9,16 @@ jobs:
         env:
             PROJECT_NAME: example
         steps:
-            -
-                name: Checkout repository
-                uses: actions/checkout@v4
+            -   uses: actions/checkout@v4
 
-            -
-                name: Run cargo generate
+            -   name: Generate Example from Template
                 uses: cargo-generate/cargo-generate-action@v0.18.3
                 with:
                     name: ${{ env.PROJECT_NAME }}
                     subfolder: template/cxx
                     template_values_file: .github/workflows/template_values.toml
 
-            -
-                name: Deploy
+            -   name: Deploy
                 uses: peaceiris/actions-gh-pages@v3
                 with:
                     deploy_key: ${{ secrets.GH_EXAMPLE_DEPLOY_SECRET }}
