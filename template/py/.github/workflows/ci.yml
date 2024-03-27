@@ -8,6 +8,7 @@ on:
     workflow_dispatch:
 
 jobs:
-    todo:
-        name: TODO
+    build:
         runs-on: ubuntu-latest
+        steps:
+            -   uses: actions/checkout@v4
