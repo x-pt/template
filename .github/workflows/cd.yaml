@@ -4,14 +4,14 @@ on:
         branches: [ main ]
 
 jobs:
-    example_cxx:
+    example-cxx:
         runs-on: ubuntu-latest
         env:
-            CXX_PROJECT_NAME: example_cxx
+            CXX_PROJECT_NAME: example-cxx
         steps:
             -   uses: actions/checkout@v4
 
-            -   name: Generate cxx_example from template/cxx
+            -   name: Generate cxx example from template/cxx
                 uses: cargo-generate/cargo-generate-action@v0.18.5
                 with:
                     name: ${{ env.CXX_PROJECT_NAME }}
@@ -32,14 +32,14 @@ jobs:
                     user_email: 'github-actions[bot]@users.noreply.github.com'
                     full_commit_message: "ci: :art: Cxx Sample"
                     force_orphan: true
-    example_go:
+    example-go:
         runs-on: ubuntu-latest
         env:
-            GO_PROJECT_NAME: example_go
+            GO_PROJECT_NAME: example-go
         steps:
             -   uses: actions/checkout@v4
 
-            -   name: Generate go_example from template/go
+            -   name: Generate go example from template/go
                 uses: cargo-generate/cargo-generate-action@v0.18.5
                 with:
                     name: ${{ env.GO_PROJECT_NAME }}
@@ -60,14 +60,14 @@ jobs:
                     user_email: 'github-actions[bot]@users.noreply.github.com'
                     full_commit_message: "ci: :art: Go Sample"
                     force_orphan: true
-    example_py:
+    example-py:
         runs-on: ubuntu-latest
         env:
-            PY_PROJECT_NAME: example_py
+            PY_PROJECT_NAME: example-py
         steps:
             -   uses: actions/checkout@v4
 
-            -   name: Generate py_example from template/py
+            -   name: Generate python example from template/py
                 uses: cargo-generate/cargo-generate-action@v0.18.5
                 with:
                     name: ${{ env.PY_PROJECT_NAME }}
