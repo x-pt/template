@@ -4,31 +4,87 @@ on:
         branches: [ main ]
 
 jobs:
-    cxx_example:
+    example_cxx:
         runs-on: ubuntu-latest
         env:
-            PROJECT_NAME: example
+            CXX_PROJECT_NAME: example_cxx
         steps:
             -   uses: actions/checkout@v4
 
-            -   name: Generate Example from Template
-                uses: cargo-generate/cargo-generate-action@v0.18.3
+            -   name: Generate cxx_example from template/cxx
+                uses: cargo-generate/cargo-generate-action@v0.18.5
                 with:
-                    name: ${{ env.PROJECT_NAME }}
-                    subfolder: template/cxx
-                    template_values_file: .github/workflows/template_values.toml
+                    name: ${{ env.CXX_PROJECT_NAME }}
+                    template: template/cxx
+                    arguments: "--template-values-file .github/workflows/template_values.toml --verbose"
 
             -   name: Deploy
                 uses: peaceiris/actions-gh-pages@v3
                 with:
                     deploy_key: ${{ secrets.GH_EXAMPLE_DEPLOY_SECRET }}
-                    external_repository: x-pt/${{ env.PROJECT_NAME }}
+                    external_repository: x-pt/${{ env.CXX_PROJECT_NAME }}
                     publish_branch: main
-                    publish_dir: ./${{ env.PROJECT_NAME }}
+                    publish_dir: ./${{ env.CXX_PROJECT_NAME }}
                     # Set exclude_assets to empty for including the .github directory to deployment assets.
                     exclude_assets: ''
                     enable_jekyll: true
                     user_name: 'github-actions[bot]'
                     user_email: 'github-actions[bot]@users.noreply.github.com'
                     full_commit_message: "ci: :art: Cxx Sample"
+                    force_orphan: true
+    example_go:
+        runs-on: ubuntu-latest
+        env:
+            GO_PROJECT_NAME: example_go
+        steps:
+            -   uses: actions/checkout@v4
+
+            -   name: Generate go_example from template/go
+                uses: cargo-generate/cargo-generate-action@v0.18.5
+                with:
+                    name: ${{ env.GO_PROJECT_NAME }}
+                    template: template/go
+                    arguments: "--template-values-file .github/workflows/template_values.toml --verbose"
+
+            -   name: Deploy
+                uses: peaceiris/actions-gh-pages@v3
+                with:
+                    deploy_key: ${{ secrets.GH_EXAMPLE_DEPLOY_SECRET }}
+                    external_repository: x-pt/${{ env.GO_PROJECT_NAME }}
+                    publish_branch: main
+                    publish_dir: ./${{ env.GO_PROJECT_NAME }}
+                    # Set exclude_assets to empty for including the .github directory to deployment assets.
+                    exclude_assets: ''
+                    enable_jekyll: true
+                    user_name: 'github-actions[bot]'
+                    user_email: 'github-actions[bot]@users.noreply.github.com'
+                    full_commit_message: "ci: :art: Go Sample"
+                    force_orphan: true
+    example_py:
+        runs-on: ubuntu-latest
+        env:
+            PY_PROJECT_NAME: example_py
+        steps:
+            -   uses: actions/checkout@v4
+
+            -   name: Generate py_example from template/py
+                uses: cargo-generate/cargo-generate-action@v0.18.5
+                with:
+                    name: ${{ env.PY_PROJECT_NAME }}
+                    template: template/py
+                    arguments: "--template-values-file .github/workflows/template_values.toml --verbose"
+
+            -   name: Deploy
+                uses: peaceiris/actions-gh-pages@v3
+                with:
+                    deploy_key: ${{ secrets.GH_EXAMPLE_DEPLOY_SECRET }}
+                    external_repository: x-pt/${{ env.PY_PROJECT_NAME }}
+                    publish_branch: main
+                    publish_dir: ./${{ env.PY_PROJECT_NAME }}
+                    # Set exclude_assets to empty for including the .github directory to deployment assets.
+                    exclude_assets: ''
+                    enable_jekyll: true
+                    user_name: 'github-actions[bot]'
+                    user_email: 'github-actions[bot]@users.noreply.github.com'
+                    full_commit_message: "ci: :art: Py Sample"
                     force_orphan: true

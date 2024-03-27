@@ -18,17 +18,17 @@ if(NOT MSVC)
     endif()
 endif()
 
-{% if proj_type == "bin" -%}
+{% if cxx_proj_type == "bin" -%}
 
 add_executable(${PROJECT_NAME} ${SOURCES})
 
-{% if bin_type == "static" -%}
+{% if cxx_bin_type == "static" -%}
 
 target_link_libraries(${PROJECT_NAME} PUBLIC "-static")
 
 {%- endif %}
 
-{%- elsif lib_type == "static" -%}
+{%- elsif cxx_lib_type == "static" -%}
 
 # static
 add_library({{project-name}} src/library.cpp)

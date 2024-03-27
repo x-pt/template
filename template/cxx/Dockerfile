@@ -22,7 +22,7 @@ COPY . .
 RUN cmake -B build && cmake --build build --target {{project-name}} --config Release --parallel 8
 
 # DEPLOYING
-{% if bin_type == "static" -%}
+{% if cxx_bin_type == "static" -%}
 FROM scratch
 {%- else -%}
 FROM rockylinux:9-minimal

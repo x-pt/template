@@ -6,7 +6,7 @@ type = "string"
 prompt = "GitHub username (or organization)?"
 regex = "^[A-Za-z0-9][A-Za-z0-9-]{0,38}$"
 
-[placeholders.proj_description]
+[placeholders.cxx_proj_desc]
 type = "string"
 prompt = "Project description?"
 
@@ -32,26 +32,26 @@ prompt = "Enable compiler-specific features OR NOT?"
 choices = ["ON", "OFF"]
 default = "OFF"
 
-[placeholders.proj_type]
+[placeholders.cxx_proj_type]
 type = "string"
 prompt = "Which cxx project type?"
 choices = ["bin", "lib"]
 default = "bin"
 
-[conditional.'proj_type == "bin"'.placeholders.bin_type]
+[conditional.'cxx_proj_type == "bin"'.placeholders.cxx_bin_type]
 type = "string"
 prompt = "Which bin compile type?"
 choices = ["static", "dynamic"]
 default = "dynamic"
 
-[conditional.'proj_type == "lib"'.placeholders.lib_type]
+[conditional.'cxx_proj_type == "lib"'.placeholders.cxx_lib_type]
 type = "string"
 prompt = "Which lib type?"
 choices = ["static", "shared"]
 default = "shared"
 
-[conditional.'proj_type == "bin"']
+[conditional.'cxx_proj_type == "bin"']
 ignore = ["src/library.h", "src/library.cpp"]
 
-[conditional.'proj_type == "lib"']
+[conditional.'cxx_proj_type == "lib"']
 ignore = ["src/main.cpp", "Dockerfile", "docker-compose.yml", ".github/workflows/docker.yml"]

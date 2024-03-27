@@ -1,10 +1,20 @@
 [values]
 gh_uname = "x-pt"
-proj_description = "Example of Cxx GitHub template"
-cmake_min_version = "3.20"
+
+# cxx template values
+cmake_min_version = "3.28"
+cxx_proj_desc = "Example of Cxx GitHub template"
 cxx_standard_version = "23"
 cxx_standard_required = "OFF"
 cxx_extensions = "OFF"
-proj_type = "bin"
-lib_type = "static"
-bin_type = "static"
+cxx_proj_type = "bin"
+cxx_lib_type = "static"
+cxx_bin_type = "static"
+
+# go template values
+go_proj_desc = "Example of Go GitHub template"
+go_version = "1.21"
+
+# python template values
+py_proj_desc = "Example of Python GitHub template"
+py_version = "3.12"
