@@ -19,7 +19,7 @@ jobs:
                     go-version: 'stable'
 
             -   name: Build
-                run: make build
+                run: make init && make build
 
             -   name: Test
                 run: make test
