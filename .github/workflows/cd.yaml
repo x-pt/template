@@ -12,7 +12,7 @@ jobs:
             -   uses: actions/checkout@v4
 
             -   name: Generate cxx example from template/cxx
-                uses: cargo-generate/cargo-generate-action@v0.18.5
+                uses: cargo-generate/cargo-generate-action@v0.20.0
                 with:
                     name: ${{ env.CXX_PROJECT_NAME }}
                     template: template/cxx
@@ -40,7 +40,7 @@ jobs:
             -   uses: actions/checkout@v4
 
             -   name: Generate go example from template/go
-                uses: cargo-generate/cargo-generate-action@v0.18.5
+                uses: cargo-generate/cargo-generate-action@v0.20.0
                 with:
                     name: ${{ env.GO_PROJECT_NAME }}
                     template: template/go
@@ -68,7 +68,7 @@ jobs:
             -   uses: actions/checkout@v4
 
             -   name: Generate python example from template/py
-                uses: cargo-generate/cargo-generate-action@v0.18.5
+                uses: cargo-generate/cargo-generate-action@v0.20.0
                 with:
                     name: ${{ env.PY_PROJECT_NAME }}
                     template: template/py
