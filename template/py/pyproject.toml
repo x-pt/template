@@ -1,0 +1,74 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "{{project-name}}"
+version = "0.0.1"
+description = "{{py_proj_desc}}"
+readme = "README.md"
+requires-python = ">=3.11"
+license = "MIT"
+authors = [
+    { name = "{{gh_uname}}" },
+]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Programming Language :: Python",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: Implementation :: CPython",
+    "Programming Language :: Python :: Implementation :: PyPy",
+]
+dependencies = [
+    "pytest>=8.0",
+    "pytest-cov>=5.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "ruff>=0.5.0",
+]
+
+[project.urls]
+Documentation = "https://github.com/{{gh_uname}}/{{project-name}}#readme"
+Issues = "https://github.com/{{gh_uname}}/{{project-name}}/issues"
+Source = "https://github.com/{{gh_uname}}/{{project-name}}"
+
+[tool.pytest.ini_options]
+minversion = "6.0"
+addopts = [
+    "-ra", # show all captured stdout/stderr
+    "-q", # quiet
+    "--cov={{project-name}}", # report coverage of {{project-name}}
+    "--cov-report=term-missing", # show missing coverage
+    "--cov-report=html", # generate html coverage report
+    "--cov-report=lcov", # generate lcov coverage report
+]
+testpaths = ["tests"]
+python_files = ["test_*.py", "*_test.py"]
+python_functions = ["test_*"]
+markers = [
+    "integration: marks tests as integration tests (deselect with '-m \"not integration\"')",
+]
+
+[tool.coverage.run]
+source_pkgs = ["{{project-name}}", "tests"]
+branch = true
+parallel = true
+omit = [
+    "*/.venv/*"
+]
+
+[tool.coverage.paths]
+{{project-name}} = ["src/{{project-name}}"]
+tests = ["tests"]
+
+[tool.coverage.report]
+exclude_lines = [
+    "no cov",
+    "if __name__ == .__main__.:",
+    "if TYPE_CHECKING:",
+]
+show_missing = true  # Show missing lines in the report
+precision = 2  # Number of decimal places to use when rounding

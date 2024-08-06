@@ -2,82 +2,69 @@
 
 [![CI](https://github.com/{{gh_uname}}/{{project-name}}/workflows/CI/badge.svg)](https://github.com/{{gh_uname}}/{{project-name}}/actions)
 [![Coverage Status](https://coveralls.io/repos/github/{{gh_uname}}/{{project-name}}/badge.svg?branch=main)](https://coveralls.io/github/{{gh_uname}}/{{project-name}}?branch=main)
+[![PyPI version](https://badge.fury.io/py/{{project-name}}.svg)](https://badge.fury.io/py/{{project-name}})
+[![Python Versions](https://img.shields.io/pypi/pyversions/{{project-name}}.svg)](https://pypi.org/project/{{project-name}}/)
 
 ## Overview
 
-{{project-name}} is a Python project that aims to {{describe your project's purpose}}.
+{{project-name}} is a Python project that aims to ...
+
+## Features
+
+- Feature 1: Description of feature 1
+- Feature 2: Description of feature 2
+- ...
+
+## Requirements
+
+- Python 3.11+
+- Dependencies: list any major dependencies here
 
 ## Installation
-
-### Using pip
-
-To install `{{project-name}}`, simply use pip:
 
 ```bash
 pip install {{project-name}}
 ```
 
-### From source
+## Quick Start
 
-```bash
-# 1. Clone the repository:
-git clone https://github.com/{{gh_uname}}/{{project-name}}.git
-
-# 2. Navigate into the project directory:
-cd {{project-name}}
-
-# 3. Install the dependencies:
-pip install -r requirements.txt
-
-```
-
-## Development
-
-If you want to contribute to the project, follow these steps to set up the development environment:
-
-Please ensure `uv`, `ruff` and `hatch` are installed firstly.
-
-```bash
-# create a virtual env by uv
-make init
-
-# install some dependencies by pyproject.toml with uv
-make install-dev
-
-# build wheel package by hatch
-make build
-
-# run the UT and FT by hatch
-make test
-
-```
-
-## Usage
-
-To use {{project-name}}, you can follow this.
+Here's a simple example to get you started:
 
 ```python
 import {{project-name}}
 
 # Example usage
-{{project-name}}.do_something()
+result = {{project-name}}.do_something()
+print(result)
 ```
+
+## Usage
+
+For more detailed usage instructions, please refer to our [Usage Guide](docs/usage.md).
+
+## Development
+
+To set up the development environment:
+
+1. Ensure `uv`, `ruff`, and `hatch` are installed.
+2. Clone the repository and navigate to the project directory.
+3. Run the following commands:
+
+```bash
+make init        # Create a virtual env using uv
+make install-dev # Install development dependencies
+make build       # Build wheel package
+make test        # Run tests
+```
+
+For more details, see our [Contributing Guide](CONTRIBUTING.md).
 
 ## License
 
-Licensed under either of
+Licensed under either of:
+- Apache License, Version 2.0 ([LICENSE-APACHE](LICENSE-APACHE) or http://www.apache.org/licenses/LICENSE-2.0)
+- MIT license ([LICENSE-MIT](LICENSE-MIT) or http://opensource.org/licenses/MIT)
 
-* Apache License, Version 2.0
-  ([LICENSE-APACHE](LICENSE-APACHE) or http://www.apache.org/licenses/LICENSE-2.0)
-* MIT license
-  ([LICENSE-MIT](LICENSE-MIT) or http://opensource.org/licenses/MIT)
+## Changelog
 
-at your option.
-
-## Contribution
-
-Unless you explicitly state otherwise, any contribution intentionally submitted
-for inclusion in the work by you, as defined in the Apache-2.0 license, shall be
-dual licensed as above, without any additional terms or conditions.
-
-See [CONTRIBUTING.md](CONTRIBUTING.md).
+See [CHANGELOG.md](CHANGELOG.md) for a history of changes to this project.
