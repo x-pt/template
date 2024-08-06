@@ -40,7 +40,7 @@ minversion = "6.0"
 addopts = [
     "-ra", # show all captured stdout/stderr
     "-q", # quiet
-    "--cov={{project-name}}", # report coverage of {{project-name}}
+    "--cov={{project-name | replace: '-', '_'}}", # report coverage of {{project-name | replace: '-', '_'}}
     "--cov-report=term-missing", # show missing coverage
     "--cov-report=html", # generate html coverage report
     "--cov-report=lcov", # generate lcov coverage report
@@ -53,7 +53,7 @@ markers = [
 ]
 
 [tool.coverage.run]
-source_pkgs = ["{{project-name}}", "tests"]
+source_pkgs = ["{{project-name | replace: '-', '_'}}", "tests"]
 branch = true
 parallel = true
 omit = [
@@ -61,8 +61,8 @@ omit = [
 ]
 
 [tool.coverage.paths]
-{{project-name}} = ["src/{{project-name}}"]
-tests = ["tests"]
+{{project-name | replace: '-', '_'}} = ["src/{{project-name | replace: '-', '_'}}", "*/{{project-name}}/src/{{project-name | replace: '-', '_'}}"]
+tests = ["tests", "*/{{project-name}}/tests"]
 
 [tool.coverage.report]
 exclude_lines = [

@@ -1,6 +1,11 @@
 [template]
 cargo_generate_version = ">=0.10.0"
 
+[hooks]
+pre = [
+    "fix-project-name.rhai",
+]
+
 [placeholders.gh_uname]
 type = "string"
 prompt = "GitHub username (or organization)?"

@@ -1,12 +1,12 @@
 version: Compose specification
 
 service:
-    {{project-name}}:
+    {{project-name | replace: '-', '_'}}:
         build: .
 
 networks:
-    {{project-name}}-net:
-        name: {{project-name}}-net
+    {{project-name | replace: '-', '_'}}-net:
+        name: {{project-name | replace: '-', '_'}}-net
         ipam:
             config:
                 -   subnet: 172.16.238.0/24
