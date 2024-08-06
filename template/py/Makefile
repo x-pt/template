@@ -1,13 +1,34 @@
-.PHONY: help
+.PHONY: help build test install-dev ruff image clean
 .DEFAULT_GOAL := help
 
-APP_NAME := {{project-name}}
+# Create virtual environment
+init:
+	@uv venv
 
-# build image
+# Install development dependencies
+install-dev:
+	@uv pip install .[dev]
+
+# Build wheel
+build:
+	@hatch build
+
+# Test
+test:
+	@hatch test
+
+# Ruff
+ruff:
+	@ruff format .
+	@ruff check . --fix
+
+# Build image
 image:
 	@docker image build -t $(APP_NAME) .
 
-# buildx cross
+# Clean build artifacts
+clean:
+	@rm -rf build dist *.egg-info htmlcov .coverage coverage.xml coverage.lcov
 
 # Show help
 help:
