@@ -22,7 +22,7 @@ COPY .. .
 RUN cmake -B build && cmake --build build --target {{cookiecutter.project_slug}} --config Release --parallel 8
 
 # DEPLOYING
-{% if cookiecutter.project_type == "binary" and not cookiecutter.is_shared -%}
+{% if cookiecutter.cxx_project_type == "binary" and not cookiecutter.cxx_share_enabled -%}
 FROM scratch
 {%- else -%}
 FROM rockylinux:9-minimal

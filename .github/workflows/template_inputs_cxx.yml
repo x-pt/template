@@ -1,0 +1,14 @@
+default_context:
+    full_name: X Author Name
+    email: x-pt@example.com
+    github_username: x-pt
+    project_name: My Awesome Project
+    project_slug: my-awesome-project
+    package_name: my_awesome_project
+    project_desc: A nice cxx project
+    cxx_cmake_version: "3.28"
+    cxx_standard_version: 20
+    cxx_standard_required: true
+    cxx_extensions_required: false
+    cxx_project_type: [ "binary", "library" ]
+    cxx_share_enabled: false
