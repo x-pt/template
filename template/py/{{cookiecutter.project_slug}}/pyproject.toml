@@ -3,14 +3,14 @@ requires = ["hatchling"]
 build-backend = "hatchling.build"
 
 [project]
-name = "{{project-name}}"
+name = "{{cookiecutter.project_slug}}"
 version = "0.0.1"
 description = "{{py_proj_desc}}"
 readme = "README.md"
 requires-python = ">=3.11"
 license = "MIT"
 authors = [
-    { name = "{{gh_uname}}" },
+    { name = "{{cookiecutter.github_username}}" },
 ]
 classifiers = [
     "Development Status :: 4 - Beta",
@@ -31,16 +31,16 @@ dev = [
 ]
 
 [project.urls]
-Documentation = "https://github.com/{{gh_uname}}/{{project-name}}#readme"
-Issues = "https://github.com/{{gh_uname}}/{{project-name}}/issues"
-Source = "https://github.com/{{gh_uname}}/{{project-name}}"
+Documentation = "https://github.com/{{cookiecutter.github_username}}/{{cookiecutter.project_slug}}#readme"
+Issues = "https://github.com/{{cookiecutter.github_username}}/{{cookiecutter.project_slug}}/issues"
+Source = "https://github.com/{{cookiecutter.github_username}}/{{cookiecutter.project_slug}}"
 
 [tool.pytest.ini_options]
 minversion = "6.0"
 addopts = [
     "-ra", # show all captured stdout/stderr
     "-q", # quiet
-    "--cov={{project-name}}", # report coverage of {{project-name}}
+    "--cov={{cookiecutter.project_slug}}", # report coverage of {{cookiecutter.project_slug}}
     "--cov-report=term-missing", # show missing coverage
     "--cov-report=html", # generate html coverage report
     "--cov-report=lcov", # generate lcov coverage report
@@ -53,7 +53,7 @@ markers = [
 ]
 
 [tool.coverage.run]
-source_pkgs = ["{{project-name}}", "tests"]
+source_pkgs = ["{{cookiecutter.package_name}}", "tests"]
 branch = true
 parallel = true
 omit = [
@@ -61,8 +61,8 @@ omit = [
 ]
 
 [tool.coverage.paths]
-{{project-name}} = ["src/{{project-name}}", "*/{{project-name}}/src/{{project-name}}"]
-tests = ["tests", "*/{{project-name}}/tests"]
+{{cookiecutter.package_name}} = ["src/{{cookiecutter.package_name}}", "*/{{cookiecutter.project_slug}}/src/{{cookiecutter.package_name}}"]
+tests = ["tests", "*/{{cookiecutter.project_slug}}/tests"]
 
 [tool.coverage.report]
 exclude_lines = [

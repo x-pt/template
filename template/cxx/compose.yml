@@ -1,12 +1,12 @@
 version: Compose specification
 
 service:
-    {{project-name}}:
+    {{cookiecutter.package_name}}:
         build: .
 
 networks:
-    {{project-name}}-net:
-        name: {{project-name}}-net
+    {{cookiecutter.package_name}}-net:
+        name: {{cookiecutter.package_name}}-net
         ipam:
             config:
                 -   subnet: 172.16.238.0/24

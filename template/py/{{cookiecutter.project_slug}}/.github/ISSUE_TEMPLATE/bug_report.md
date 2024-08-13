@@ -37,7 +37,7 @@ Steps to reproduce the behavior:
 <!-- Please fill the following information. -->
 
 - OS: [e.g. Ubuntu 20.04]
-- {{project-name}} version: [e.g. 0.1.0]
+- {{cookiecutter.package_name}} version: [e.g. 0.1.0]
 
 ## Additional context
 
