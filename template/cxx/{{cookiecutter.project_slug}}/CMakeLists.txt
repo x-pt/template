@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION {{cookiecutter.cmake_min_version}})
+cmake_minimum_required(VERSION {{cookiecutter.cxx_cmake_version}})
 project({{cookiecutter.project_slug}} LANGUAGES CXX)
 
 # C++ Standard settings
@@ -23,8 +23,8 @@ if(NOT MSVC)
 endif()
 
 # Determine target type
-set(IS_BINARY {{ cookiecutter.project_type == "binary" }})
-set(IS_SHARED {{ cookiecutter.is_shared }})
+set(IS_BINARY {{ cookiecutter.cxx_project_type == "binary" }})
+set(IS_SHARED {{ cookiecutter.cxx_share_enabled }})
 
 if(IS_BINARY)
     add_executable(${PROJECT_NAME} ${SOURCES})

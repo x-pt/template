@@ -2,20 +2,23 @@
     "project_name": "My Awesome Project",
     "project_slug": "{{ cookiecutter.project_name | slugify }}",
     "package_name": "{{ cookiecutter.project_slug | replace('-', '_') }}",
-    "go_version": "1.22",
-    "short_description": "A nice go project",
-    "github_username": "your-org-or-username",
+    "project_desc": "A nice go project",
     "full_name": "Firstname Lastname",
     "email": "email@example.com",
+    "github_username": "your-org-or-username",
+
+
+    "go_version": "1.22",
+
+
     "__gh_slug": "{{ cookiecutter.github_username }}/{{ cookiecutter.project_slug }}",
     "__prompts__": {
-        "project_name": "Select your project name",
-        "project_slug": "Project slug",
-        "package_name": "Package name",
-        "go_version": "Go version",
-        "short_description": "Short description",
+        "project_name": "Enter your project name",
+        "project_slug": "Generated project identifier (slug)",
+        "package_name": "Generated package/module name",
+        "project_desc": "Brief project description",
         "github_username": "GitHub username or organization",
-        "full_name": "Author full name",
-        "email": "Author email"
+        "full_name": "Author's full name",
+        "email": "Author's email address"
     }
 }

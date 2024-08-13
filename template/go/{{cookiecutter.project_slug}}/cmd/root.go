@@ -12,7 +12,7 @@ var cfgFile string
 
 var rootCmd = &cobra.Command{
 	Use:   "{{cookiecutter.project_slug}}",
-	Short: "{{cookiecutter.short_description}}",
+	Short: "{{cookiecutter.project_desc}}",
 	Long: `A long desc for the {{cookiecutter.project_slug}}.
 Such as:
 - Feature1
