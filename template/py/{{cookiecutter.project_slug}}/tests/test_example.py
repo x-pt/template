@@ -1,5 +1,5 @@
 import pytest
-from {{project-name}} import add, divide, multiply, subtract
+from {{cookiecutter.package_name}} import add, divide, multiply, subtract
 
 
 def test_add():

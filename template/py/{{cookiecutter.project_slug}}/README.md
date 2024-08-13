@@ -1,7 +1,7 @@
 # {{project-name}}
 
-[![CI](https://github.com/{{gh_uname}}/{{project-name}}/workflows/CI/badge.svg)](https://github.com/{{gh_uname}}/{{project-name}}/actions)
-[![Coverage Status](https://coveralls.io/repos/github/{{gh_uname}}/{{project-name}}/badge.svg?branch=main)](https://coveralls.io/github/{{gh_uname}}/{{project-name}}?branch=main)
+[![CI](https://github.com/{{cookiecutter.github_username}}/{{project-name}}/workflows/CI/badge.svg)](https://github.com/{{cookiecutter.github_username}}/{{project-name}}/actions)
+[![Coverage Status](https://coveralls.io/repos/github/{{cookiecutter.github_username}}/{{project-name}}/badge.svg?branch=main)](https://coveralls.io/github/{{cookiecutter.github_username}}/{{project-name}}?branch=main)
 [![PyPI version](https://badge.fury.io/py/{{project-name}}.svg)](https://badge.fury.io/py/{{project-name}})
 [![Python Versions](https://img.shields.io/pypi/pyversions/{{project-name}}.svg)](https://pypi.org/project/{{project-name}}/)
 

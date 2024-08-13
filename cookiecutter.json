@@ -1,0 +1,19 @@
+{
+    "templates": {
+        "cxx": {
+            "path": "./template/cxx",
+            "title": "C++ Project",
+            "description": "A cookiecutter template for a cxx project"
+        },
+        "go": {
+            "path": "./template/go",
+            "title": "Go Project",
+            "description": "A cookiecutter template for a go project"
+        },
+        "python": {
+            "path": "./template/py",
+            "title": "Python Project",
+            "description": "A cookiecutter template for a python project"
+        }
+    }
+}

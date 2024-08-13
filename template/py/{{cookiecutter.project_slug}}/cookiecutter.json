@@ -1,0 +1,16 @@
+{
+    "project_name": "My Awesome Project",
+    "project_slug": "{{ cookiecutter.package_name | slugify }}",
+    "package_name": "{{ cookiecutter.project_slug | replace('-', '_') }}",
+    "short_description": "A nice python package",
+    "github_username": "your-org-or-username",
+    "full_name": "Firstname Lastname",
+    "email": "email@example.com",
+    "__prompts__": {
+        "package_name": "Select your project name",
+        "short_description": "Short description",
+        "github_username": "GitHub username or organization",
+        "full_name": "Author full name",
+        "email": "Author email"
+    }
+}
