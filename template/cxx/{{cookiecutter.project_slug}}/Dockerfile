@@ -17,7 +17,7 @@ RUN dnf upgrade --refresh -y && \
     dnf clean all && \
     rm -fr /var/cache/yum
 
-COPY . .
+COPY .. .
 
 RUN cmake -B build && cmake --build build --target {{project-name}} --config Release --parallel 8
 
