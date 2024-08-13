@@ -20,22 +20,20 @@ endif()
 
 {% if cookiecutter.project_type == "binary" -%}
 
-add_executable(${PROJECT_NAME} ${SOURCES})
+    add_executable(${PROJECT_NAME} ${SOURCES})
 
-{% if not cookiecutter.is_shared -%}
+{% else -%}
 
-target_link_libraries(${PROJECT_NAME} PUBLIC "-static")
+    {% if not cookiecutter.is_shared -%}
+        # static library
+        add_library({{cookiecutter.project_slug}} STATIC src/library.cpp)
+    {% else -%}
+        # shared library
+        add_library({{cookiecutter.project_slug}} SHARED src/library.cpp)
+    {% endif %}
 
-{%- endif %}
+{% endif %}
 
-{%- elif not cookiecutter.is_shared -%}
-
-# static
-add_library({{cookiecutter.project_slug}} src/library.cpp)
-
-{%- else -%}
-
-# shared
-add_library({{cookiecutter.project_slug}} SHARED src/library.cpp)
-
-{%- endif %}
+{% if cookiecutter.project_type == "binary" and not cookiecutter.is_shared -%}
+    target_link_libraries(${PROJECT_NAME} PUBLIC "-static")
+{% endif %}
