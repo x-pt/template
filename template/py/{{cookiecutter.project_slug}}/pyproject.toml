@@ -5,12 +5,12 @@ build-backend = "hatchling.build"
 [project]
 name = "{{cookiecutter.project_slug}}"
 version = "0.0.1"
-description = "{{py_proj_desc}}"
+description = "{{cookiecutter.short_description}}"
 readme = "README.md"
 requires-python = ">=3.11"
 license = "MIT"
 authors = [
-    { name = "{{cookiecutter.github_username}}" },
+    { name = "{{cookiecutter.full_name}}" },
 ]
 classifiers = [
     "Development Status :: 4 - Beta",
@@ -31,9 +31,9 @@ dev = [
 ]
 
 [project.urls]
-Documentation = "https://github.com/{{cookiecutter.github_username}}/{{cookiecutter.project_slug}}#readme"
-Issues = "https://github.com/{{cookiecutter.github_username}}/{{cookiecutter.project_slug}}/issues"
-Source = "https://github.com/{{cookiecutter.github_username}}/{{cookiecutter.project_slug}}"
+Documentation = "https://github.com/{{cookiecutter.__gh_slug}}#readme"
+Issues = "https://github.com/{{cookiecutter.__gh_slug}}/issues"
+Source = "https://github.com/{{cookiecutter.__gh_slug}}"
 
 [tool.pytest.ini_options]
 minversion = "6.0"

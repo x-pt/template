@@ -8,7 +8,7 @@ wish to make by creating a new issue before making the change.
 ## Reporting issues
 
 Before reporting an issue on the
-[issue tracker](https://github.com/{{cookiecutter.github_username}}/{{cookiecutter.project_slug}}/issues),
+[issue tracker](https://github.com/{{cookiecutter.__gh_slug}}/issues),
 please check that it has not already been reported by searching for some related
 keywords.
 
@@ -42,7 +42,7 @@ If the required subsection does not exist yet under **Unreleased**, create it!
 This is no different from other Python projects.
 
 ```shell
-git clone https://github.com/{{cookiecutter.github_username}}/{{cookiecutter.project_slug}}
+git clone https://github.com/{{cookiecutter.__gh_slug}}
 cd {{cookiecutter.project_slug}}
 make test
 ```
