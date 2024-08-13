@@ -1,6 +1,6 @@
-FROM python:{{py_version}} AS venv
+FROM python:{{cookiecutter.python_version}} AS venv
 
-LABEL author="{{authors}}"
+LABEL author="{{cookiecutter.full_name}}"
 
 # set environment variables
 # NO Cache
@@ -19,9 +19,9 @@ RUN . venv/bin/activate && \
     pip install -r requirement.txt
 
 
-FROM python:{{py_version}}-slim
+FROM python:{{cookiecutter.python_version}}-slim
 
-LABEL author="{{authors}}"
+LABEL author="{{cookiecutter.full_name}}"
 
 COPY --from=venv /app/venv /app/venv
 ENV PATH /app/venv/bin:$PATH

@@ -1,13 +1,13 @@
-# {{project-name}}
+# {{cookiecutter.project_slug}}
 
-[![CI](https://github.com/{{cookiecutter.github_username}}/{{project-name}}/workflows/CI/badge.svg)](https://github.com/{{cookiecutter.github_username}}/{{project-name}}/actions)
-[![Coverage Status](https://coveralls.io/repos/github/{{cookiecutter.github_username}}/{{project-name}}/badge.svg?branch=main)](https://coveralls.io/github/{{cookiecutter.github_username}}/{{project-name}}?branch=main)
-[![PyPI version](https://badge.fury.io/py/{{project-name}}.svg)](https://badge.fury.io/py/{{project-name}})
-[![Python Versions](https://img.shields.io/pypi/pyversions/{{project-name}}.svg)](https://pypi.org/project/{{project-name}}/)
+[![CI](https://github.com/{{cookiecutter.__gh_slug}}/workflows/CI/badge.svg)](https://github.com/{{cookiecutter.__gh_slug}}/actions)
+[![Coverage Status](https://coveralls.io/repos/github/{{cookiecutter.__gh_slug}}/badge.svg?branch=main)](https://coveralls.io/github/{{cookiecutter.__gh_slug}}?branch=main)
+[![PyPI version](https://badge.fury.io/py/{{cookiecutter.project_slug}}.svg)](https://badge.fury.io/py/{{cookiecutter.project_slug}})
+[![Python Versions](https://img.shields.io/pypi/pyversions/{{cookiecutter.project_slug}}.svg)](https://pypi.org/project/{{cookiecutter.project_slug}}/)
 
 ## Overview
 
-{{project-name}} is a Python project that aims to ...
+{{cookiecutter.project_slug}} is a Python project that aims to ...
 
 ## Features
 
@@ -23,7 +23,7 @@
 ## Installation
 
 ```bash
-pip install {{project-name}}
+pip install {{cookiecutter.project_slug}}
 ```
 
 ## Quick Start
@@ -31,10 +31,10 @@ pip install {{project-name}}
 Here's a simple example to get you started:
 
 ```python
-import {{project-name}}
+import {{cookiecutter.project_slug}}
 
 # Example usage
-result = {{project-name}}.do_something()
+result = {{cookiecutter.project_slug}}.do_something()
 print(result)
 ```
 
