@@ -32,13 +32,13 @@ jobs:
                     context: .
                     load: true
                     tags: |
-                        ghcr.io/{{gh_uname}}/{{project-name}}:latest
-                        ghcr.io/{{gh_uname}}/{{project-name}}:${GITHUB_REF_NAME:1}
+                        ghcr.io/{{cookiecutter.__gh_slug}}:latest
+                        ghcr.io/{{cookiecutter.__gh_slug}}:${GITHUB_REF_NAME:1}
             -
                 name: Test it before Push
                 run: |
-                    docker run --rm ghcr.io/{{gh_uname}}/{{project-name}}:latest
-                    docker run --rm ghcr.io/{{gh_uname}}/{{project-name}}:${GITHUB_REF_NAME:1}
+                    docker run --rm ghcr.io/{{cookiecutter.__gh_slug}}:latest
+                    docker run --rm ghcr.io/{{cookiecutter.__gh_slug}}:${GITHUB_REF_NAME:1}
             -
                 name: Build and Push
                 uses: docker/build-push-action@v5
@@ -47,5 +47,5 @@ jobs:
                     platforms: linux/amd64,linux/arm64
                     push: true
                     tags: |
-                        ghcr.io/{{gh_uname}}/{{project-name}}:latest
-                        ghcr.io/{{gh_uname}}/{{project-name}}:${GITHUB_REF_NAME:1}
+                        ghcr.io/{{cookiecutter.__gh_slug}}:latest
+                        ghcr.io/{{cookiecutter.__gh_slug}}:${GITHUB_REF_NAME:1}

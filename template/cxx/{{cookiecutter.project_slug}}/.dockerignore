@@ -1,6 +1,5 @@
 # all start with .(dot), including directories and files
 .*
-cargo-generate.toml
 CHANGELOG.md
 CODE_OF_CONDUCT.md
 CONTRIBUTING.md

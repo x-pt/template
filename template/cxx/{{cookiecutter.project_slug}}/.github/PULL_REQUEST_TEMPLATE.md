@@ -3,7 +3,7 @@
 <!--
 Please make sure:
 - you have read the contributing guidelines:
-  https://github.com/{{gh_uname}}/{{cookiecutter.package_name}}/blob/main/docs/CONTRIBUTING.md
+  https://github.com/{{cookiecutter.__gh_slug}}/blob/main/docs/CONTRIBUTING.md
 - you have updated the changelog (if needed):
-  https://github.com/{{gh_uname}}/{{cookiecutter.package_name}}/blob/main/CHANGELOG.md
+  https://github.com/{{cookiecutter.__gh_slug}}/blob/main/CHANGELOG.md
 -->

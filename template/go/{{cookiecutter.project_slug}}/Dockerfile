@@ -1,6 +1,6 @@
-FROM golang:{{go_version}}-alpine AS builder
+FROM golang:{{cookiecutter.go_version}}-alpine AS builder
 
-LABEL author="{{authors}}"
+LABEL author="{{cookiecutter.full_name}}"
 
 # Set necessary environmet variables needed for our image
 # Such as:
