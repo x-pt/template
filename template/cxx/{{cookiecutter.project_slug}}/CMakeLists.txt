@@ -1,11 +1,15 @@
 cmake_minimum_required(VERSION {{cookiecutter.cmake_min_version}})
 project({{cookiecutter.project_slug}} LANGUAGES CXX)
 
+# C++ Standard settings
 set(CMAKE_CXX_STANDARD {{cookiecutter.cxx_standard_version}})
 set(CMAKE_CXX_STANDARD_REQUIRED {{cookiecutter.cxx_standard_required}})
-set(CMAKE_CXX_EXTENSIONS {{cookiecutter.cxx_extensions_required}}) # enable compiler-specific features or not
-set(CMAKE_EXPORT_COMPILE_COMMANDS ON) # clangd completion
+set(CMAKE_CXX_EXTENSIONS {{cookiecutter.cxx_extensions_required}})  # enable compiler-specific features or not
 
+# Enable compile commands for clangd
+set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
+
+# Source files
 file(GLOB SOURCES CONFIGURE_DEPENDS ${CMAKE_SOURCE_DIR}/src/*.h ${CMAKE_SOURCE_DIR}/src/*.cpp)
 
 # Speed up the compile by ccache
@@ -18,22 +22,17 @@ if(NOT MSVC)
     endif()
 endif()
 
-{% if cookiecutter.project_type == "binary" -%}
+# Determine target type
+set(IS_BINARY {{ cookiecutter.project_type == "binary" }})
+set(IS_SHARED {{ cookiecutter.is_shared }})
 
+if(IS_BINARY)
     add_executable(${PROJECT_NAME} ${SOURCES})
+else()
+    add_library({{cookiecutter.project_slug}} ${IS_SHARED} src/library.cpp)
+endif()
 
-{% else -%}
-
-    {% if not cookiecutter.is_shared -%}
-        # static library
-        add_library({{cookiecutter.project_slug}} STATIC src/library.cpp)
-    {% else -%}
-        # shared library
-        add_library({{cookiecutter.project_slug}} SHARED src/library.cpp)
-    {% endif %}
-
-{% endif %}
-
-{% if cookiecutter.project_type == "binary" and not cookiecutter.is_shared -%}
+# Link static libraries for binary projects if not shared
+if(IS_BINARY AND NOT IS_SHARED)
     target_link_libraries(${PROJECT_NAME} PUBLIC "-static")
-{% endif %}
+endif()
