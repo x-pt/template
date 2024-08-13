@@ -1,6 +1,6 @@
 # BUILDING
 FROM rockylinux:9 AS builder
-LABEL author="{{authors}}"
+LABEL author="{{cookiecutter.full_name}}"
 WORKDIR /app
 
 # build deps
@@ -19,15 +19,15 @@ RUN dnf upgrade --refresh -y && \
 
 COPY .. .
 
-RUN cmake -B build && cmake --build build --target {{project-name}} --config Release --parallel 8
+RUN cmake -B build && cmake --build build --target {{cookiecutter.project_slug}} --config Release --parallel 8
 
 # DEPLOYING
-{% if cxx_bin_type == "static" -%}
+{% if cookiecutter.project_type == "binary" and not cookiecutter.is_shared -%}
 FROM scratch
 {%- else -%}
 FROM rockylinux:9-minimal
 {%- endif %}
 
-COPY --from=builder /app/build/{{project-name}} /{{project-name}}
+COPY --from=builder /app/build/{{cookiecutter.project_slug}} /{{cookiecutter.project_slug}}
 
-CMD ["/{{project-name}}"]
+CMD ["/{{cookiecutter.project_slug}}"]

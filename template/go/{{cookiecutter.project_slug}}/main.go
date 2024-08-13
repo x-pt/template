@@ -1,7 +1,7 @@
 package main
 
 import (
-	"github.com/{{gh_uname}}/{{project-name}}/cmd"
+	"github.com/{{cookiecutter.__gh_slug}}/cmd"
 )
 
 func main() {

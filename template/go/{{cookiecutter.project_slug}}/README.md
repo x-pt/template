@@ -1,7 +1,7 @@
-# {{project-name}}
+# {{cookiecutter.project_slug}}
 
-[![CI](https://github.com/{{gh_uname}}/{{project-name}}/workflows/CI/badge.svg)](https://github.com/{{gh_uname}}/{{project-name}}/actions)
-[![Coverage Status](https://coveralls.io/repos/github/{{gh_uname}}/{{project-name}}/badge.svg?branch=main)](https://coveralls.io/github/{{gh_uname}}/{{project-name}}?branch=main)
+[![CI](https://github.com/{{cookiecutter.__gh_slug}}/workflows/CI/badge.svg)](https://github.com/{{cookiecutter.__gh_slug}}/actions)
+[![Coverage Status](https://coveralls.io/repos/github/{{cookiecutter.__gh_slug}}/badge.svg?branch=main)](https://coveralls.io/github/{{cookiecutter.__gh_slug}}?branch=main)
 
 ## Usage
 
@@ -16,7 +16,7 @@ make run
 make build
 
 # run with binary
-./bin/{{project-name}}
+./bin/{{cookiecutter.project_slug}}
 ```
 
 ## License

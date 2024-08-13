@@ -1,7 +1,7 @@
 .PHONY: help init image run build test
 .DEFAULT_GOAL := help
 
-APP_NAME := {{project-name}}
+APP_NAME := {{cookiecutter.project_slug}}
 APP_PATH=.
 
 # init

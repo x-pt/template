@@ -11,9 +11,9 @@ import (
 var cfgFile string
 
 var rootCmd = &cobra.Command{
-	Use:   "{{project-name}}",
-	Short: "A short desc for the {{project-name}}",
-	Long: `A long desc for the {{project-name}}.
+	Use:   "{{cookiecutter.project_slug}}",
+	Short: "{{cookiecutter.short_description}}",
+	Long: `A long desc for the {{cookiecutter.project_slug}}.
 Such as:
 - Feature1
 - Feature2

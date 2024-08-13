@@ -1,6 +1,6 @@
-module github.com/{{gh_uname}}/{{project-name}}
+module github.com/{{cookiecutter.__gh_slug}}
 
-go {{go_version}}
+go {{cookiecutter.go_version}}
 
 require (
 	github.com/spf13/cobra v1.8.0
