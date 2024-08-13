@@ -1,0 +1,11 @@
+default_context:
+    full_name: X Author Name
+    email: x-pt@example.com
+    github_username: x-pt
+    project_name: My Awesome Go Project
+    project_slug: my-awesome-go-project
+    package_name: my_awesome_go_project
+    project_desc: A nice example project
+
+    # Go
+    go_version: 1.22
