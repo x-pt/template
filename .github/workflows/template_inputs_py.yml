@@ -1,0 +1,11 @@
+default_context:
+    full_name: X Author Name
+    email: x-pt@example.com
+    github_username: x-pt
+    project_name: My Awesome Python Project
+    project_slug: my-awesome-python-project
+    package_name: my_awesome_python_project
+    project_desc: A nice example project
+
+    # Python
+    python_version: 3.11
