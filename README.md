@@ -1,6 +1,6 @@
 # X Project Template
 
-A **CookieCutter**-based template designed to serve as a robust starting point for most startup projects hosted on GitHub.
+A [**CookieCutter**](https://github.com/cookiecutter/cookiecutter)-based template designed to serve as a robust starting point for most startup projects hosted on GitHub.
 
 Visit our [website](https://x-pt.github.io) for more details.
 
