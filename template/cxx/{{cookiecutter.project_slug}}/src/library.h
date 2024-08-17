@@ -1,6 +1,6 @@
-#ifndef {{cookiecutter.project_slug}}_LIBRARY_H
-#define {{cookiecutter.project_slug}}_LIBRARY_H
+#ifndef {{cookiecutter.package_name | upper}}_LIBRARY_H
+#define {{cookiecutter.package_name | upper}}_LIBRARY_H
 
 void hello();
 
-#endif //{{cookiecutter.project_slug}}_LIBRARY_H
+#endif //{{cookiecutter.package_name | upper}}_LIBRARY_H
