@@ -20,7 +20,7 @@ jobs:
                     deploy_key: ${{ secrets.GH_EXAMPLE_DEPLOY_SECRET }}
                     external_repository: x-pt/example-cxx
                     publish_branch: main
-                    publish_dir: ./my-awesome-cxx-project
+                    publish_dir: ./example-cxx
                     # Set exclude_assets to empty for including the .github directory to deployment assets.
                     exclude_assets: ''
                     enable_jekyll: true
@@ -44,7 +44,7 @@ jobs:
                     deploy_key: ${{ secrets.GH_EXAMPLE_DEPLOY_SECRET }}
                     external_repository: x-pt/example-go
                     publish_branch: main
-                    publish_dir: ./my-awesome-go-project
+                    publish_dir: ./example-go
                     # Set exclude_assets to empty for including the .github directory to deployment assets.
                     exclude_assets: ''
                     enable_jekyll: true
@@ -68,7 +68,7 @@ jobs:
                     deploy_key: ${{ secrets.GH_EXAMPLE_DEPLOY_SECRET }}
                     external_repository: x-pt/example-py
                     publish_branch: main
-                    publish_dir: ./my-awesome-python-project
+                    publish_dir: ./example-py
                     # Set exclude_assets to empty for including the .github directory to deployment assets.
                     exclude_assets: ''
                     enable_jekyll: true
