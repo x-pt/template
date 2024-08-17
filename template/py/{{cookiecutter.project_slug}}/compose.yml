@@ -1,8 +1,8 @@
-version: Compose specification
-
-service:
+services:
     {{cookiecutter.project_slug}}:
         build: .
+        ports:
+            - 8000:8000
 
 networks:
     {{cookiecutter.project_slug}}-net:

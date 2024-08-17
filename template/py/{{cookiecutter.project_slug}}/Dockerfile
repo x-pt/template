@@ -37,4 +37,6 @@ COPY . .
 # Ensure the application builds and tests are executed correctly
 RUN hatch build && hatch test
 
+HEALTHCHECK --start-period=30s CMD python -c "import requests; requests.get('http://localhost:8000', timeout=2)"
+
 CMD ["python", "src/app.py"]

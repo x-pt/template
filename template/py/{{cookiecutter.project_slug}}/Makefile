@@ -28,6 +28,14 @@ ruff:
 image:
 	@docker image build -t $(APP_NAME) .
 
+# Start a compose service
+compose-up:
+	@docker compose -f ./compose.yml -p $(APP_NAME) up -d
+
+# Shutdown a compose service
+compose-down:
+	@docker compose -f ./compose.yml down
+
 # Clean build artifacts
 clean:
 	@rm -rf build dist *.egg-info htmlcov .coverage coverage.xml coverage.lcov
