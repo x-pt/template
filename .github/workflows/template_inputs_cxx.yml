@@ -2,9 +2,9 @@ default_context:
     full_name: X Author Name
     email: x-pt@example.com
     github_username: x-pt
-    project_name: My Awesome Cxx Project
-    project_slug: my-awesome-cxx-project
-    package_name: my_awesome_cxx_project
+    project_name: Example Cxx
+    project_slug: example-cxx
+    package_name: example_cxx
     project_desc: A nice example project
 
     # C++
