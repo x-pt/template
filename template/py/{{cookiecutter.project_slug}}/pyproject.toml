@@ -70,3 +70,6 @@ exclude_lines = [
 ]
 show_missing = true  # Show missing lines in the report
 precision = 2  # Number of decimal places to use when rounding
+
+[tool.uv.pip]
+index-url = "https://mirrors.cernet.edu.cn/pypi/web/simple"

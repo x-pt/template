@@ -77,6 +77,7 @@ make install-dev  # Install development dependencies
 make build        # Build wheel package
 make test         # Run tests
 
+make compose-up   # Start a compose service, access at http://localhost:8000
 ```
 
 For more details, see our [Contributing Guide](CONTRIBUTING.md).
