@@ -6,7 +6,6 @@ build-backend = "hatchling.build"
 name = "{{cookiecutter.project_slug}}"
 version = "0.0.1"
 description = "{{cookiecutter.project_desc}}"
-readme = "README.md"
 requires-python = ">=3.11"
 license = "MIT"
 authors = [
@@ -34,6 +33,9 @@ dev = [
 Documentation = "https://github.com/{{cookiecutter.__gh_slug}}#readme"
 Issues = "https://github.com/{{cookiecutter.__gh_slug}}/issues"
 Source = "https://github.com/{{cookiecutter.__gh_slug}}"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/{{cookiecutter.package_name}}"]
 
 [tool.pytest.ini_options]
 minversion = "6.0"

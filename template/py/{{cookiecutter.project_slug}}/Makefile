@@ -1,5 +1,7 @@
-.PHONY: help build test install-dev ruff image clean
+.PHONY: help init install-dev build test ruff image clean
 .DEFAULT_GOAL := help
+
+APP_NAME := {{cookiecutter.project_slug}}
 
 # Create virtual environment
 init:
