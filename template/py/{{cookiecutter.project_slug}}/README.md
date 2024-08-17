@@ -50,18 +50,7 @@ To set up the development environment:
 
     - Using `pipx`
         ```bash
-        # you can use `pipx`
         pipx install uv ruff hatch
-
-        # or
-        # Firstly, install `uv` (macOS and Linux)
-        curl -LsSf https://astral.sh/uv/install.sh | sh
-        # (Windows)
-        powershell -c "irm https://astral.sh/uv/install.ps1 | iex"
-
-        # Then
-        uv tool install ruff
-        uv tool install hatch
         ```
     - Using `uv`
         ```bash
