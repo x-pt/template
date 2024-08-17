@@ -47,14 +47,50 @@ For more detailed usage instructions, please refer to our [Usage Guide](docs/usa
 To set up the development environment:
 
 1. Ensure `uv`, `ruff`, and `hatch` are installed.
+
+    - Using `pipx`
+        ```bash
+        # you can use `pipx`
+        pipx install uv ruff hatch
+
+        # or
+        # Firstly, install `uv` (macOS and Linux)
+        curl -LsSf https://astral.sh/uv/install.sh | sh
+        # (Windows)
+        powershell -c "irm https://astral.sh/uv/install.ps1 | iex"
+
+        # Then
+        uv tool install ruff
+        uv tool install hatch
+        ```
+    - Using `uv`
+        ```bash
+        # macOS and Linux
+        curl -LsSf https://astral.sh/uv/install.sh | sh
+        # Windows
+        powershell -c "irm https://astral.sh/uv/install.ps1 | iex"
+
+        # Then
+        uv tool install ruff
+        uv tool install hatch
+        ```
+    - BTW
+        > `pipx` and `uv tool install` will usually install the binaries in your `~/.local/bin` directory.
+        >
+        > Please ensure the `~/.local/bin` directory is in your `PATH` environment variable.
+
 2. Clone the repository and navigate to the project directory.
 3. Run the following commands:
 
 ```bash
-make init        # Create a virtual env using uv
-make install-dev # Install development dependencies
-make build       # Build wheel package
-make test        # Run tests
+make init         # Create a virtual env using uv
+make install-dev  # Install development dependencies
+make build        # Build wheel package
+make test         # Run tests
+make image        # Build Docker image
+make compose-up   # Run Docker Compose
+make compose-down # Stop and remove Docker Compose
+make clean        # Remove build artifacts
 ```
 
 For more details, see our [Contributing Guide](CONTRIBUTING.md).

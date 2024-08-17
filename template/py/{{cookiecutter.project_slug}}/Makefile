@@ -39,6 +39,8 @@ compose-down:
 # Clean build artifacts
 clean:
 	@rm -rf build dist *.egg-info htmlcov .coverage coverage.xml coverage.lcov
+	@docker compose -f ./compose.yml down -v
+	@docker image rm -f $(APP_NAME)
 
 # Show help
 help:

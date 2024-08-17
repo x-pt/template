@@ -2,8 +2,9 @@
 .*
 CHANGELOG.md
 CODE_OF_CONDUCT.md
-CONTRIBUTING.md
 compose.yml
+CONTRIBUTING.md
+Dockerfile
 LICENSE*
-Makefile
 README.md
+SECURITY.md

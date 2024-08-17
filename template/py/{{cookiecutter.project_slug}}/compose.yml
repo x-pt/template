@@ -1,6 +1,7 @@
 services:
     {{cookiecutter.project_slug}}:
         build: .
+        image: {{cookiecutter.project_slug}}
         ports:
             - 8000:8000
 

@@ -18,6 +18,15 @@ RUN uv venv venv && \
     . venv/bin/activate && \
     uv pip install .[dev]
 
+# Separate stage for validation (build and test)
+FROM builder AS validator
+
+WORKDIR /app
+COPY . .
+
+# Run build and test as part of the validation
+RUN hatch build && hatch test
+
 # Final image for running the application
 FROM python:{{cookiecutter.python_version}}-slim-bullseye
 
@@ -32,11 +41,8 @@ WORKDIR /app
 # Copy the virtual environment and application code
 COPY --from=builder /app/venv /app/venv
 COPY --from=builder /root/.local /root/.local
-COPY . .
-
-# Ensure the application builds and tests are executed correctly
-RUN hatch build && hatch test
+COPY src ./src
 
 HEALTHCHECK --start-period=30s CMD python -c "import requests; requests.get('http://localhost:8000', timeout=2)"
 
-CMD ["python", "src/app.py"]
+CMD ["python", "src/{{cookiecutter.package_name}}/app.py"]
