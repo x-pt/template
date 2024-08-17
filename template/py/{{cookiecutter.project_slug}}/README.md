@@ -76,10 +76,7 @@ make init         # Create a virtual env using uv
 make install-dev  # Install development dependencies
 make build        # Build wheel package
 make test         # Run tests
-make image        # Build Docker image
-make compose-up   # Run Docker Compose
-make compose-down # Stop and remove Docker Compose
-make clean        # Remove build artifacts
+
 ```
 
 For more details, see our [Contributing Guide](CONTRIBUTING.md).
