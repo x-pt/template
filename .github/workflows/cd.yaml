@@ -12,7 +12,7 @@ jobs:
                 run: pipx install cookiecutter
 
             -   name: Generate cxx example
-                run: cookiecutter --no-input --config-file .github/workflows/template_inputs_cxx.yml ./template/cxx
+                run: cookiecutter --no-input --config-file .github/configs/template_inputs_cxx.yml ./template/cxx
 
             -   name: Deploy
                 uses: peaceiris/actions-gh-pages@v4
@@ -36,7 +36,7 @@ jobs:
                 run: pipx install cookiecutter
 
             -   name: Generate go example
-                run: cookiecutter --no-input --config-file .github/workflows/template_inputs_go.yml ./template/go
+                run: cookiecutter --no-input --config-file .github/configs/template_inputs_go.yml ./template/go
 
             -   name: Deploy
                 uses: peaceiris/actions-gh-pages@v4
@@ -60,7 +60,7 @@ jobs:
                 run: pipx install cookiecutter
 
             -   name: Generate py example
-                run: cookiecutter --no-input --config-file .github/workflows/template_inputs_py.yml ./template/py
+                run: cookiecutter --no-input --config-file .github/configs/template_inputs_py.yml ./template/py
 
             -   name: Deploy
                 uses: peaceiris/actions-gh-pages@v4
