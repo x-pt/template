@@ -6,6 +6,20 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.0.0] - 2024-08-18
+
+### Added
+
+- [template] introduce cookiecutter, drop cargo-generate for project templates
+- [python] introduce hatch and uv for python boilerplate
+
+### Changed
+
+- [cpp] update the CMakeLists.txt
+- [python] update Dockerfile
+
+## [0.1.1] - 2024-08-18
+
 ### Added
 
 - [cpp] add `ccache` to speed up the compile-time
