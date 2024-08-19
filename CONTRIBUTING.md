@@ -22,5 +22,5 @@ Try to use a clear title, and describe your problem with complete sentences.
 
 Try to do one pull request per change.
 
-See [Continuous delivery](https://github.com/x-pt/template/blob/main/.github/workflows/cd.yml)
+See [Introduce CookieCutter](https://github.com/x-pt/template/pull/13)
 as an example.
