@@ -3,9 +3,13 @@ bug:
     - '*bug*'
     - '*error*'
     - '*fail*'
+    - '*failure*'
     - '*issue*'
     - '*crash*'
     - '*problem*'
+    - '*fault*'
+    - '*defect*'
+    - '*break*'
 
 # Label issues related to new features or enhancements
 enhancement:
@@ -15,6 +19,8 @@ enhancement:
     - '*upgrade*'
     - '*add*'
     - '*implement*'
+    - '*new feature*'
+    - '*new functionality*'
 
 # Label issues related to documentation
 documentation:
@@ -23,6 +29,9 @@ documentation:
     - '*readme*'
     - '*wiki*'
     - '*documentation*'
+    - '*guide*'
+    - '*manual*'
+    - '*instruction*'
 
 # Label issues related to performance improvements
 performance:
@@ -32,6 +41,9 @@ performance:
     - '*slow*'
     - '*lag*'
     - '*efficient*'
+    - '*latency*'
+    - '*throughput*'
+    - '*bottleneck*'
 
 # Label issues related to security concerns
 security:
@@ -41,6 +53,11 @@ security:
     - '*attack*'
     - '*secure*'
     - '*encryption*'
+    - '*breach*'
+    - '*hack*'
+    - '*malware*'
+    - '*threat*'
+    - '*safety*'
 
 # Label issues related to testing
 test:
@@ -50,6 +67,10 @@ test:
     - '*integration*'
     - '*e2e*'
     - '*coverage*'
+    - '*test case*'
+    - '*regression*'
+    - '*qa*'
+    - '*validation*'
 
 # Label issues related to user interface or design
 design:
@@ -59,6 +80,10 @@ design:
     - '*design*'
     - '*layout*'
     - '*style*'
+    - '*aesthetic*'
+    - '*visual*'
+    - '*user experience*'
+    - '*user interface*'
 
 # Label issues related to configuration or setup
 configuration:
@@ -66,8 +91,12 @@ configuration:
     - '*configuration*'
     - '*setup*'
     - '*install*'
+    - '*installation*'
     - '*environment*'
     - '*settings*'
+    - '*initialization*'
+    - '*deployment*'
+    - '*setup guide*'
 
 # Label issues related to dependencies or third-party libraries
 dependencies:
@@ -77,6 +106,11 @@ dependencies:
     - '*library*'
     - '*upgrade*'
     - '*update*'
+    - '*module*'
+    - '*plugin*'
+    - '*third-party*'
+    - '*external*'
+    - '*vendor*'
 
 # Label issues that are questions or require further discussion
 question:
@@ -86,6 +120,11 @@ question:
     - '*help*'
     - '*support*'
     - '*clarification*'
+    - '*query*'
+    - '*why*'
+    - '*what*'
+    - '*who*'
+    - '*where*'
 
 # Label issues related to accessibility concerns
 accessibility:
@@ -94,3 +133,7 @@ accessibility:
     - '*inclusive*'
     - '*assistive*'
     - '*screen reader*'
+    - '*accessible*'
+    - '*disability*'
+    - '*inclusive design*'
+    - '*equal access*'
