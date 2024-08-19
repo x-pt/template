@@ -1,3 +1,5 @@
+[![Contributor Covenant](https://img.shields.io/badge/Contributor%20Covenant-2.1-4baaaa.svg)](CODE_OF_CONDUCT.md)
+
 # X Project Template
 
 A [**CookieCutter**](https://github.com/cookiecutter/cookiecutter)-based template designed to serve as a robust starting point for most startup projects hosted on GitHub.
