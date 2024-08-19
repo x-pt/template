@@ -23,21 +23,13 @@ Visit our [website](https://x-pt.github.io) for more details.
 - Python 3.6+
 - [CookieCutter](https://cookiecutter.readthedocs.io/en/latest/installation.html)
 
-### Installation
+### Usage
 
 To generate a new project using this template:
 
 ```bash
 cookiecutter gh:x-pt/template
 ```
-
-### Usage
-
-1. Follow the prompts to customize your project.
-2. Navigate to your project directory and review the generated files.
-3. Start coding!
-
-For a detailed guide, visit our [documentation](https://x-pt.github.io/docs).
 
 ## Example Project
 
