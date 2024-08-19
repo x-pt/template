@@ -3,6 +3,7 @@ version: Compose specification
 service:
     {{cookiecutter.package_name}}:
         build: .
+        image: {{cookiecutter.project_slug}}
 
 networks:
     {{cookiecutter.package_name}}-net:
