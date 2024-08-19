@@ -1,0 +1,96 @@
+# Label issues related to bugs
+bug:
+    - '*bug*'
+    - '*error*'
+    - '*fail*'
+    - '*issue*'
+    - '*crash*'
+    - '*problem*'
+
+# Label issues related to new features or enhancements
+enhancement:
+    - '*enhancement*'
+    - '*feature*'
+    - '*improve*'
+    - '*upgrade*'
+    - '*add*'
+    - '*implement*'
+
+# Label issues related to documentation
+documentation:
+    - '*doc*'
+    - '*docs*'
+    - '*readme*'
+    - '*wiki*'
+    - '*documentation*'
+
+# Label issues related to performance improvements
+performance:
+    - '*performance*'
+    - '*speed*'
+    - '*optimize*'
+    - '*slow*'
+    - '*lag*'
+    - '*efficient*'
+
+# Label issues related to security concerns
+security:
+    - '*security*'
+    - '*vulnerability*'
+    - '*exploit*'
+    - '*attack*'
+    - '*secure*'
+    - '*encryption*'
+
+# Label issues related to testing
+test:
+    - '*test*'
+    - '*testing*'
+    - '*unittest*'
+    - '*integration*'
+    - '*e2e*'
+    - '*coverage*'
+
+# Label issues related to user interface or design
+design:
+    - '*ui*'
+    - '*ux*'
+    - '*interface*'
+    - '*design*'
+    - '*layout*'
+    - '*style*'
+
+# Label issues related to configuration or setup
+configuration:
+    - '*config*'
+    - '*configuration*'
+    - '*setup*'
+    - '*install*'
+    - '*environment*'
+    - '*settings*'
+
+# Label issues related to dependencies or third-party libraries
+dependencies:
+    - '*dependency*'
+    - '*dependencies*'
+    - '*package*'
+    - '*library*'
+    - '*upgrade*'
+    - '*update*'
+
+# Label issues that are questions or require further discussion
+question:
+    - '*question*'
+    - '*inquiry*'
+    - '*how to*'
+    - '*help*'
+    - '*support*'
+    - '*clarification*'
+
+# Label issues related to accessibility concerns
+accessibility:
+    - '*accessibility*'
+    - '*a11y*'
+    - '*inclusive*'
+    - '*assistive*'
+    - '*screen reader*'
