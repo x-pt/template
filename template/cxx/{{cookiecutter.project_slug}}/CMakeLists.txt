@@ -22,17 +22,12 @@ if(NOT MSVC)
     endif()
 endif()
 
-# Determine target type
-set(IS_BINARY {{ cookiecutter.cxx_project_type == "binary" }})
-set(IS_SHARED {{ cookiecutter.cxx_share_enabled }})
+{% if cookiecutter.cxx_project_type == "binary" %}
+add_executable({{cookiecutter.project_slug}} ${SOURCES})
+{% else %}
+add_library({{cookiecutter.project_slug}} {{cookiecutter.cxx_share_enabled}} src/library.cpp)
+{% endif %}
 
-if(IS_BINARY)
-    add_executable(${PROJECT_NAME} ${SOURCES})
-else()
-    add_library({{cookiecutter.project_slug}} ${IS_SHARED} src/library.cpp)
-endif()
-
-# Link static libraries for binary projects if not shared
-if(IS_BINARY AND NOT IS_SHARED)
-    target_link_libraries(${PROJECT_NAME} PUBLIC "-static")
-endif()
+{% if cookiecutter.cxx_project_type == "binary" and not cookiecutter.cxx_share_enabled %}
+target_link_libraries({{cookiecutter.project_slug}} PUBLIC "-static")
+{% endif %}
