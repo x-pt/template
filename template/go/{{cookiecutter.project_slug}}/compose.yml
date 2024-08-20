@@ -1,5 +1,3 @@
-version: Compose specification
-
 service:
     {{cookiecutter.package_name}}:
         build: .
