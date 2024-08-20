@@ -45,7 +45,7 @@ print(result)
 ## Installation
 
 ### Requirements
-- Python 3.11+
+- Python {{cookiecutter.python_version}}+
 - Dependencies:
   - [Dependency 1]: [version] - [brief description or purpose]
   - [Dependency 2]: [version] - [brief description or purpose]
