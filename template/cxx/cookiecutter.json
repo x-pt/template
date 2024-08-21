@@ -13,7 +13,7 @@
     "cxx_standard_required": true,
     "cxx_extensions_required": false,
     "cxx_project_type": ["binary", "library"],
-    "cxx_share_enabled": false,
+    "cxx_share_enabled": ["SHARED", "STATIC"],
 
 
     "__gh_slug": "{{ cookiecutter.github_username }}/{{ cookiecutter.project_slug }}",

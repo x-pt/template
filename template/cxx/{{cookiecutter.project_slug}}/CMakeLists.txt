@@ -22,12 +22,20 @@ if(NOT MSVC)
     endif()
 endif()
 
+# Specify architecture for macOS
+if(APPLE)
+    set(CMAKE_OSX_ARCHITECTURES "arm64")
+endif()
+
 {% if cookiecutter.cxx_project_type == "binary" %}
 add_executable({{cookiecutter.project_slug}} ${SOURCES})
 {% else %}
 add_library({{cookiecutter.project_slug}} {{cookiecutter.cxx_share_enabled}} src/library.cpp)
 {% endif %}
 
-{% if cookiecutter.cxx_project_type == "binary" and not cookiecutter.cxx_share_enabled %}
-target_link_libraries({{cookiecutter.project_slug}} PUBLIC "-static")
+{% if cookiecutter.cxx_project_type == "binary" and cookiecutter.cxx_share_enabled == "static" %}
+# Remove the -static option for macOS
+if(NOT APPLE)
+    target_link_libraries({{cookiecutter.project_slug}} PUBLIC "-static")
+endif()
 {% endif %}

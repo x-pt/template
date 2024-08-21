@@ -1,13 +1,20 @@
-.PHONY: help
+.PHONY: help build image
 .DEFAULT_GOAL := help
 
-APP_NAME := go
+APP_NAME := {{cookiecutter.project_slug}}
+
+# compile and build
+build:
+	@cmake -S . -B build
+	@cmake --build build
+
+# run
+run:
+	@./build/{{cookiecutter.project_slug}}
 
 # build image
 image:
 	@docker image build -t $(APP_NAME) .
-
-# buildx cross
 
 # Show help
 help:
