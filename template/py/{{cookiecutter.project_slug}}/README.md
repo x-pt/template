@@ -6,6 +6,7 @@
 [![Python Versions](https://img.shields.io/pypi/pyversions/{{cookiecutter.project_slug}}.svg)](https://pypi.org/project/{{cookiecutter.project_slug}}/)
 
 ## Table of Contents
+
 - [Overview](#overview)
 - [Features](#features)
 - [Quick Start](#quick-start)

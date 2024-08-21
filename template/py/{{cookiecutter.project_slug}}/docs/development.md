@@ -3,6 +3,7 @@
 This guide will help you set up your development environment and contribute to the `{{cookiecutter.project_slug}}` project.
 
 ## Table of Contents
+
 - [Setting Up the Development Environment](#setting-up-the-development-environment)
 - [Running Tests](#running-tests)
 - [Building the Project](#building-the-project)
@@ -13,40 +14,20 @@ This guide will help you set up your development environment and contribute to t
 ### Prerequisites
 
 Before you begin, ensure you have the following installed:
-- Python 3.11+
-- `pipx` (recommended for tool installation)
+
+- Python {{cookiecutter.python_version}}+
 
 ### Installation Steps
 
-1. Install required tools:
-
-    We recommend using `pipx` for installing `uv`, `ruff`, and `hatch`. If you don't have `pipx`, install it first:
+1. Install `uv`
 
     ```bash
-    python -m pip install --user pipx
-    python -m pipx ensurepath
-    ```
-
-    Then install the required tools:
-
-    ```bash
-    pipx install uv ruff hatch
-    ```
-
-    Alternative installation method using `uv`:
-    - For macOS and Linux:
-    ```bash
+    # macOS and Linux
     curl -LsSf https://astral.sh/uv/install.sh | sh
-    uv tool install ruff hatch
-    ```
 
-    - For Windows:
-    ```powershell
+    # Windows
     powershell -c "irm https://astral.sh/uv/install.ps1 | iex"
-    uv tool install ruff hatch
     ```
-
-    > Note: Ensure that `~/.local/bin` is in your `PATH` environment variable.
 
 2. Clone the repository and navigate to the project directory:
 
@@ -58,8 +39,7 @@ Before you begin, ensure you have the following installed:
 3. Set up the development environment:
 
     ```bash
-    make init         # Create a virtual environment using uv
-    make install-dev  # Install development dependencies
+    make init
     ```
 
 ## Running Tests

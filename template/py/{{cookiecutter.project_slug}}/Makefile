@@ -1,28 +1,27 @@
-.PHONY: help init install-dev build test ruff image clean
+.PHONY: help build test ruff image clean
 .DEFAULT_GOAL := help
 
 APP_NAME := {{cookiecutter.project_slug}}
 
-# Create virtual environment
-init:
-	@uv venv
+# Init the venv
+init: sync
 
-# Install development dependencies
-install-dev:
-	@uv pip install .[dev]
+# Sync the project with the venv
+sync:
+	@uv sync
 
 # Build wheel
 build:
-	@hatch build
+	@uvx hatch build
 
 # Test
 test:
-	@hatch test
+	@uvx hatch test
 
 # Ruff
 ruff:
-	@ruff format .
-	@ruff check . --fix
+	@uvx ruff format .
+	@uvx ruff check . --fix
 
 # Build image
 image:
