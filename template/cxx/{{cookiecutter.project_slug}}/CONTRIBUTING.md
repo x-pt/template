@@ -39,7 +39,7 @@ If the required subsection does not exist yet under **Unreleased**, create it!
 
 ### Set up
 
-This is no different from other Rust projects.
+This is no different from other C++ projects.
 
 ```shell
 git clone https://github.com/{{cookiecutter.__gh_slug}}

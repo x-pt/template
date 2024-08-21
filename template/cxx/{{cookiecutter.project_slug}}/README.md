@@ -5,20 +5,33 @@
 
 ## Installation
 
-### Cargo
+### Build
 
-- Install the rust toolchain in order to have cargo installed by following
-  [this](https://www.rust-lang.org/tools/install) guide.
-- run `cargo install {{cookiecutter.project_slug}}`
+- Ensure you have a C++ compiler installed (e.g., `g++`, `clang++`).
+- Install [CMake](https://cmake.org/install/) and any necessary dependencies.
+- Clone the repository:
+    ```sh
+    git clone https://github.com/{{cookiecutter.__gh_slug}}.git
+    ```
+- Create a build directory and run CMake:
+    ```sh
+    mkdir build && cd build
+    cmake ..
+    make
+    ```
+- Run the executable:
+    ```sh
+    ./{{cookiecutter.project_slug}}
+    ```
 
 ## License
 
 Licensed under either of
 
 - Apache License, Version 2.0
-   ([LICENSE-APACHE](LICENSE-APACHE) or http://www.apache.org/licenses/LICENSE-2.0)
+  ([LICENSE-APACHE](LICENSE-APACHE) or http://www.apache.org/licenses/LICENSE-2.0)
 - MIT license
-   ([LICENSE-MIT](LICENSE-MIT) or http://opensource.org/licenses/MIT)
+  ([LICENSE-MIT](LICENSE-MIT) or http://opensource.org/licenses/MIT)
 
 at your option.
 
