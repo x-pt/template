@@ -2,6 +2,7 @@
 FROM python:{{cookiecutter.python_version}}-bullseye AS builder
 
 ENV PATH="/root/.cargo/bin:$PATH" \
+    UV_INDEX_URL="https://mirrors.cernet.edu.cn/pypi/web/simple" \
     PIP_INDEX_URL="https://mirrors.cernet.edu.cn/pypi/web/simple"
 
 # Install uv and tools
