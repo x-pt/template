@@ -8,9 +8,11 @@ build:
 	@cmake -S . -B build
 	@cmake --build build
 
+{% if cookiecutter.cxx_project_type == "binary" %}
 # run
 run:
 	@./build/{{cookiecutter.project_slug}}
+{% endif %}
 
 # build image
 image:
