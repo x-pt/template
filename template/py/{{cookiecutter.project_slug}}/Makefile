@@ -5,6 +5,8 @@ APP_NAME := {{cookiecutter.project_slug}}
 
 # Init the venv
 init: sync
+	@git init
+	@uvx pre-commit install
 
 # Sync the project with the venv
 sync:

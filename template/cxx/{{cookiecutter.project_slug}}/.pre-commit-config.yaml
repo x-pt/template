@@ -1,6 +1,6 @@
 repos:
     -   repo: https://github.com/pre-commit/pre-commit-hooks
-        rev: v4.5.0
+        rev: v4.6.0
         hooks:
             -   id: check-merge-conflict
             -   id: check-toml
@@ -10,6 +10,6 @@ repos:
                 args: [ --fix=lf ]
             -   id: trailing-whitespace
     -   repo: https://github.com/commitizen-tools/commitizen
-        rev: v3.18.4
+        rev: v3.29.0
         hooks:
             -   id: commitizen
