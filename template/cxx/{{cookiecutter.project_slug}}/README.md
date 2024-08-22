@@ -12,15 +12,8 @@
 - Clone the repository:
     ```sh
     git clone https://github.com/{{cookiecutter.__gh_slug}}.git
-    ```
-- Create a build directory and run CMake:
-    ```sh
-    mkdir build && cd build
-    cmake ..
-    make
-    ```
-- Run the executable:
-    ```sh
+    cd {{cookiecutter.project_slug}}
+    make build
     ./{{cookiecutter.project_slug}}
     ```
 
