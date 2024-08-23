@@ -5,13 +5,17 @@ APP_NAME := {{cookiecutter.project_slug}}
 
 # compile and build
 build:
+{% if cookiecutter.cxx_build_tool == "cmake" %}
 	@cmake -S . -B build
 	@cmake --build build
+{% else %}
+	@xmake
+{% endif %}
 
 {% if cookiecutter.cxx_project_type == "binary" %}
 # run
 run:
-	@./build/{{cookiecutter.project_slug}}
+	@./build/bin/{{cookiecutter.project_slug}}
 {% endif %}
 
 # build image

@@ -9,6 +9,13 @@ set(CMAKE_CXX_EXTENSIONS {{cookiecutter.cxx_extensions_required}})  # Enable or 
 # Enable compile commands for clangd
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
+# Set output directory for binaries
+set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
+
+# Set output directory for libraries
+set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)
+set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)
+
 # Source files
 file(GLOB SOURCES CONFIGURE_DEPENDS ${CMAKE_SOURCE_DIR}/src/*.h ${CMAKE_SOURCE_DIR}/src/*.cpp)
 
