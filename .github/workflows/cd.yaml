@@ -1,4 +1,5 @@
 name: Synchronize the example with the template
+
 on:
     push:
         branches: [ main ]
@@ -6,28 +7,41 @@ on:
 jobs:
     example-cxx:
         runs-on: ubuntu-latest
+        strategy:
+            matrix:
+                config:
+                    -   name: cxx-cmake
+                        config_file: .github/configs/template_inputs_cxx_cmake.yml
+                        publish_dir: example-cxx-cmake
+                        repo_name: x-pt/example-cxx-cmake
+                    -   name: cxx-xmake
+                        config_file: .github/configs/template_inputs_cxx_xmake.yml
+                        publish_dir: example-cxx-xmake
+                        repo_name: x-pt/example-cxx-xmake
+
         steps:
             -   uses: actions/checkout@v4
+
             -   name: Setup CookieCutter
                 run: pipx install cookiecutter
 
             -   name: Generate cxx example
-                run: cookiecutter --no-input --config-file .github/configs/template_inputs_cxx.yml ./template/cxx
+                run: cookiecutter --no-input --config-file ${{ matrix.config.config_file }} ./template/cxx
 
             -   name: Deploy
                 uses: peaceiris/actions-gh-pages@v4
                 with:
                     deploy_key: ${{ secrets.GH_EXAMPLE_DEPLOY_SECRET }}
-                    external_repository: x-pt/example-cxx
+                    external_repository: ${{ matrix.config.repo_name }}
                     publish_branch: main
-                    publish_dir: ./example-cxx
-                    # Set exclude_assets to empty for including the .github directory to deployment assets.
+                    publish_dir: ./${{ matrix.config.publish_dir }}
                     exclude_assets: ''
                     enable_jekyll: true
                     user_name: 'github-actions[bot]'
                     user_email: 'github-actions[bot]@users.noreply.github.com'
                     full_commit_message: "ci: :art: Cxx Sample"
                     force_orphan: true
+
     example-go:
         runs-on: ubuntu-latest
         steps:

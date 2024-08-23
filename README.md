@@ -35,7 +35,8 @@ cookiecutter gh:x-pt/template
 
 Check out an example project generated with this template:
 
-- [Example C++](https://github.com/x-pt/example-cxx)
+- [Example C++ with CMake](https://github.com/x-pt/example-cxx-cmake)
+- [Example C++ with XMake](https://github.com/x-pt/example-cxx-xmake)
 - [Example Golang](https://github.com/x-pt/example-go)
 - [Example Python](https://github.com/x-pt/example-py)
 

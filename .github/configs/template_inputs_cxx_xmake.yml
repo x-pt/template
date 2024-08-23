@@ -2,10 +2,10 @@ default_context:
     full_name: X Author Name
     email: x-pt@example.com
     github_username: x-pt
-    project_name: Example Cxx
-    project_slug: example-cxx
-    package_name: example_cxx
+    project_name: Example Cxx XMake
+    project_slug: example-cxx-xmake
+    package_name: example_cxx_xmake
     project_desc: A nice example project
 
     # C++
-    cxx_build_tool: cmake
+    cxx_build_tool: xmake
