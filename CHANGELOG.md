@@ -8,6 +8,8 @@ All notable changes to this project will be documented in this file.
 
 - *(cxx)* Optimize the CMakeLists
 - *(cxx)* Optimize the CMakeLists
+- *(cxx)* Introduce xmake option
+- *(cxx)* Setup the output dir for binary and lib
 
 ### 🚜 Refactor
 

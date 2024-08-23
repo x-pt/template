@@ -5,10 +5,9 @@ on:
         branches:
             - main
     pull_request:
-{% raw  %}
+
 jobs:
     build-and-test:
-
         name: ${{ matrix.toolchain }}
         runs-on: ${{ matrix.os }}
 
@@ -17,32 +16,24 @@ jobs:
                 toolchain:
                     - linux-gcc
                     - windows-msvc
-
-                configuration:
-                    - Debug
-
+                    - macos-clang
                 include:
                     -   toolchain: linux-gcc
                         os: ubuntu-latest
                         compiler: gcc
-
                     -   toolchain: windows-msvc
                         os: windows-latest
                         compiler: msvc
+                    -   toolchain: macos-clang
+                        os: macos-latest
+                        compiler: clang
 
         steps:
             -   name: Checkout Code
                 uses: actions/checkout@v4
 
-            -   name: Configure (${{ matrix.configuration }})
-                run: cmake -S . -B build -D CMAKE_BUILD_TYPE=${{ matrix.configuration }}
-
-            -   name: Build with ${{ matrix.compiler }}
-                run: cmake --build build
+            -   name: Build
+                run: make build
 
             -   name: Test
-                working-directory: build
-                env:
-                    CTEST_OUTPUT_ON_FAILURE: 1
-                run: ctest -C ${{ matrix.configuration }}
-{% endraw  %}
+                run: make run
