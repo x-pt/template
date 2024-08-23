@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION {{cookiecutter.cxx_cmake_version}})
+cmake_minimum_required(VERSION 3.28)
 project({{cookiecutter.project_slug}} LANGUAGES CXX)
 
 # C++ Standard settings

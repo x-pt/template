@@ -7,8 +7,7 @@
     "email": "email@example.com",
     "github_username": "your-org-or-username",
 
-
-    "cxx_cmake_version": "3.28",
+    "cxx_build_tool": ["xmake", "cmake"],
     "cxx_standard_version": "20",
     "cxx_standard_required": true,
     "cxx_extensions_required": false,

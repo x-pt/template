@@ -48,6 +48,8 @@ All notable changes to this project will be documented in this file.
 - *(python)* Use uv for all scenario
 - *(python)* Only install uv at Dockerfile
 - *(python)* Add UV_INDEX_URL at Dockerfile
+- *(python)* Use debian bookworm
+- Introduce git-cliff to generate the changelog
 
 ## [1.0.0] - 2024-08-17
 
