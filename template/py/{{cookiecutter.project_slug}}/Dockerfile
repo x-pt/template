@@ -1,5 +1,5 @@
 # Base image for building the virtual environment
-FROM python:{{cookiecutter.python_version}}-bullseye AS builder
+FROM python:{{cookiecutter.python_version}}-bookworm AS builder
 
 ENV PATH="/root/.cargo/bin:$PATH" \
     UV_INDEX_URL="https://mirrors.cernet.edu.cn/pypi/web/simple" \
@@ -25,7 +25,7 @@ COPY . .
 RUN make build && make test
 
 # Final image for running the application
-FROM python:{{cookiecutter.python_version}}-slim-bullseye
+FROM python:{{cookiecutter.python_version}}-slim-bookworm
 
 LABEL author="{{cookiecutter.full_name}}"
 
