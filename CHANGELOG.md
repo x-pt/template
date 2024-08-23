@@ -44,6 +44,7 @@ All notable changes to this project will be documented in this file.
 - Update the pre-commit version
 - *(cxx)* Update the ci config
 - Fix the template input error
+- Build xmake and cmake example
 
 ### Build
 

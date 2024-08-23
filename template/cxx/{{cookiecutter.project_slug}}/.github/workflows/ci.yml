@@ -6,7 +6,6 @@ on:
             - main
     pull_request:
 
-{% raw  %}
 jobs:
     build-and-test:
         strategy:
@@ -15,17 +14,19 @@ jobs:
                     - ubuntu-latest
                     - macos-latest
                     - windows-latest
-
+{% raw  %}
         name: ${{ matrix.os }}
         runs-on: ${{ matrix.os }}
-
+{% endraw  %}
         steps:
-            -   name: Checkout Code
-                uses: actions/checkout@v4
-
+            -   uses: actions/checkout@v4
+{% if cookiecutter.cxx_build_tool == "xmake" %}
+            -   uses: xmake-io/github-action-setup-xmake@v1
+                with:
+                    xmake-version: latest
+{% endif %}
             -   name: Build
                 run: make build
 
             -   name: Test
                 run: make run
-{% endraw  %}
