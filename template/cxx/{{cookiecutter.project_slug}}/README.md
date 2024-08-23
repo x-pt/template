@@ -8,13 +8,18 @@
 ### Build
 
 - Ensure you have a C++ compiler installed (e.g., `g++`, `clang++`).
+{% if cookiecutter.cxx_build_tool == 'cmake' %}
 - Install [CMake](https://cmake.org/install/) and any necessary dependencies.
+{% else %}
+- Install [XMake](https://xmake.io/#/guide/installation) and any necessary dependencies.
+{% endif %}
 - Clone the repository:
+
     ```sh
     git clone https://github.com/{{cookiecutter.__gh_slug}}.git
     cd {{cookiecutter.project_slug}}
     make build
-    ./{{cookiecutter.project_slug}}
+    ./build/bin/{{cookiecutter.project_slug}}
     ```
 
 ## License
