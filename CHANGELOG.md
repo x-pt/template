@@ -42,6 +42,8 @@ All notable changes to this project will be documented in this file.
 - Add year to license dynamically
 - Use local time for license date
 - Update the pre-commit version
+- *(cxx)* Update the ci config
+- Fix the template input error
 
 ### Build
 
