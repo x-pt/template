@@ -34,18 +34,18 @@ if(APPLE)
     set(CMAKE_OSX_ARCHITECTURES "arm64")
 endif()
 
-{% if cookiecutter.cxx_project_type == "binary" %}
+{% if cookiecutter.cxx_project_type == "binary" -%}
 # Binary project setup
 add_executable({{cookiecutter.project_slug}} ${SOURCES})
 
-{% if cookiecutter.cxx_share_enabled == "STATIC" %}
+{% if cookiecutter.cxx_share_enabled == "STATIC" -%}
 # Additional settings for static binary on non-macOS platforms
 if(NOT APPLE)
     target_link_libraries({{cookiecutter.project_slug}} PUBLIC "-static")
 endif()
 {% endif %}
 
-{% else %}
+{%- else -%}
 # Library project setup
 add_library({{cookiecutter.project_slug}} {{cookiecutter.cxx_share_enabled}} ${SOURCES})
-{% endif %}
+{%- endif %}
