@@ -2,6 +2,41 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.1.5](https://github.com/x-pt/template/compare/v1.1.4..v1.1.5) - 2024-08-24
+
+### ⚙️ Miscellaneous Tasks
+
+- Fix the push action error - ([674b069](https://github.com/x-pt/template/commit/674b06999e23bc482c6e5cfd53612182c3c167da))
+
+
+## [1.1.4](https://github.com/x-pt/template/compare/v1.1.3..v1.1.4) - 2024-08-24
+
+### ⚙️ Miscellaneous Tasks
+
+- Fix the push action error - ([660564d](https://github.com/x-pt/template/commit/660564db7d1c42d93a1ea12ea37665581ba2f1b1))
+
+
+## [1.1.3](https://github.com/x-pt/template/compare/v1.1.2..v1.1.3) - 2024-08-24
+
+### ⚙️ Miscellaneous Tasks
+
+- Fix the push action error - ([12e3080](https://github.com/x-pt/template/commit/12e30801505dcf7c42cc5521ac2fb6910f8582d2))
+
+
+## [1.1.2](https://github.com/x-pt/template/compare/v1.1.1..v1.1.2) - 2024-08-24
+
+### ⚙️ Miscellaneous Tasks
+
+- Update the release action - ([fefa8b6](https://github.com/x-pt/template/commit/fefa8b6d3ef603549c1dcbea84bdc5a187d3d51e))
+
+
+## [1.1.1](https://github.com/x-pt/template/compare/v1.1.0..v1.1.1) - 2024-08-24
+
+### ⚙️ Miscellaneous Tasks
+
+- Only show the latest release notes - ([1233bc1](https://github.com/x-pt/template/commit/1233bc1ce81da23cf1dff467d73ecda99a5d22df))
+
+
 ## [1.1.0](https://github.com/x-pt/template/compare/v1.0.0..v1.1.0) - 2024-08-24
 
 ### 🚀 Features
