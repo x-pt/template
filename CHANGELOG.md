@@ -2,7 +2,7 @@
 
 All notable changes to this project will be documented in this file.
 
-## [unreleased]
+## [1.1.0](https://github.com/x-pt/template/compare/v1.0.0..v1.1.0) - 2024-08-24
 
 ### 🚀 Features
 
@@ -63,6 +63,7 @@ All notable changes to this project will be documented in this file.
 - *(python)* Add UV_INDEX_URL at Dockerfile - ([6b76681](https://github.com/x-pt/template/commit/6b766811155a9f02cdb7bbf0aec89573209cc2e5))
 - *(python)* Only install uv at Dockerfile - ([4212835](https://github.com/x-pt/template/commit/4212835f33845b12876f002d80d7da9701814c6f))
 - *(python)* Use uv for all scenario - ([c76a122](https://github.com/x-pt/template/commit/c76a12247d357d5f95ca1225015255685e973412))
+- Add Makefile - ([016dd0d](https://github.com/x-pt/template/commit/016dd0d27a4ec26cfdc07f2aa08babc248e081d4))
 - Introduce git-cliff to generate the changelog - ([f940d5e](https://github.com/x-pt/template/commit/f940d5eed5ce34251b29ff6c0e72085e18cab87f))
 - Remove version from the docker compose - ([95d203e](https://github.com/x-pt/template/commit/95d203e616005394c3aeffd931d97940a45d0013))
 
