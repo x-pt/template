@@ -42,6 +42,7 @@ All notable changes to this project will be documented in this file.
 
 - *(cxx)* Fix failed to run github action job for xmake project - ([a145866](https://github.com/x-pt/template/commit/a145866ab3750cad3cfbdad841e7d69728ec4377))
 - *(cxx)* Update the ci config - ([f63e6df](https://github.com/x-pt/template/commit/f63e6dfab6059f144f203949c8283bd609a99654))
+- Enable the typos as default - ([a0b0f17](https://github.com/x-pt/template/commit/a0b0f1746752a079f7d3195c05bbfbf3c35eb73c))
 - Add much more info in changelog by cliff - ([23657ba](https://github.com/x-pt/template/commit/23657ba177cadc4c2bcbd018200f054a0b57c2a5))
 - Build xmake and cmake example - ([d295be9](https://github.com/x-pt/template/commit/d295be905384ac19a5c723091c2dd2f40a5aea20))
 - Fix the template input error - ([5d1a541](https://github.com/x-pt/template/commit/5d1a541752c931107f4ffa74e151cc9edc313b23))
