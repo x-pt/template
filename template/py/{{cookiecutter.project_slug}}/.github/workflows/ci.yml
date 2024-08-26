@@ -7,7 +7,7 @@ on:
     pull_request:
     workflow_dispatch:
 
-{% raw  %}
+{% raw %}
 jobs:
     build-and-test:
         name: python-${{ matrix.os }}
@@ -40,4 +40,4 @@ jobs:
                     make init
                     make build
                     make test
-{% endraw  %}
+{% endraw %}
