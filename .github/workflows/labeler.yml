@@ -11,3 +11,5 @@ jobs:
             -   uses: srvaroa/labeler@master
                 with:
                     config_path: .github/configs/labeler.yml
+                env:
+                    GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
