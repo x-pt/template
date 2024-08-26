@@ -1,0 +1,13 @@
+name: Labeler
+
+on:
+    - pull_request
+    - issues
+
+jobs:
+    labeler:
+        runs-on: ubuntu-latest
+        steps:
+            -   uses: srvaroa/labeler@master
+                with:
+                    config_path: .github/configs/labeler.yml
