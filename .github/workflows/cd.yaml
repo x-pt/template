@@ -1,8 +1,9 @@
-name: Synchronize the example with the template
+name: Synchronize Examples with Templates
 
 on:
     push:
         branches: [ main ]
+    workflow_dispatch:  # Allow the workflow to be triggered manually
 
 jobs:
     example-deployments:
@@ -40,7 +41,7 @@ jobs:
             -   name: Generate ${{ matrix.config.name }}
                 run: cookiecutter --no-input --config-file ${{ matrix.config.config_file }} ${{ matrix.config.template_dir }}
 
-            -   name: Deploy
+            -   name: Push to ${{ matrix.config.repo_name }}
                 uses: peaceiris/actions-gh-pages@v4
                 with:
                     deploy_key: ${{ secrets.GH_EXAMPLE_DEPLOY_SECRET }}
@@ -51,5 +52,5 @@ jobs:
                     enable_jekyll: true
                     user_name: 'github-actions[bot]'
                     user_email: 'github-actions[bot]@users.noreply.github.com'
-                    full_commit_message: "ci: :art: ${{ matrix.config.name }}"
+                    full_commit_message: "ci: Update ${{ matrix.config.name }}"
                     force_orphan: true
