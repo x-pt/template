@@ -52,7 +52,7 @@ labels:
         type: issue
         title: "^Feature Request:"
 
-    # Issue Type Only: Bug Report
+    # Issue Type Only: Documentation
     -   label: "Documentation"
         type: issue
         title: "^.*(\b[Dd]ocumentation|doc(s)?\b).*"
