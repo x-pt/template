@@ -5,19 +5,31 @@ on:
         branches: [ main ]
 
 jobs:
-    example-cxx:
+    example-deployments:
         runs-on: ubuntu-latest
         strategy:
             matrix:
                 config:
-                    -   name: cxx-cmake
+                    -   name: cxx cmake example
+                        template_dir: template/cxx
                         config_file: .github/configs/template_inputs_cxx_cmake.yml
                         publish_dir: example-cxx-cmake
                         repo_name: x-pt/example-cxx-cmake
-                    -   name: cxx-xmake
+                    -   name: cxx xmake example
+                        template_dir: template/cxx
                         config_file: .github/configs/template_inputs_cxx_xmake.yml
                         publish_dir: example-cxx-xmake
                         repo_name: x-pt/example-cxx-xmake
+                    -   name: python example
+                        template_dir: template/py
+                        config_file: .github/configs/template_inputs_py.yml
+                        publish_dir: example-py
+                        repo_name: x-pt/example-py
+                    -   name: go example
+                        template_dir: template/go
+                        config_file: .github/configs/template_inputs_go.yml
+                        publish_dir: example-go
+                        repo_name: x-pt/example-go
 
         steps:
             -   uses: actions/checkout@v4
@@ -25,8 +37,8 @@ jobs:
             -   name: Setup CookieCutter
                 run: pipx install cookiecutter
 
-            -   name: Generate cxx example
-                run: cookiecutter --no-input --config-file ${{ matrix.config.config_file }} ./template/cxx
+            -   name: Generate ${{ matrix.config.name }}
+                run: cookiecutter --no-input --config-file ${{ matrix.config.config_file }} ${{ matrix.config.template_dir }}
 
             -   name: Deploy
                 uses: peaceiris/actions-gh-pages@v4
@@ -39,54 +51,5 @@ jobs:
                     enable_jekyll: true
                     user_name: 'github-actions[bot]'
                     user_email: 'github-actions[bot]@users.noreply.github.com'
-                    full_commit_message: "ci: :art: Cxx Sample"
-                    force_orphan: true
-
-    example-go:
-        runs-on: ubuntu-latest
-        steps:
-            -   uses: actions/checkout@v4
-            -   name: Setup CookieCutter
-                run: pipx install cookiecutter
-
-            -   name: Generate go example
-                run: cookiecutter --no-input --config-file .github/configs/template_inputs_go.yml ./template/go
-
-            -   name: Deploy
-                uses: peaceiris/actions-gh-pages@v4
-                with:
-                    deploy_key: ${{ secrets.GH_EXAMPLE_DEPLOY_SECRET }}
-                    external_repository: x-pt/example-go
-                    publish_branch: main
-                    publish_dir: ./example-go
-                    # Set exclude_assets to empty for including the .github directory to deployment assets.
-                    exclude_assets: ''
-                    enable_jekyll: true
-                    user_name: 'github-actions[bot]'
-                    user_email: 'github-actions[bot]@users.noreply.github.com'
-                    full_commit_message: "ci: :art: Go Sample"
-                    force_orphan: true
-    example-py:
-        runs-on: ubuntu-latest
-        steps:
-            -   uses: actions/checkout@v4
-            -   name: Setup CookieCutter
-                run: pipx install cookiecutter
-
-            -   name: Generate py example
-                run: cookiecutter --no-input --config-file .github/configs/template_inputs_py.yml ./template/py
-
-            -   name: Deploy
-                uses: peaceiris/actions-gh-pages@v4
-                with:
-                    deploy_key: ${{ secrets.GH_EXAMPLE_DEPLOY_SECRET }}
-                    external_repository: x-pt/example-py
-                    publish_branch: main
-                    publish_dir: ./example-py
-                    # Set exclude_assets to empty for including the .github directory to deployment assets.
-                    exclude_assets: ''
-                    enable_jekyll: true
-                    user_name: 'github-actions[bot]'
-                    user_email: 'github-actions[bot]@users.noreply.github.com'
-                    full_commit_message: "ci: :art: Py Sample"
+                    full_commit_message: "ci: :art: ${{ matrix.config.name }}"
                     force_orphan: true
