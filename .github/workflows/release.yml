@@ -19,7 +19,7 @@ jobs:
                 run: echo "CURRENT_TAG=${GITHUB_REF#refs/tags/}" >> $GITHUB_ENV
 
             -   name: Generate Full Changelog
-                uses: orhun/git-cliff-action@v3
+                uses: orhun/git-cliff-action@v4
                 with:
                     config: cliff.toml
                     args: --verbose
@@ -47,7 +47,7 @@ jobs:
 
             -   name: Generate Latest Release Notes
                 id: latest_release_notes
-                uses: orhun/git-cliff-action@v3
+                uses: orhun/git-cliff-action@v4
                 with:
                     config: cliff.toml
                     args: --latest --strip all
