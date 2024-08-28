@@ -10,10 +10,11 @@ on:
 {% raw %}
 jobs:
     build-and-test:
-        name: python-${{ matrix.os }}
+        name: Node.js-${{ matrix.node }}
 
         strategy:
             matrix:
+                node: [ 18, 20, 22 ]
                 os:
                     - ubuntu-latest
                     - windows-latest
@@ -26,18 +27,17 @@ jobs:
         steps:
             -   uses: actions/checkout@v4
 
-            -   name: Set up uv
-                if: ${{ matrix.os == 'ubuntu-latest' || matrix.os == 'macos-latest' }}
-                run: curl -LsSf https://astral.sh/uv/install.sh | sh
+            -   name: Set up Node.js
+                uses: actions/setup-node@v4
+                with:
+                    node-version: ${{ matrix.node }}
 
-            -   name: Set up uv
-                if: ${{ matrix.os == 'windows-latest' }}
-                run: irm https://astral.sh/uv/install.ps1 | iex
-                shell: powershell
+            -   name: Init dependencies
+                run: make init
 
-            -   name: Build & Test
-                run: |
-                    make init
-                    make build
-                    make test
+            -   name: Build
+                run: make build
+
+            -   name: Run tests
+                run: make test
 {% endraw %}

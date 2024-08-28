@@ -1,44 +1,45 @@
-# Base image for building the virtual environment
-FROM python:{{cookiecutter.python_version}}-bookworm AS builder
+# Base image for building the application
+FROM node:{{cookiecutter.node_version}}-bookworm AS builder
 
-ENV PATH="/root/.cargo/bin:$PATH" \
-    UV_INDEX_URL="https://mirrors.cernet.edu.cn/pypi/web/simple" \
-    PIP_INDEX_URL="https://mirrors.cernet.edu.cn/pypi/web/simple"
-
-# Install uv and tools
-RUN curl -LsSf https://astral.sh/uv/install.sh | sh
-
+# Set working directory
 WORKDIR /app
 
-COPY pyproject.toml .
+# Copy package.json and package-lock.json to the container
+COPY package.json yarn.lock ./
 
-# Create and install dependencies in the virtual environment
-RUN uv sync
+# Install dependencies
+RUN yarn install
+
+# Copy the rest of the application code
+COPY . .
+
+# Build the application
+RUN yarn build
 
 # Separate stage for validation (build and test)
 FROM builder AS validator
 
-WORKDIR /app
-COPY . .
-
-# Run build and test as part of the validation
-RUN make build && make test
+# Run tests as part of the validation
+RUN yarn test
 
 # Final image for running the application
-FROM python:{{cookiecutter.python_version}}-slim-bookworm
+FROM node:{{cookiecutter.node_version}}-slim-bookworm
 
 LABEL author="{{cookiecutter.full_name}}"
 
-ENV PATH="/app/.venv/bin:$PATH" \
-    PYTHONDONTWRITEBYTECODE=1 \
-    PYTHONUNBUFFERED=1
-
+# Set working directory
 WORKDIR /app
 
-# Copy the virtual environment and application code
-COPY --from=builder /app/.venv /app/.venv
-COPY src ./src
+# Copy built application code and node_modules from builder
+COPY --from=builder /app/dist ./dist
+COPY --from=builder /app/node_modules ./node_modules
+COPY package.json yarn.lock ./
 
-HEALTHCHECK --start-period=30s CMD python -c "import requests; requests.get('http://localhost:8000', timeout=2)"
+# Expose the port the app runs on
+EXPOSE 3000
 
-CMD ["python", "src/{{cookiecutter.package_name}}/app.py"]
+# Define a health check
+HEALTHCHECK --start-period=30s CMD curl -f http://localhost:3000 || exit 1
+
+# Start the application
+CMD ["node", "dist/index.js"]
