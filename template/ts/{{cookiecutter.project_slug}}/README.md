@@ -2,8 +2,8 @@
 
 [![CI](https://github.com/{{cookiecutter.__gh_slug}}/workflows/CI/badge.svg)](https://github.com/{{cookiecutter.__gh_slug}}/actions)
 [![Coverage Status](https://coveralls.io/repos/github/{{cookiecutter.__gh_slug}}/badge.svg?branch=main)](https://coveralls.io/github/{{cookiecutter.__gh_slug}}?branch=main)
-[![PyPI version](https://badge.fury.io/py/{{cookiecutter.project_slug}}.svg)](https://badge.fury.io/py/{{cookiecutter.project_slug}})
-[![Python Versions](https://img.shields.io/pypi/pyversions/{{cookiecutter.project_slug}}.svg)](https://pypi.org/project/{{cookiecutter.project_slug}}/)
+[![NPM version](https://badge.fury.io/js/{{cookiecutter.project_slug}}.svg)](https://badge.fury.io/js/{{cookiecutter.project_slug}})
+[![Node Version](https://img.shields.io/node/v/{{cookiecutter.project_slug}}.svg)](https://nodejs.org/en/)
 
 ## Table of Contents
 
@@ -22,7 +22,7 @@
 
 ## Overview
 
-`{{cookiecutter.project_slug}}` is a Python project designed to [brief description of the project's main purpose or functionality]. This project aims to [explain the primary goals or problems it solves].
+`{{cookiecutter.project_slug}}` is a TypeScript project designed to [brief description of the project's main purpose or functionality]. This project aims to [explain the primary goals or problems it solves].
 
 ## Features
 
@@ -33,42 +33,48 @@
 
 ## Quick Start
 
-```python
-import {{cookiecutter.project_slug}}
+```typescript
+import { doSomething } from '{{cookiecutter.project_slug}}';
 
-# Example usage
-result = {{cookiecutter.project_slug}}.do_something()
-print(result)
+// Example usage
+const result = doSomething();
+console.log(result);
 
-# Add more examples showcasing key features
+// Add more examples showcasing key features
 ```
 
 ## Installation
 
 ### Requirements
-- Python {{cookiecutter.python_version}}+
+- Node.js {{cookiecutter.node_version}}+
 - Dependencies:
   - [Dependency 1]: [version] - [brief description or purpose]
   - [Dependency 2]: [version] - [brief description or purpose]
   - [Add more dependencies as needed]
 
 ### User Installation
-Install `{{cookiecutter.project_slug}}` using pip:
+Install `{{cookiecutter.project_slug}}` using npm:
 
 ```bash
-pip install {{cookiecutter.project_slug}}
+npm install {{cookiecutter.project_slug}}
+```
+
+Or using yarn:
+
+```bash
+yarn add {{cookiecutter.project_slug}}
 ```
 
 ## Usage
 
 Here's a brief overview of basic usage:
 
-```python
-import {{cookiecutter.project_slug}}
+```typescript
+import { doSomething } from '{{cookiecutter.project_slug}}';
 
-# Example usage
-result = {{cookiecutter.project_slug}}.do_something()
-print(result)
+// Example usage
+const result = doSomething();
+console.log(result);
 
 ```
 
