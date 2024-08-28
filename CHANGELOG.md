@@ -2,6 +2,49 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.2.0](https://github.com/x-pt/template/compare/v1.1.2..v1.2.0) - 2024-08-28
+
+### 🚀 Features
+
+- *(cxx)* Introduce auto release with release notes - ([e923548](https://github.com/x-pt/template/commit/e9235485857729a769a79b20c6c05570d039ab9c))
+- *(go)* Introduce auto release with release notes - ([5e8e301](https://github.com/x-pt/template/commit/5e8e301d756cec946409072b4aa3efc2540b5a6f))
+- *(python)* Introduce auto release with release notes - ([33bfd59](https://github.com/x-pt/template/commit/33bfd59411f4af46e83deb65c421b1e79db8a73d))
+- *(ts)* Update the example - ([c614959](https://github.com/x-pt/template/commit/c614959666c6dfabffa04ef3fa1e4c19becda2f2))
+- Add ts boilerplate - ([53350c9](https://github.com/x-pt/template/commit/53350c9f8e1a5f71d2a9eb94dd81e16400825b55))
+
+### 🐛 Bug Fixes
+
+- *(python)* Parse error when use {{ at github action - ([dbc1591](https://github.com/x-pt/template/commit/dbc1591139b256871a4fdfef3a100befed2a57ef))
+- Loss husky hooks - ([0e3da2b](https://github.com/x-pt/template/commit/0e3da2b618c473fca214c6ee45824bc2978b01ac))
+
+### 📚 Documentation
+
+- *(ts)* Add development.md - ([7bfcc5e](https://github.com/x-pt/template/commit/7bfcc5e50582967a628501f4995fe2ca9427cefc))
+
+### ⚙️ Miscellaneous Tasks
+
+- *(cxx)* Introduce issue labeler bot - ([b716642](https://github.com/x-pt/template/commit/b71664205cd0cba27bf75e2ab18a2563a51e797d))
+- *(go)* Introduce issue labeler bot - ([60687aa](https://github.com/x-pt/template/commit/60687aa01b18deff314d662d8a4e75d773cb856f))
+- *(python)* Introduce issue labeler bot - ([7e2c3d3](https://github.com/x-pt/template/commit/7e2c3d342e3fa085fac3bf8a35d71d2492837b08))
+- *(python)* Support make build for macOS, Ubuntu, Win - ([a827f4d](https://github.com/x-pt/template/commit/a827f4dbc3cf83d5958eea452b7d1deba5d4030c))
+- *(ts)* Add automation test - ([20381e7](https://github.com/x-pt/template/commit/20381e7259216c67cda48ce79a842aaf8bece6ef))
+- Update the git-cliff version - ([8f6a615](https://github.com/x-pt/template/commit/8f6a61563b658bca308dd8a1a845f9d67c84babf))
+- Fix the typos - ([6543281](https://github.com/x-pt/template/commit/6543281ac84cee5e8c6769d083601118e41dcd75))
+- Use srvaroa/labeler instead of github/issue-labeler - ([6812345](https://github.com/x-pt/template/commit/6812345e48cf1d4c8ec615cb28f196933ef79cbd))
+- Fix the labeler 401 error - ([9423020](https://github.com/x-pt/template/commit/9423020fab8603975f5c0390ee5603c619602273))
+- Use srvaroa/labeler - ([2b8603e](https://github.com/x-pt/template/commit/2b8603ea41929a063cb915a18fcf0030a46336ee))
+- Add manual trigger for example deployments - ([e61e7ad](https://github.com/x-pt/template/commit/e61e7ad62f6e50ab376f3d389ef457f2c09a4f7e))
+- Optimize the example deployment - ([aab00d4](https://github.com/x-pt/template/commit/aab00d44f10b09dec1082123fc971cea1907747b))
+- Remove the deps for the release job - ([721be13](https://github.com/x-pt/template/commit/721be13bfe5fbb917d39a1f682d7722ff2ba4572))
+
+### Build
+
+- Update the cliff.toml without using raw and endraw - ([619d827](https://github.com/x-pt/template/commit/619d8270c0215b3ec85d53b034e2183676b2303d))
+
+## New Contributors ❤️
+
+* @github-actions[bot] made their first contribution
+
 ## [1.1.2](https://github.com/x-pt/template/compare/v1.1.0..v1.1.2) - 2024-08-24
 
 ### ⚙️ Miscellaneous Tasks
