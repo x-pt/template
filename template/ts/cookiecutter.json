@@ -8,7 +8,7 @@
     "github_username": "your-org-or-username",
 
 
-    "node_version": "18",
+    "node_version": "20",
 
 
     "__gh_slug": "{{ cookiecutter.github_username }}/{{ cookiecutter.project_slug }}",

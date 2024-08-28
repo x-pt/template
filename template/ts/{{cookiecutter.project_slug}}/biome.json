@@ -16,8 +16,7 @@
         "enabled": true,
         "rules": {
             "recommended": true
-        },
-        "ignore": ["**/*.test.ts"]
+        }
     },
     "organizeImports": {
         "enabled": true

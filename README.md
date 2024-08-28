@@ -20,7 +20,7 @@ Visit our [website](https://x-pt.github.io) for more details.
 
 ### Prerequisites
 
-- Python 3.6+
+- Python 3.8+
 - [CookieCutter](https://cookiecutter.readthedocs.io/en/latest/installation.html)
 
 ### Usage
@@ -35,10 +35,10 @@ cookiecutter gh:x-pt/template
 
 Check out an example project generated with this template:
 
-- [Example C++ with CMake](https://github.com/x-pt/example-cxx-cmake)
-- [Example C++ with XMake](https://github.com/x-pt/example-cxx-xmake)
-- [Example Golang](https://github.com/x-pt/example-go)
-- [Example Python](https://github.com/x-pt/example-py)
+- [Example for C++ with CMake](https://github.com/x-pt/example-cxx-cmake)
+- [Example for C++ with XMake](https://github.com/x-pt/example-cxx-xmake)
+- [Example for Golang](https://github.com/x-pt/example-go)
+- [Example for Python](https://github.com/x-pt/example-py)
 
 ## Contributing
 

@@ -1,113 +1,130 @@
-import { getInput, setFailed } from "@actions/core";
-import { context, getOctokit } from "@actions/github";
+import * as fs from "node:fs/promises";
+import * as core from "@actions/core";
+import axios from "axios";
 import { run } from "../src";
 
 jest.mock("@actions/core");
-jest.mock("@actions/github");
+jest.mock("node:fs/promises");
+jest.mock("axios");
+
+const mockConfig = `
+input_text = "Hello world! Hello!"
+find_word = "Hello"
+replace_word = "Hi"
+number_list = [1, 2, 3, 4, 5]
+input_file = "input.txt"
+output_file = "output.txt"
+append_text = "Goodbye!"
+api_url = "https://api.example.com/data"
+`;
 
 describe("GitHub Action", () => {
-    const mockGetInput = getInput as jest.MockedFunction<typeof getInput>;
-    const mockSetFailed = setFailed as jest.MockedFunction<typeof setFailed>;
-    const mockGetOctokit = getOctokit as jest.MockedFunction<typeof getOctokit>;
-
-    const mockAddLabels = jest.fn();
-    const mockOctokit = {
-        rest: {
-            issues: {
-                addLabels: mockAddLabels,
-            },
-        },
-    };
+    const mockGetInput = jest.spyOn(core, "getInput");
+    const mockSetOutput = jest.spyOn(core, "setOutput");
+    const mockSetFailed = jest.spyOn(core, "setFailed");
+    const mockWarning = jest.spyOn(core, "warning");
+    const mockReadFile = fs.readFile as jest.MockedFunction<typeof fs.readFile>;
+    const mockWriteFile = fs.writeFile as jest.MockedFunction<typeof fs.writeFile>;
+    const mockAxiosGet = axios.get as jest.MockedFunction<typeof axios.get>;
 
     beforeEach(() => {
-        jest.clearAllMocks();
-        mockGetInput.mockImplementation((name) => {
-            switch (name) {
-                case "gh-token":
-                    return "gh-token-value";
-                case "label":
-                    return "label-value";
-                default:
-                    return "";
-            }
-        });
-        mockGetOctokit.mockReturnValue(mockOctokit as any);
-        (context as any).payload = { pull_request: { number: 1 } };
-        (context as any).repo = { owner: "owner", repo: "repo" };
+        jest.resetAllMocks();
+        mockGetInput.mockReturnValue(".github/configs/setup-custom-action-by-ts.toml");
+        mockReadFile.mockResolvedValue(mockConfig);
+        mockAxiosGet.mockResolvedValue({ status: 200, data: {} });
     });
 
-    describe("run function", () => {
-        it("should set failed if not run on a pull request", async () => {
-            (context as any).payload = {};
+    it("should process text, count words, calculate sum and average correctly", async () => {
+        await run();
 
-            await run();
+        expect(mockSetOutput).toHaveBeenCalledWith("processed_text", "Hi world! Hi!");
+        expect(mockSetOutput).toHaveBeenCalledWith("word_count", 3);
+        expect(mockSetOutput).toHaveBeenCalledWith("sum", 15);
+        expect(mockSetOutput).toHaveBeenCalledWith("average", 3);
+    });
 
-            expect(mockSetFailed).toHaveBeenCalledWith("This action can only be run on Pull Requests");
+    it("should handle missing configuration file gracefully", async () => {
+        mockReadFile.mockRejectedValue(new Error("File not found"));
+
+        await run();
+
+        expect(mockSetFailed).toHaveBeenCalledWith("Action failed with error: File not found");
+    });
+
+    it("should handle API request failures gracefully", async () => {
+        mockAxiosGet.mockRejectedValue(new Error("API error"));
+
+        await run();
+
+        expect(mockWarning).toHaveBeenCalledWith("Failed to make API request: API error");
+    });
+
+    it("should check API reachability correctly", async () => {
+        await run();
+
+        expect(mockAxiosGet).toHaveBeenCalledWith("https://api.example.com/data", { timeout: 10000 });
+    });
+
+    it("should check API reachability correctly and warn on bad status", async () => {
+        mockAxiosGet.mockResolvedValue({ status: 500, data: {} });
+
+        await run();
+
+        expect(mockWarning).toHaveBeenCalledWith("API is not reachable, status code: 500");
+    });
+
+    it("should read from the input file and append text to the output file correctly", async () => {
+        // Mock for the first call (config file)
+        mockReadFile.mockImplementationOnce(() => Promise.resolve(mockConfig));
+
+        // Mock for the second call (input file)
+        mockReadFile.mockImplementationOnce(() => Promise.resolve("Original file content."));
+
+        const mockAppendText = "Goodbye!";
+        await run();
+
+        expect(mockReadFile).toHaveBeenCalledWith(".github/configs/setup-custom-action-by-ts.toml", "utf-8");
+        expect(mockReadFile).toHaveBeenCalledWith("input.txt", "utf-8");
+        expect(mockWriteFile).toHaveBeenCalledWith("output.txt", "Original file content.\nGoodbye!", {
+            encoding: "utf-8",
         });
+    });
 
-        it("should add label to the pull request", async () => {
-            await run();
+    it("should handle file read errors gracefully", async () => {
+        // First call to mock the config file
+        mockReadFile.mockImplementationOnce(() => Promise.resolve(mockConfig));
 
-            expect(mockGetInput).toHaveBeenCalledWith("gh-token", { required: true });
-            expect(mockGetInput).toHaveBeenCalledWith("label", { required: true });
-            expect(mockGetOctokit).toHaveBeenCalledWith("gh-token-value");
-            expect(mockAddLabels).toHaveBeenCalledWith({
-                owner: "owner",
-                repo: "repo",
-                issue_number: 1,
-                labels: ["label-value"],
-            });
-            expect(mockSetFailed).not.toHaveBeenCalled();
-        });
+        // Second call to mock the input file read error
+        mockReadFile.mockImplementationOnce(() => Promise.reject(new Error("Failed to read input file")));
 
-        it("should handle error and set failed", async () => {
-            mockAddLabels.mockRejectedValueOnce(new Error("Test error"));
+        await run();
 
-            await run();
+        expect(mockWarning).toHaveBeenCalledWith("File operation failed: Failed to read input file");
+    });
 
-            expect(mockAddLabels).toHaveBeenCalledWith({
-                owner: "owner",
-                repo: "repo",
-                issue_number: 1,
-                labels: ["label-value"],
-            });
-            expect(mockSetFailed).toHaveBeenCalledWith("Test error");
-        });
+    it("should handle file write errors gracefully", async () => {
+        // First call to mock the config file
+        mockReadFile.mockImplementationOnce(() => Promise.resolve(mockConfig));
 
-        it("should set failed if gh-token is not provided", async () => {
-            mockGetInput.mockImplementation((name, options) => {
-                if (name === "gh-token" && options?.required) {
-                    throw new Error("Input required and not supplied: gh-token");
-                }
-                return name === "label" ? "label-value" : "";
-            });
+        // Second call to mock the input file read
+        mockReadFile.mockImplementationOnce(() => Promise.resolve("Original file content."));
 
-            await run();
+        // Mock write file to throw an error
+        mockWriteFile.mockImplementationOnce(() => Promise.reject(new Error("Failed to write to output file")));
 
-            expect(mockSetFailed).toHaveBeenCalledWith("Input required and not supplied: gh-token");
-        });
+        await run();
 
-        it("should set failed if label is not provided", async () => {
-            mockGetInput.mockImplementation((name, options) => {
-                if (name === "label" && options?.required) {
-                    throw new Error("Input required and not supplied: label");
-                }
-                return name === "gh-token" ? "gh-token-value" : "";
-            });
+        expect(mockWarning).toHaveBeenCalledWith("File operation failed: Failed to write to output file");
+    });
 
-            await run();
+    it("should use default values when config is empty", async () => {
+        mockReadFile.mockResolvedValue("");
 
-            expect(mockSetFailed).toHaveBeenCalledWith("Input required and not supplied: label");
-        });
+        await run();
 
-        it("should set failed with generic message for unexpected errors", async () => {
-            mockGetOctokit.mockImplementation(() => {
-                throw new Error("Unexpected error");
-            });
-
-            await run();
-
-            expect(mockSetFailed).toHaveBeenCalledWith("Unexpected error");
-        });
+        expect(mockSetOutput).toHaveBeenCalledWith("processed_text", "");
+        expect(mockSetOutput).toHaveBeenCalledWith("word_count", 0);
+        expect(mockSetOutput).toHaveBeenCalledWith("sum", 0);
+        expect(mockSetOutput).toHaveBeenCalledWith("average", 0);
     });
 });
