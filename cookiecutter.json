@@ -14,6 +14,11 @@
             "path": "./template/py",
             "title": "Python Project",
             "description": "A cookiecutter template for a python project"
+        },
+        "ts": {
+            "path": "./template/ts",
+            "title": "TypeScript Project",
+            "description": "A cookiecutter template for a typescript project"
         }
     }
 }
