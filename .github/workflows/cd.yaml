@@ -50,7 +50,7 @@ jobs:
                     publish_dir: ./${{ matrix.config.publish_dir }}
                     exclude_assets: ''
                     enable_jekyll: true
-                    user_name: 'github-actions[bot]'
-                    user_email: 'github-actions[bot]@users.noreply.github.com'
+                    user_name: 'Mystic'
+                    user_email: '215104920@qq.com'
                     full_commit_message: "ci: Update ${{ matrix.config.name }}"
                     force_orphan: true

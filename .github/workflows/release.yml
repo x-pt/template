@@ -29,8 +29,8 @@ jobs:
 
             -   name: Commit Changelog
                 run: |
-                    git config user.name 'github-actions[bot]'
-                    git config user.email 'github-actions[bot]@users.noreply.github.com'
+                    git config user.name 'Mystic'
+                    git config user.email '215104920@qq.com'
                     set +e
                     git switch main
                     git add CHANGELOG.md
