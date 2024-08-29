@@ -31,6 +31,11 @@ jobs:
                         config_file: .github/configs/template_inputs_go.yml
                         publish_dir: example-go
                         repo_name: x-pt/example-go
+                    -   name: typescript example
+                        template_dir: template/ts
+                        config_file: .github/configs/template_inputs_ts.yml
+                        publish_dir: example-ts
+                        repo_name: x-pt/example-ts
 
         steps:
             -   uses: actions/checkout@v4

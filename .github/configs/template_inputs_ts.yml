@@ -1,0 +1,11 @@
+default_context:
+    full_name: X Author Name
+    email: x-pt@example.com
+    github_username: x-pt
+    project_name: Example TS
+    project_slug: example-ts
+    package_name: example_ts
+    project_desc: A nice example project
+
+    # Node
+    node_version: 20
