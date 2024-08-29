@@ -39,6 +39,7 @@ Check out an example project generated with this template:
 - [Example for C++ with XMake](https://github.com/x-pt/example-cxx-xmake)
 - [Example for Golang](https://github.com/x-pt/example-go)
 - [Example for Python](https://github.com/x-pt/example-py)
+- [Example for TypeScript](https://github.com/x-pt/example-ts)
 
 ## Contributing
 
