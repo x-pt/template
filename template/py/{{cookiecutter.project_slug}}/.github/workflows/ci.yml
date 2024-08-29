@@ -35,9 +35,15 @@ jobs:
                 run: irm https://astral.sh/uv/install.ps1 | iex
                 shell: powershell
 
+            -   name: Format
+                run: uvx ruff format --diff .
+
+            -   name: Lint
+                run: uvx ruff check .
+
             -   name: Build & Test
                 run: |
-                    make init
-                    make build
-                    make test
+                    uv sync
+                    uvx hatch build
+                    uvx hatch test
 {% endraw %}
