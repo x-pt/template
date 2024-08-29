@@ -14,33 +14,52 @@ interface Config {
     api_url?: string;
 }
 
-// Function to check API reachability
 async function checkAPIReachability(apiUrl: string): Promise<void> {
     try {
         const response = await axios.get(apiUrl, { timeout: 10000 });
         if (response.status < 200 || response.status >= 300) {
             core.warning(`API is not reachable, status code: ${response.status}`);
+        } else {
+            core.info(`API ${apiUrl} is reachable.`);
         }
     } catch (error) {
         core.warning(`Failed to make API request: ${error instanceof Error ? error.message : String(error)}`);
     }
 }
 
-// Function to read and append text to a file
 async function readAndAppendToFile(inputFile: string, outputFile: string, appendText: string): Promise<void> {
     try {
         const content = await fs.readFile(inputFile, "utf-8");
         const modifiedContent = `${content}\n${appendText}`;
         await fs.writeFile(outputFile, modifiedContent, { encoding: "utf-8" });
+        core.info(`Appended text to file: ${outputFile}`);
     } catch (error) {
         throw new Error(`File operation failed: ${error instanceof Error ? error.message : String(error)}`);
     }
 }
 
+function processText(
+    text: string,
+    findWord: string,
+    replaceWord: string,
+): {
+    processedText: string;
+    wordCount: number;
+} {
+    const processedText = text.replace(new RegExp(findWord, "g"), replaceWord);
+    const wordCount = processedText.trim() === "" ? 0 : processedText.trim().split(/\s+/).length;
+    return { processedText, wordCount };
+}
+
+function calculateNumberStats(numbers: number[]): { sum: number; average: number } {
+    const sum = numbers.reduce((acc, num) => acc + num, 0);
+    const average = numbers.length > 0 ? sum / numbers.length : 0;
+    return { sum, average };
+}
+
 export async function run(): Promise<void> {
     try {
         const configPath = core.getInput("config_path") || ".github/configs/setup-custom-action-by-ts.toml";
-
         const configContent = await fs.readFile(configPath, "utf-8");
         const config: Config = toml.parse(configContent);
 
@@ -56,28 +75,15 @@ export async function run(): Promise<void> {
         } = config;
 
         if (api_url) {
-            try {
-                await checkAPIReachability(api_url);
-                core.info(`API ${api_url} is reachable.`);
-            } catch (error) {
-                core.warning(error instanceof Error ? error.message : String(error));
-            }
+            await checkAPIReachability(api_url);
         }
 
         if (input_file && output_file && append_text) {
-            try {
-                await readAndAppendToFile(input_file, output_file, append_text);
-                core.info(`Appended text to file: ${output_file}`);
-            } catch (error) {
-                core.warning(error instanceof Error ? error.message : String(error));
-            }
+            await readAndAppendToFile(input_file, output_file, append_text);
         }
 
-        const processedText = input_text.replace(new RegExp(find_word, "g"), replace_word);
-        const wordCount = processedText.trim() === "" ? 0 : processedText.trim().split(/\s+/).length;
-
-        const sum = number_list.reduce((acc: number, num: number) => acc + num, 0);
-        const average = number_list.length > 0 ? sum / number_list.length : 0;
+        const { processedText, wordCount } = processText(input_text, find_word, replace_word);
+        const { sum, average } = calculateNumberStats(number_list);
 
         core.setOutput("processed_text", processedText);
         core.setOutput("word_count", wordCount);
