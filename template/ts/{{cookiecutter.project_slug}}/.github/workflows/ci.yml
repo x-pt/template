@@ -33,12 +33,11 @@ jobs:
                     node-version: ${{ matrix.node }}
                     # cache: "npm"
 
-            -   name: Init dependencies
-                run: make init
-
             -   name: Build
-                run: make build
+                run: |
+                    npm i
+                    npm run build
 
-            -   name: Run tests
-                run: make test
+            -   name: Test
+                run: npm test
 {% endraw %}
