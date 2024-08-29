@@ -5,7 +5,6 @@ APP_NAME := {{cookiecutter.project_slug}}
 
 # Init the venv
 init:
-	@git init
 	@npm i
 
 # Build wheel
