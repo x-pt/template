@@ -1,4 +1,4 @@
-name: Synchronize Examples with Templates
+name: Examples
 
 on:
     push:
@@ -6,7 +6,7 @@ on:
     workflow_dispatch:  # Allow the workflow to be triggered manually
 
 jobs:
-    example-deployments:
+    deployment:
         runs-on: ubuntu-latest
         strategy:
             matrix:
