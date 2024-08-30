@@ -9,15 +9,23 @@ repos:
             -   id: mixed-line-ending
                 args: [ --fix=lf ]
             -   id: trailing-whitespace
+    -   repo: https://github.com/crate-ci/typos
+        rev: v1.24.1
+        hooks:
+            -   id: typos
     -   repo: https://github.com/commitizen-tools/commitizen
         rev: v3.29.0
         hooks:
             -   id: commitizen
+            -   id: commitizen-branch
+                stages: [ push ]
     -   repo: https://github.com/astral-sh/ruff-pre-commit
-        rev: v0.6.1
+        rev: v0.6.3
         hooks:
-            # Run the linter.
             -   id: ruff
                 args: [ --fix ]
-            # Run the formatter.
             -   id: ruff-format
+    -   repo: https://github.com/astral-sh/uv-pre-commit
+        rev: 0.4.0
+        hooks:
+            -   id: uv-lock

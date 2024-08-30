@@ -9,10 +9,16 @@ repos:
             -   id: mixed-line-ending
                 args: [ --fix=lf ]
             -   id: trailing-whitespace
+    -   repo: https://github.com/crate-ci/typos
+        rev: v1.24.1
+        hooks:
+            -   id: typos
     -   repo: https://github.com/commitizen-tools/commitizen
         rev: v3.29.0
         hooks:
             -   id: commitizen
+            -   id: commitizen-branch
+                stages: [ push ]
     -   repo: https://github.com/golangci/golangci-lint
         rev: v1.56.2
         hooks:

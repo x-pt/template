@@ -46,4 +46,4 @@ jobs:
                     uv sync
                     uvx hatch build
                     uvx hatch test
-{% endraw %}
+{% endraw -%}
