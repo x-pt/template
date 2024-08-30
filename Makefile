@@ -1,6 +1,10 @@
 .PHONY: help cliff
 .DEFAULT_GOAL := help
 
+# init
+init:
+	@pre-commit install --hook-type commit-msg --hook-type pre-push
+
 # Update the changelog
 cliff:
 	@git cliff -o CHANGELOG.md
