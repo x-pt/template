@@ -2,6 +2,44 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.2.1](https://github.com/x-pt/template/compare/v1.2.0..v1.2.1) - 2024-09-02
+
+### 🚀 Features
+
+- *(cxx)* Git init at post_gen_project - ([d41eb07](https://github.com/x-pt/template/commit/d41eb0749b47c4351e0590445eebe125174d6788))
+- *(go)* Git init at post_gen_project - ([5b819d6](https://github.com/x-pt/template/commit/5b819d637e37bc1dac3b4f73fe438e4d995df448))
+- *(py)* Git init at post_gen_project - ([6f311b4](https://github.com/x-pt/template/commit/6f311b445e7db74fbadaa854c04a65d4bc986354))
+- *(py)* Use uv command in github action instead of make - ([9d77b0b](https://github.com/x-pt/template/commit/9d77b0b96510ce62004117629e68ce287c18c5a0))
+- *(ts)* Introduce conventional commit check - ([ae1639f](https://github.com/x-pt/template/commit/ae1639f74e2fc384189f323f6ceb3ac057965ff4))
+- *(ts)* Git init at post_gen_project - ([21a4cb5](https://github.com/x-pt/template/commit/21a4cb5705597bff450658a96d1b03a03dca11a3))
+- *(ts)* Introduce auto release with release notes - ([7c26d6e](https://github.com/x-pt/template/commit/7c26d6edbd60b82ec374a0ae80fdd3fbde8d4e89))
+- *(ts)* Update the startup code - ([41f6592](https://github.com/x-pt/template/commit/41f6592e9ca8b44889ca6d00c306387a83160b70))
+- Introduce the pre-commit - ([106a949](https://github.com/x-pt/template/commit/106a949bc245398a69b33d8ae8e642adbb36faad))
+- Introduce crate-ci/typos - ([1ccf903](https://github.com/x-pt/template/commit/1ccf903b8225250676503a2243d4219968b538fa))
+
+### 🐛 Bug Fixes
+
+- *(ts)* Pnpm build cannot find lib/index.js - ([511bd4b](https://github.com/x-pt/template/commit/511bd4b48a1286adb5dbe633b0eaef11ff47c0b1))
+
+### 📚 Documentation
+
+- Add ts example - ([9f95dae](https://github.com/x-pt/template/commit/9f95dae103821395e48786229b288c1d504b9b99))
+
+### ⚙️ Miscellaneous Tasks
+
+- *(ts)* Use pnpm - ([b5a0558](https://github.com/x-pt/template/commit/b5a05583a496f3b01f2269d0d22c6958dcc06dc7))
+- *(ts)* Use npm command instead of make - ([c9af759](https://github.com/x-pt/template/commit/c9af759aea25a7018a4772ef4199a0564e47aba4))
+- *(ts)* Disable the cache default - ([d521e88](https://github.com/x-pt/template/commit/d521e889e67f18393a1e78bcc0472ba98700da5c))
+- Add ts example - ([c951cc1](https://github.com/x-pt/template/commit/c951cc1985f71f7848d0ebbe707eb21a98ef9d3a))
+- Some minor changes - ([0d54e6a](https://github.com/x-pt/template/commit/0d54e6a6eeec013bbdb5f7606dc58c72baa0d619))
+
+### Build
+
+- *(ts)* Update the lint-staged - ([8a1b2bc](https://github.com/x-pt/template/commit/8a1b2bcc37a43caa6863e038de50672642eb32d3))
+- *(ts)* Update the axios - ([d140771](https://github.com/x-pt/template/commit/d140771a274607b4c77044f2f599ccab67e208a0))
+- Add init - ([2629087](https://github.com/x-pt/template/commit/262908798caef03cd787fb8c8e04b47c19976766))
+
+
 ## [1.2.0](https://github.com/x-pt/template/compare/v1.1.2..v1.2.0) - 2024-08-28
 
 ### 🚀 Features
@@ -41,9 +79,6 @@ All notable changes to this project will be documented in this file.
 
 - Update the cliff.toml without using raw and endraw - ([619d827](https://github.com/x-pt/template/commit/619d8270c0215b3ec85d53b034e2183676b2303d))
 
-## New Contributors ❤️
-
-* @github-actions[bot] made their first contribution
 
 ## [1.1.2](https://github.com/x-pt/template/compare/v1.1.0..v1.1.2) - 2024-08-24
 
