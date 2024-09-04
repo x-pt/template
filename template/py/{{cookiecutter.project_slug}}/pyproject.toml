@@ -51,7 +51,7 @@ markers = [
 ]
 
 [tool.coverage.run]
-source_pkgs = ["{{cookiecutter.package_name}}", "tests"]
+source_pkgs = ["{{cookiecutter.package_name}}"]
 branch = true
 parallel = true
 omit = [
