@@ -1,7 +1,11 @@
-.PHONY: help build image
+.PHONY: help init build image
 .DEFAULT_GOAL := help
 
 APP_NAME := {{cookiecutter.project_slug}}
+
+# init
+init:
+	@pre-commit install --hook-type commit-msg --hook-type pre-push
 
 # compile and build
 build:
