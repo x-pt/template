@@ -19,7 +19,7 @@ build:
 {% if cookiecutter.cxx_project_type == "binary" -%}
 # run
 run:
-	@./build/bin/{{cookiecutter.project_slug}}
+	@./build/bin/$(APP_NAME)
 {%- endif %}
 
 # build image
