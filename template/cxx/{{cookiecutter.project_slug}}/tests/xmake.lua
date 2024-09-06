@@ -7,6 +7,3 @@ target("{{cookiecutter.project_slug}}-tests")
     add_files("*.cpp")
     add_deps("{{cookiecutter.package_name}}_lib")
     add_packages("gtest")
-
-    -- Add test rule
-    add_rules("test")
