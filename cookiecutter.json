@@ -1,5 +1,10 @@
 {
     "templates": {
+        "cuda": {
+            "path": "./template/cuda",
+            "title": "Cuda Project",
+            "description": "A cookiecutter template for a cuda project"
+        },
         "cxx": {
             "path": "./template/cxx",
             "title": "C++ Project",

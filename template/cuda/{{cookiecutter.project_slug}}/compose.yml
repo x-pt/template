@@ -1,0 +1,11 @@
+service:
+    {{cookiecutter.package_name}}:
+        build: .
+        image: {{cookiecutter.project_slug}}
+
+networks:
+    {{cookiecutter.package_name}}-net:
+        name: {{cookiecutter.package_name}}-net
+        ipam:
+            config:
+                -   subnet: 172.16.238.0/24

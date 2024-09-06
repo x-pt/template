@@ -1,0 +1,32 @@
+name: CI # Continuous Integration
+
+on:
+    push:
+        branches:
+            - main
+    pull_request:
+
+jobs:
+    build-and-test:
+        strategy:
+            matrix:
+                os:
+                    - ubuntu-latest
+                    - macos-latest
+                    - windows-latest
+        name: {{ "${{ matrix.os }}" }}
+        runs-on: {{ "${{ matrix.os }}" }}
+        steps:
+            -   uses: actions/checkout@v4
+{% if cookiecutter.cxx_build_tool == "xmake" %}
+            -   uses: xmake-io/github-action-setup-xmake@v1
+                with:
+                    xmake-version: latest
+{% endif %}
+            -   name: Build
+                run: make build
+
+            -   name: Test
+                run: |
+                    make run
+                    make test

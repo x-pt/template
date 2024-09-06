@@ -1,0 +1,114 @@
+### C++ template
+# Prerequisites
+*.d
+
+# Compiled Object files
+*.slo
+*.lo
+*.o
+*.obj
+
+# Precompiled Headers
+*.gch
+*.pch
+
+# Compiled Dynamic libraries
+*.so
+*.dylib
+*.dll
+
+# Fortran module files (optional, in case your project integrates Fortran)
+*.mod
+*.smod
+
+# Compiled Static libraries
+*.lai
+*.la
+*.a
+*.lib
+
+# Executables
+*.exe
+*.out
+*.app
+
+# Debug and other temporary files
+*.dSYM/
+*.su
+*.idb
+*.pdb
+*.log
+
+### CMake
+CMakeLists.txt.user
+CMakeCache.txt
+CMakeFiles/
+CMakeScripts/
+Testing/
+cmake_install.cmake
+install_manifest.txt
+compile_commands.json
+CTestTestfile.cmake
+_deps/
+
+### Visual Studio Code
+.vscode/
+
+### JetBrains IDEs (CLion, IntelliJ, etc.)
+.idea/
+.idea_modules/
+out/
+
+# CMake generated build directories
+cmake-build-*/
+
+### Visual Studio
+.vs/
+*.vcxproj.user
+*.vcxproj.filters
+*.rsuser
+*.suo
+*.user
+*.userosscache
+*.VC.db
+*.VC.opendb
+
+# Visual Studio build results
+[Bb]in/
+[Oo]bj/
+[Dd]ebug*/
+[Rr]elease*/
+x64/
+x86/
+
+# Visual Studio cache files
+*.sdf
+*.ipch
+*.aps
+*.ncb
+
+# Visual Studio profiler
+*.psess
+*.vsp
+*.vspx
+
+# Other Visual Studio-related files
+*.log
+*.tlog
+*.tlb
+*.tli
+*.tlh
+
+### Miscellaneous
+.DS_Store
+*.tmp
+*.temp
+*.bak
+*.swp
+*.swo
+*~
+
+# Backup and temporary files
+*.old
+*.orig
+*.backup

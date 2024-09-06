@@ -1,0 +1,14 @@
+name: CD # Continuous Deployment or Delivery
+
+on:
+    push:
+        # e.g. 1.0.0, v2.0.0, v0.1.0, v0.2.0-alpha, v0.3.0+build-71edf32
+        tags:
+            - '[v]?[0-9]+\.[0-9]+\.[0-9]+.*'
+
+jobs:
+    dd:
+        name: Deploy or Delivery
+        runs-on: ubuntu-latest
+        steps:
+            -   uses: actions/checkout@v4
