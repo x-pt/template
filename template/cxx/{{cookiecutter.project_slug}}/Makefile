@@ -16,11 +16,9 @@ build:
 	@xmake
 {%- endif %}
 
-{% if cookiecutter.cxx_project_type == "binary" -%}
 # run
 run:
 	@./build/bin/$(APP_NAME)
-{%- endif %}
 
 # build image
 image:

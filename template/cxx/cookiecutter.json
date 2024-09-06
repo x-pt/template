@@ -9,11 +9,6 @@
 
     "cxx_build_tool": ["xmake", "cmake"],
     "cxx_standard_version": "20",
-    "cxx_standard_required": true,
-    "cxx_extensions_required": false,
-    "cxx_project_type": ["binary", "library"],
-    "cxx_share_enabled": ["SHARED", "STATIC"],
-
 
     "__gh_slug": "{{ cookiecutter.github_username }}/{{ cookiecutter.project_slug }}",
     "__prompts__": {
