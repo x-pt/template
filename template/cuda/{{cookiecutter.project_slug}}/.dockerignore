@@ -1,0 +1,9 @@
+# all start with .(dot), including directories and files
+.*
+CHANGELOG.md
+CODE_OF_CONDUCT.md
+CONTRIBUTING.md
+compose.yml
+LICENSE*
+Makefile
+README.md

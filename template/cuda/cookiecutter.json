@@ -1,0 +1,23 @@
+{
+    "project_name": "My Awesome Project",
+    "project_slug": "{{ cookiecutter.project_name | slugify }}",
+    "package_name": "{{ cookiecutter.project_slug | replace('-', '_') }}",
+    "project_desc": "A nice cuda project",
+    "full_name": "Firstname Lastname",
+    "email": "email@example.com",
+    "github_username": "your-org-or-username",
+
+    "cxx_build_tool": ["xmake", "cmake"],
+    "cxx_standard_version": "20",
+
+    "__gh_slug": "{{ cookiecutter.github_username }}/{{ cookiecutter.project_slug }}",
+    "__prompts__": {
+        "project_name": "Enter your project name",
+        "project_slug": "Generated project identifier (slug)",
+        "package_name": "Generated package/module name",
+        "project_desc": "Brief project description",
+        "github_username": "GitHub username or organization",
+        "full_name": "Author's full name",
+        "email": "Author's email address"
+    }
+}
