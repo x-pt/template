@@ -20,6 +20,10 @@ build:
 run:
 	@./build/bin/$(APP_NAME)
 
+# test
+test:
+	@./build/bin/$(APP_NAME)-tests
+
 # build image
 image:
 	@docker image build -t $(APP_NAME) .
