@@ -13,7 +13,7 @@ build:
 	@cmake -S . -B build
 	@cmake --build build
 {%- else %}
-	@xmake
+	@xmake -y
 {%- endif %}
 
 # run
