@@ -22,6 +22,6 @@ repos:
             -   id: commitizen-branch
                 stages: [ push ]
     -   repo: https://github.com/golangci/golangci-lint
-        rev: v1.56.2
+        rev: v1.60.3
         hooks:
             -   id: golangci-lint
