@@ -3,27 +3,25 @@ FROM rockylinux:9 AS builder
 LABEL author="{{cookiecutter.full_name}}"
 WORKDIR /app
 
-# build deps
-RUN dnf upgrade --refresh -y && \
-    dnf --enablerepo=crb install -y \
-        cmake \
-        gcc \
-        gcc-c++ \
-        make \
-        # enable repo crb to install the following packages for building static binary
-        libstdc++-static \
-        glibc-static && \
-    # due to this Dockerfile is a multi-stage, the following clean steps are redundant.
-    dnf clean all && \
-    rm -fr /var/cache/yum
+RUN sed -e 's|^mirrorlist=|#mirrorlist=|g' \
+         -e 's|^#baseurl=http://dl.rockylinux.org/$contentdir|baseurl=https://mirrors.cernet.edu.cn/rocky|g' \
+         -i.bak \
+         /etc/yum.repos.d/rocky-extras.repo \
+         /etc/yum.repos.d/rocky.repo && \
+    dnf upgrade --refresh -y && \
+    dnf groupinstall -y "Development Tools"
 
-COPY .. .
+# Copy source code
+COPY . .
 
-RUN cmake -B build && cmake --build build --target {{cookiecutter.project_slug}} --config Release --parallel 8
+# Build the project
+RUN make build
 
-# DEPLOYING
-FROM rockylinux:9-minimal
+# DEPLOYING STAGE (distroless)
+FROM gcr.io/distroless/static-debian12
 
-COPY --from=builder /app/build/{{cookiecutter.project_slug}} /{{cookiecutter.project_slug}}
+# Copy the static binary from the builder stage
+COPY --from=builder /app/build/bin/{{cookiecutter.project_slug}} /{{cookiecutter.project_slug}}
 
+# Set execution command
 CMD ["/{{cookiecutter.project_slug}}"]
