@@ -1,22 +1,29 @@
--- Set project name and language
+-- Specify the project details
 set_project("{{cookiecutter.project_slug}}")
-set_languages("c++{{cookiecutter.cxx_standard_version}}")
+set_version("0.0.1")
 
--- Include directories
-add_includedirs("include")
+-- Specify languages
+set_languages("cxx17")
 
--- Add targets
+-- Add CUDA support
+add_requires("cuda")
+
+-- Define the target for the library
 target("{{cookiecutter.package_name}}_lib")
     set_targetdir("build/lib")
     set_kind("static")
-    add_files("src/*.cpp")
-    add_headerfiles("include/*.h")
+    set_policy("build.cuda.devlink", true)
+    add_includedirs("include", {public = true})
+    add_files("src/**.cpp", "src/**.cu")
+    add_packages("cuda")
+    add_links("cudart", "cublas")
 
+-- Define the target for the executable
 target("{{cookiecutter.project_slug}}")
     set_targetdir("build/bin")
     set_kind("binary")
     add_files("src/main.cpp")
     add_deps("{{cookiecutter.package_name}}_lib")
 
--- Add tests
+-- Add the tests
 includes("tests")

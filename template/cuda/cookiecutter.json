@@ -8,6 +8,7 @@
     "github_username": "your-org-or-username",
 
     "cxx_build_tool": ["xmake", "cmake"],
+    "cuda_standard_version": "17",
     "cxx_standard_version": "20",
 
     "__gh_slug": "{{ cookiecutter.github_username }}/{{ cookiecutter.project_slug }}",
