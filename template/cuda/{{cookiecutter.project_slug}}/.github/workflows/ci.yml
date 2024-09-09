@@ -23,6 +23,9 @@ jobs:
                 with:
                     xmake-version: latest
 {% endif %}
+            -   uses: Jimver/cuda-toolkit@master
+                id: cuda-toolkit
+
             -   name: Build
                 run: make build
 
