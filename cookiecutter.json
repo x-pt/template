@@ -2,7 +2,7 @@
     "templates": {
         "cuda": {
             "path": "./template/cuda",
-            "title": "Cuda Project",
+            "title": "CUDA Project",
             "description": "A cookiecutter template for a cuda project"
         },
         "cxx": {
@@ -15,7 +15,7 @@
             "title": "Go Project",
             "description": "A cookiecutter template for a go project"
         },
-        "python": {
+        "py": {
             "path": "./template/py",
             "title": "Python Project",
             "description": "A cookiecutter template for a python project"
