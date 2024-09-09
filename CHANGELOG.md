@@ -2,6 +2,47 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.2.2](https://github.com/x-pt/template/compare/v1.2.1..v1.2.2) - 2024-09-09
+
+### 🚀 Features
+
+- *(cxx)* Add version for xmake and update Dockerfile - ([0327864](https://github.com/x-pt/template/commit/03278643b42d6763623b8a53b8e16726dcfdfb93))
+- *(cxx)* Introduce google test - ([8b11c1f](https://github.com/x-pt/template/commit/8b11c1fdd917e3e4e886c777e5ef6df0dd7247c4))
+- Introduce xmake for cuda - ([649f696](https://github.com/x-pt/template/commit/649f6964e75a8bfb1602a56df12be54fd4395acf))
+- Introduce cuda boilerplate - ([0c993f7](https://github.com/x-pt/template/commit/0c993f7495b0d9753bafa8a610f5c54ed0244f9e))
+
+### 🐛 Bug Fixes
+
+- *(ci)* Cxx cannot build with xmake when auto deploying - ([b0cca27](https://github.com/x-pt/template/commit/b0cca27eae9eda56e694ff64495d21c148843f53))
+- *(cxx)* Tests are not be executed - ([1a0af6b](https://github.com/x-pt/template/commit/1a0af6b1f5bf75044597238b23fbd205390d9e85))
+- *(py)* One line 'module-not-imported' - ([763207c](https://github.com/x-pt/template/commit/763207c3352c5b0275deff8f12e778510b1cd1a9))
+
+### 🎨 Styling
+
+- *(cxx)* Align the cxx and cuda boilerplate CMakeLists.txt - ([9483e90](https://github.com/x-pt/template/commit/9483e9052944fb65816876393cc9e68d1ff68a67))
+
+### ⚙️ Miscellaneous Tasks
+
+- *(cuda)* Use the specified version for win and ubuntu - ([7609f73](https://github.com/x-pt/template/commit/7609f7347118a5ffc7f4f8389a2d4cc31c0788b5))
+- *(cuda)* Cancel the test at post build in xmake - ([4e02d86](https://github.com/x-pt/template/commit/4e02d862845fe9df5b4d17092ccd2968893c6b12))
+- *(cuda)* Fix the typos - ([2723dc2](https://github.com/x-pt/template/commit/2723dc29fba643f199c586ad330943da38811a24))
+- *(cuda)* Enable log for installing cuda - ([4736dde](https://github.com/x-pt/template/commit/4736dde757848a930c175a4780046b638b4c6522))
+- *(cuda)* Remove macos platform - ([b242314](https://github.com/x-pt/template/commit/b242314feced20f664d7cab58359551f89b53a85))
+- *(cuda)* Install cuda - ([0a2cbc0](https://github.com/x-pt/template/commit/0a2cbc01e3747bab3d9693ed08ba0d696a4889b6))
+- *(cxx)* Ignore build dir - ([deaf865](https://github.com/x-pt/template/commit/deaf8657ad789c18db885c81a68b0dedb8a71d4c))
+- *(cxx)* Optimize the gitignore - ([2edca53](https://github.com/x-pt/template/commit/2edca53dec72ec079fdd774977cf8effb8b6f321))
+- *(cxx)* Add test stage at github action - ([9c3c6b0](https://github.com/x-pt/template/commit/9c3c6b020b2f8250c77adba22b45c8a2110ddda5))
+- *(cxx)* Use APP_NAME variable at Makefile run command - ([10ad86e](https://github.com/x-pt/template/commit/10ad86e6db72192f3017bf5c5ebcb846597e37dc))
+- *(cxx)* Add init command at Makefile - ([dc18d7c](https://github.com/x-pt/template/commit/dc18d7cd6bae2612d69642ec4f54ed156fe3d8dd))
+- *(go)* Update the golangci-lint - ([2819ce6](https://github.com/x-pt/template/commit/2819ce6dbfa41ffb00eadd34effc88efd658ef0b))
+- *(py)* Skip coverage.lcov - ([1543693](https://github.com/x-pt/template/commit/15436937555d2af7197208eeda29f1a354fb13ba))
+- Add example cuda deployment - ([28bf892](https://github.com/x-pt/template/commit/28bf892bde6d48c3b1da7e57b4b36546bafc6e32))
+
+### Build
+
+- Add fail-fast at pre-commit - ([7a98e66](https://github.com/x-pt/template/commit/7a98e662617692edae4ada3dbc4249d45a265f81))
+
+
 ## [1.2.1](https://github.com/x-pt/template/compare/v1.2.0..v1.2.1) - 2024-09-02
 
 ### 🚀 Features
