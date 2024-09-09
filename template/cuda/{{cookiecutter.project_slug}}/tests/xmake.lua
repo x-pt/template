@@ -11,6 +11,6 @@ target("{{cookiecutter.project_slug}}-tests")
     add_links("cudart", "cublas")
 
     -- Define test run command
-    after_build(function (target)
-        os.exec("%s", target:targetfile())
-    end)
+    -- after_build(function (target)
+    --     os.exec("%s", target:targetfile())
+    -- end)
