@@ -1,11 +1,6 @@
 #include "gtest/gtest.h"
 #include "my_lib.h"
 
-int main(int argc, char **argv) {
-    testing::InitGoogleTest(&argc, argv);
-    return RUN_ALL_TESTS();
-}
-
 TEST(AddTest, PositiveNumbers)
 {
     EXPECT_EQ(add(1, 2), 3);

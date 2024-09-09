@@ -1,50 +1,75 @@
-cmake_minimum_required(VERSION 3.28)
+# Specify the minimum version of CMake required
+cmake_minimum_required(VERSION 3.25)
+
+# Define the project
 project({{cookiecutter.project_slug}}
-    VERSION 0.0.1
-    DESCRIPTION "{{cookiecutter.project_desc}}"
-    HOMEPAGE_URL "https://github.com/{{cookiecutter.__gh_slug}}"
-    LANGUAGES CXX
+        VERSION 0.0.1
+        DESCRIPTION "{{cookiecutter.project_desc}}"
+        HOMEPAGE_URL "https://github.com/{{cookiecutter.__gh_slug}}"
+        LANGUAGES CXX
 )
 
-# C++ Standard settings
-set(CMAKE_CXX_STANDARD {{cookiecutter.cxx_standard_version}})
+# ===================== Build Settings =====================
+
+# Set C++ standards
+set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
-set(CMAKE_CXX_EXTENSIONS OFF)  # Enable or disable compiler-specific features
+set(CMAKE_CXX_EXTENSIONS OFF)
 
-# Enable compile commands for clangd
-set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
+# Set compile options
+set(CMAKE_EXPORT_COMPILE_COMMANDS ON)  # Enable compile commands for clangd
 
-# Specify architecture for macOS
+# Set architecture for macOS (if applicable)
 if(APPLE)
     set(CMAKE_OSX_ARCHITECTURES "arm64")
 endif()
 
-# Set output directory for binaries
+# ===================== Output Directories =====================
+
+# Set output directories
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
-set(CMAKE_RUNTIME_OUTPUT_DIRECTORY_DEBUG ${CMAKE_RUNTIME_OUTPUT_DIRECTORY})
-set(CMAKE_RUNTIME_OUTPUT_DIRECTORY_RELEASE ${CMAKE_RUNTIME_OUTPUT_DIRECTORY})
-
-# Set output directory for libraries
 set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)
-set(CMAKE_LIBRARY_OUTPUT_DIRECTORY_DEBUG ${CMAKE_LIBRARY_OUTPUT_DIRECTORY})
-set(CMAKE_LIBRARY_OUTPUT_DIRECTORY_RELEASE ${CMAKE_LIBRARY_OUTPUT_DIRECTORY})
-
-# Set output directory for archives
 set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)
-set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY_DEBUG ${CMAKE_ARCHIVE_OUTPUT_DIRECTORY})
-set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY_RELEASE ${CMAKE_ARCHIVE_OUTPUT_DIRECTORY})
+
+# Ensure output directories are set for all configurations
+foreach(OUTPUT_CONFIG ${CMAKE_CONFIGURATION_TYPES})
+    string(TOUPPER ${OUTPUT_CONFIG} OUTPUT_CONFIG)
+    set(CMAKE_RUNTIME_OUTPUT_DIRECTORY_${OUTPUT_CONFIG} ${CMAKE_RUNTIME_OUTPUT_DIRECTORY})
+    set(CMAKE_LIBRARY_OUTPUT_DIRECTORY_${OUTPUT_CONFIG} ${CMAKE_LIBRARY_OUTPUT_DIRECTORY})
+    set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY_${OUTPUT_CONFIG} ${CMAKE_ARCHIVE_OUTPUT_DIRECTORY})
+endforeach()
+
+# ===================== Source Files =====================
 
 # Collect source files
-file(GLOB_RECURSE SOURCES ${CMAKE_SOURCE_DIR}/src/*.cpp)
+file(GLOB_RECURSE SOURCES
+        ${CMAKE_SOURCE_DIR}/src/*.cpp
+)
 file(GLOB_RECURSE HEADERS ${CMAKE_SOURCE_DIR}/include/*.h)
+
+# ===================== Library Target =====================
 
 # Create library target
 add_library({{cookiecutter.package_name}}_lib ${SOURCES} ${HEADERS})
-target_include_directories({{cookiecutter.package_name}}_lib PUBLIC ${CMAKE_SOURCE_DIR}/include)
+
+# Set include directories for the library
+target_include_directories({{cookiecutter.package_name}}_lib
+        PUBLIC
+        ${CMAKE_SOURCE_DIR}/include
+)
+
+# ===================== Executable Target =====================
 
 # Create executable target
 add_executable({{cookiecutter.project_slug}} ${CMAKE_SOURCE_DIR}/src/main.cpp)
-target_link_libraries({{cookiecutter.project_slug}} PRIVATE {{cookiecutter.package_name}}_lib)
+
+# Link library and CUDA libraries to the executable
+target_link_libraries({{cookiecutter.project_slug}}
+        PRIVATE
+        {{cookiecutter.package_name}}_lib
+)
+
+# ===================== Tests =====================
 
 # Add tests subdirectory
 add_subdirectory(tests)
