@@ -11,6 +11,16 @@ jobs:
         strategy:
             matrix:
                 config:
+                    -   name: cuda cmake example
+                        template_dir: template/cuda
+                        config_file: .github/configs/template_inputs_cuda_cmake.yml
+                        publish_dir: example-cuda-cmake
+                        repo_name: x-pt/example-cuda-cmake
+                    -   name: cuda xmake example
+                        template_dir: template/cuda
+                        config_file: .github/configs/template_inputs_cuda_xmake.yml
+                        publish_dir: example-cuda-xmake
+                        repo_name: x-pt/example-cuda-xmake
                     -   name: cxx cmake example
                         template_dir: template/cxx
                         config_file: .github/configs/template_inputs_cxx_cmake.yml

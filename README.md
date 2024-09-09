@@ -37,6 +37,8 @@ Check out an example project generated with this template:
 
 - [Example for C++ with CMake](https://github.com/x-pt/example-cxx-cmake)
 - [Example for C++ with XMake](https://github.com/x-pt/example-cxx-xmake)
+- [Example for CUDA with CMake](https://github.com/x-pt/example-cuda-cmake)
+- [Example for CUDA with XMake](https://github.com/x-pt/example-cuda-xmake)
 - [Example for Golang](https://github.com/x-pt/example-go)
 - [Example for Python](https://github.com/x-pt/example-py)
 - [Example for TypeScript](https://github.com/x-pt/example-ts)
