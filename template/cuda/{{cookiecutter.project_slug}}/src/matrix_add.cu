@@ -1,39 +1,58 @@
 #include "cuda_utils.h"
 
-__global__ void matrixAdd(const float* A, const float* B, float* C, int rows, int cols) {
-    int row = blockIdx.y * blockDim.y + threadIdx.y;
-    int col = blockIdx.x * blockDim.x + threadIdx.x;
+// CUDA kernel for adding two matrices element-wise
+__global__ void addMatricesKernel(const float* matrixA, const float* matrixB, float* resultMatrix, int numRows, int numCols) {
+    // Calculate the global row and column indices for this thread
+    int rowIndex = blockIdx.y * blockDim.y + threadIdx.y;
+    int colIndex = blockIdx.x * blockDim.x + threadIdx.x;
 
-    if (row < rows && col < cols) {
-        int idx = row * cols + col;
-        C[idx] = A[idx] + B[idx];
+    // Check if this thread is within the matrix bounds
+    if (rowIndex < numRows && colIndex < numCols) {
+        // Calculate the linear index for the current element
+        int elementIndex = rowIndex * numCols + colIndex;
+        // Perform element-wise addition
+        resultMatrix[elementIndex] = matrixA[elementIndex] + matrixB[elementIndex];
     }
 }
 
-void matrixAddHost(const float* A, const float* B, float* C, int rows, int cols) {
-    size_t size = rows * cols * sizeof(float);
+// Host function to set up and execute matrix addition on GPU
+void addMatricesOnGPU(const float* hostMatrixA, const float* hostMatrixB, float* hostResultMatrix, int numRows, int numCols) {
+    // Calculate total size of the matrices in bytes
+    size_t matrixSizeBytes = numRows * numCols * sizeof(float);
 
-    float* d_A;
-    float* d_B;
-    float* d_C;
+    // Declare pointers for device (GPU) memory
+    float* deviceMatrixA;
+    float* deviceMatrixB;
+    float* deviceResultMatrix;
 
-    CUDA_CHECK(cudaMalloc(&d_A, size));
-    CUDA_CHECK(cudaMalloc(&d_B, size));
-    CUDA_CHECK(cudaMalloc(&d_C, size));
+    // Allocate memory on the GPU
+    CUDA_CHECK(cudaMalloc(&deviceMatrixA, matrixSizeBytes));
+    CUDA_CHECK(cudaMalloc(&deviceMatrixB, matrixSizeBytes));
+    CUDA_CHECK(cudaMalloc(&deviceResultMatrix, matrixSizeBytes));
 
-    CUDA_CHECK(cudaMemcpy(d_A, A, size, cudaMemcpyHostToDevice));
-    CUDA_CHECK(cudaMemcpy(d_B, B, size, cudaMemcpyHostToDevice));
+    // Copy input matrices from host to device
+    CUDA_CHECK(cudaMemcpy(deviceMatrixA, hostMatrixA, matrixSizeBytes, cudaMemcpyHostToDevice));
+    CUDA_CHECK(cudaMemcpy(deviceMatrixB, hostMatrixB, matrixSizeBytes, cudaMemcpyHostToDevice));
 
+    // Define the grid and block dimensions
     dim3 threadsPerBlock(16, 16);
-    dim3 blocksPerGrid((cols + threadsPerBlock.x - 1) / threadsPerBlock.x,
-                       (rows + threadsPerBlock.y - 1) / threadsPerBlock.y);
+    dim3 numBlocks((numCols + threadsPerBlock.x - 1) / threadsPerBlock.x,
+                   (numRows + threadsPerBlock.y - 1) / threadsPerBlock.y);
 
-    matrixAdd<<<blocksPerGrid, threadsPerBlock>>>(d_A, d_B, d_C, rows, cols);
+    // Launch the CUDA kernel
+    addMatricesKernel<<<numBlocks, threadsPerBlock>>>(deviceMatrixA, deviceMatrixB, deviceResultMatrix, numRows, numCols);
+
+    // Check for errors
+    CUDA_CHECK(cudaGetLastError());
+
+    // Wait for GPU to finish
     CUDA_CHECK(cudaDeviceSynchronize());
 
-    CUDA_CHECK(cudaMemcpy(C, d_C, size, cudaMemcpyDeviceToHost));
+    // Copy the result back to host memory
+    CUDA_CHECK(cudaMemcpy(hostResultMatrix, deviceResultMatrix, matrixSizeBytes, cudaMemcpyDeviceToHost));
 
-    CUDA_CHECK(cudaFree(d_A));
-    CUDA_CHECK(cudaFree(d_B));
-    CUDA_CHECK(cudaFree(d_C));
+    // Free GPU memory
+    CUDA_CHECK(cudaFree(deviceMatrixA));
+    CUDA_CHECK(cudaFree(deviceMatrixB));
+    CUDA_CHECK(cudaFree(deviceResultMatrix));
 }

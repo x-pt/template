@@ -1,40 +1,49 @@
 #include "cuda_utils.h"
 
-void matrixMultHost(const float* A, const float* B, float* C, int rowsA, int colsA, int colsB) {
-    size_t sizeA = rowsA * colsA * sizeof(float);
-    size_t sizeB = colsA * colsB * sizeof(float);
-    size_t sizeC = rowsA * colsB * sizeof(float);
+// Function to perform matrix multiplication on GPU using cuBLAS
+void multiplyMatricesOnGPU(const float* hostMatrixA, const float* hostMatrixB, float* hostResultMatrix,
+                           int numRowsA, int numColsA, int numColsB) {
+    // Calculate sizes in bytes for each matrix
+    size_t byteSizeA = numRowsA * numColsA * sizeof(float);
+    size_t byteSizeB = numColsA * numColsB * sizeof(float);
+    size_t byteSizeC = numRowsA * numColsB * sizeof(float);
 
-    float* d_A;
-    float* d_B;
-    float* d_C;
+    // Declare pointers for device (GPU) memory
+    float *deviceMatrixA, *deviceMatrixB, *deviceResultMatrix;
 
-    CUDA_CHECK(cudaMalloc(&d_A, sizeA));
-    CUDA_CHECK(cudaMalloc(&d_B, sizeB));
-    CUDA_CHECK(cudaMalloc(&d_C, sizeC));
+    // Allocate memory on the GPU
+    CUDA_CHECK(cudaMalloc(&deviceMatrixA, byteSizeA));
+    CUDA_CHECK(cudaMalloc(&deviceMatrixB, byteSizeB));
+    CUDA_CHECK(cudaMalloc(&deviceResultMatrix, byteSizeC));
 
-    CUDA_CHECK(cudaMemcpy(d_A, A, sizeA, cudaMemcpyHostToDevice));
-    CUDA_CHECK(cudaMemcpy(d_B, B, sizeB, cudaMemcpyHostToDevice));
+    // Copy input matrices from host to device
+    CUDA_CHECK(cudaMemcpy(deviceMatrixA, hostMatrixA, byteSizeA, cudaMemcpyHostToDevice));
+    CUDA_CHECK(cudaMemcpy(deviceMatrixB, hostMatrixB, byteSizeB, cudaMemcpyHostToDevice));
 
-    cublasHandle_t handle;
-    CUBLAS_CHECK(cublasCreate(&handle));
+    // Create cuBLAS handle
+    cublasHandle_t cublasHandle;
+    CUBLAS_CHECK(cublasCreate(&cublasHandle));
 
+    // Set up parameters for cublasSgemm
     const float alpha = 1.0f;
     const float beta = 0.0f;
-    CUBLAS_CHECK(cublasSgemm(handle,
-                            CUBLAS_OP_N, CUBLAS_OP_N,
-                            colsB, rowsA, colsA,
-                            &alpha,
-                            d_B, colsB,
-                            d_A, colsA,
-                            &beta,
-                            d_C, colsB));
 
-    CUDA_CHECK(cudaMemcpy(C, d_C, sizeC, cudaMemcpyDeviceToHost));
+    // Perform matrix multiplication using cuBLAS
+    CUBLAS_CHECK(cublasSgemm(cublasHandle,
+                             CUBLAS_OP_N, CUBLAS_OP_N,
+                             numColsB, numRowsA, numColsA,
+                             &alpha,
+                             deviceMatrixB, numColsB,
+                             deviceMatrixA, numColsA,
+                             &beta,
+                             deviceResultMatrix, numColsB));
 
-    CUDA_CHECK(cudaFree(d_A));
-    CUDA_CHECK(cudaFree(d_B));
-    CUDA_CHECK(cudaFree(d_C));
+    // Copy the result back to host memory
+    CUDA_CHECK(cudaMemcpy(hostResultMatrix, deviceResultMatrix, byteSizeC, cudaMemcpyDeviceToHost));
 
-    CUBLAS_CHECK(cublasDestroy(handle));
+    // Clean up: Free GPU memory and destroy cuBLAS handle
+    CUDA_CHECK(cudaFree(deviceMatrixA));
+    CUDA_CHECK(cudaFree(deviceMatrixB));
+    CUDA_CHECK(cudaFree(deviceResultMatrix));
+    CUBLAS_CHECK(cublasDestroy(cublasHandle));
 }

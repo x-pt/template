@@ -9,7 +9,7 @@ TEST(MatrixOperations, AddTest) {
     float B[rows * cols] = {5, 6, 7, 8};
     float C[rows * cols] = {0};
 
-    matrixAddHost(A, B, C, rows, cols);
+    addMatricesOnGPU(A, B, C, rows, cols);
 
     float expected[rows * cols] = {6, 8, 10, 12};
     for (int i = 0; i < rows * cols; i++) {
@@ -26,7 +26,7 @@ TEST(MatrixOperations, MultTest) {
     float B[colsA * colsB] = {5, 6, 7, 8};
     float C[rowsA * colsB] = {0};
 
-    matrixMultHost(A, B, C, rowsA, colsA, colsB);
+    multiplyMatricesOnGPU(A, B, C, rowsA, colsA, colsB);
 
     float expected[rowsA * colsB] = {19, 22, 43, 50};
     for (int i = 0; i < rowsA * colsB; i++) {
