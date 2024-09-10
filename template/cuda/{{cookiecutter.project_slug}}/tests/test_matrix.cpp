@@ -2,34 +2,41 @@
 #include "matrix_add.h"
 #include "matrix_mult.h"
 
-TEST(MatrixOperations, AddTest) {
-    const int rows = 2;
-    const int cols = 2;
-    float A[rows * cols] = {1, 2, 3, 4};
-    float B[rows * cols] = {5, 6, 7, 8};
-    float C[rows * cols] = {0};
+class MatrixOperationsTest : public ::testing::Test {
+protected:
+    static constexpr int kMatrixSize = 2;
+    static constexpr int kMatrixElements = kMatrixSize * kMatrixSize;
 
-    addMatricesOnGPU(A, B, C, rows, cols);
+    float matrixA[kMatrixElements];
+    float matrixB[kMatrixElements];
+    float resultMatrix[kMatrixElements];
 
-    float expected[rows * cols] = {6, 8, 10, 12};
-    for (int i = 0; i < rows * cols; i++) {
-        EXPECT_FLOAT_EQ(C[i], expected[i]);
+    void SetUp() override {
+        // Initialize matrices A and B with test data
+        float dataA[kMatrixElements] = {1, 2, 3, 4};
+        float dataB[kMatrixElements] = {5, 6, 7, 8};
+        std::copy(std::begin(dataA), std::end(dataA), std::begin(matrixA));
+        std::copy(std::begin(dataB), std::end(dataB), std::begin(matrixB));
     }
+
+    void verifyResult(const float expected[kMatrixElements]) {
+        for (int i = 0; i < kMatrixElements; i++) {
+            EXPECT_FLOAT_EQ(resultMatrix[i], expected[i])
+                << "Mismatch at index " << i;
+        }
+    }
+};
+
+TEST_F(MatrixOperationsTest, AdditionTest) {
+    addMatricesOnGPU(matrixA, matrixB, resultMatrix, kMatrixSize, kMatrixSize);
+
+    float expectedSum[kMatrixElements] = {6, 8, 10, 12};
+    verifyResult(expectedSum);
 }
 
-TEST(MatrixOperations, MultTest) {
-    const int rowsA = 2;
-    const int colsA = 2;
-    const int colsB = 2;
+TEST_F(MatrixOperationsTest, MultiplicationTest) {
+    multiplyMatricesOnGPU(matrixA, matrixB, resultMatrix, kMatrixSize, kMatrixSize, kMatrixSize);
 
-    float A[rowsA * colsA] = {1, 2, 3, 4};
-    float B[colsA * colsB] = {5, 6, 7, 8};
-    float C[rowsA * colsB] = {0};
-
-    multiplyMatricesOnGPU(A, B, C, rowsA, colsA, colsB);
-
-    float expected[rowsA * colsB] = {19, 22, 43, 50};
-    for (int i = 0; i < rowsA * colsB; i++) {
-        EXPECT_FLOAT_EQ(C[i], expected[i]);
-    }
+    float expectedProduct[kMatrixElements] = {19, 22, 43, 50};
+    verifyResult(expectedProduct);
 }
