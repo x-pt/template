@@ -1,15 +1,14 @@
 #include "cuda_utils.h"
+#include "matrix_mult.h"
 
-// Function to perform matrix multiplication on GPU using cuBLAS
-void multiplyMatricesOnGPU(const float* hostMatrixA, const float* hostMatrixB, float* hostResultMatrix,
+template <typename T>
+void multiplyMatricesOnGPU(const T* hostMatrixA, const T* hostMatrixB, T* hostResultMatrix,
                            int numRowsA, int numColsA, int numColsB) {
-    // Calculate sizes in bytes for each matrix
-    size_t byteSizeA = numRowsA * numColsA * sizeof(float);
-    size_t byteSizeB = numColsA * numColsB * sizeof(float);
-    size_t byteSizeC = numRowsA * numColsB * sizeof(float);
+    size_t byteSizeA = numRowsA * numColsA * sizeof(T);
+    size_t byteSizeB = numColsA * numColsB * sizeof(T);
+    size_t byteSizeC = numRowsA * numColsB * sizeof(T);
 
-    // Declare pointers for device (GPU) memory
-    float *deviceMatrixA, *deviceMatrixB, *deviceResultMatrix;
+    T *deviceMatrixA, *deviceMatrixB, *deviceResultMatrix;
 
     // Allocate memory on the GPU
     CUDA_CHECK(cudaMalloc(&deviceMatrixA, byteSizeA));
@@ -20,30 +19,44 @@ void multiplyMatricesOnGPU(const float* hostMatrixA, const float* hostMatrixB, f
     CUDA_CHECK(cudaMemcpy(deviceMatrixA, hostMatrixA, byteSizeA, cudaMemcpyHostToDevice));
     CUDA_CHECK(cudaMemcpy(deviceMatrixB, hostMatrixB, byteSizeB, cudaMemcpyHostToDevice));
 
-    // Create cuBLAS handle
     cublasHandle_t cublasHandle;
     CUBLAS_CHECK(cublasCreate(&cublasHandle));
 
-    // Set up parameters for cublasSgemm
-    const float alpha = 1.0f;
-    const float beta = 0.0f;
+    const T alpha = 1.0;
+    const T beta = 0.0;
 
     // Perform matrix multiplication using cuBLAS
-    CUBLAS_CHECK(cublasSgemm(cublasHandle,
-                             CUBLAS_OP_N, CUBLAS_OP_N,
-                             numColsB, numRowsA, numColsA,
-                             &alpha,
-                             deviceMatrixB, numColsB,
-                             deviceMatrixA, numColsA,
-                             &beta,
-                             deviceResultMatrix, numColsB));
+    if constexpr (std::is_same_v<T, float>) {
+        CUBLAS_CHECK(cublasSgemm(cublasHandle,
+                                 CUBLAS_OP_N, CUBLAS_OP_N,
+                                 numColsB, numRowsA, numColsA,
+                                 &alpha,
+                                 deviceMatrixB, numColsB,
+                                 deviceMatrixA, numColsA,
+                                 &beta,
+                                 deviceResultMatrix, numColsB));
+    } else if constexpr (std::is_same_v<T, double>) {
+        CUBLAS_CHECK(cublasDgemm(cublasHandle,
+                                 CUBLAS_OP_N, CUBLAS_OP_N,
+                                 numColsB, numRowsA, numColsA,
+                                 &alpha,
+                                 deviceMatrixB, numColsB,
+                                 deviceMatrixA, numColsA,
+                                 &beta,
+                                 deviceResultMatrix, numColsB));
+    } else {
+        static_assert(std::is_same_v<T, float> || std::is_same_v<T, double>,
+                      "Only float and double types are supported");
+    }
 
-    // Copy the result back to host memory
     CUDA_CHECK(cudaMemcpy(hostResultMatrix, deviceResultMatrix, byteSizeC, cudaMemcpyDeviceToHost));
 
-    // Clean up: Free GPU memory and destroy cuBLAS handle
+    CUBLAS_CHECK(cublasDestroy(cublasHandle));
     CUDA_CHECK(cudaFree(deviceMatrixA));
     CUDA_CHECK(cudaFree(deviceMatrixB));
     CUDA_CHECK(cudaFree(deviceResultMatrix));
-    CUBLAS_CHECK(cublasDestroy(cublasHandle));
 }
+
+// Explicit instantiations
+template void multiplyMatricesOnGPU<float>(const float*, const float*, float*, int, int, int);
+template void multiplyMatricesOnGPU<double>(const double*, const double*, double*, int, int, int);

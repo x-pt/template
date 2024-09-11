@@ -1,31 +1,36 @@
 #include "cuda_utils.h"
+#include "matrix_add.h"
 
-// CUDA kernel for adding two matrices element-wise
-__global__ void addMatricesKernel(const float* matrixA, const float* matrixB, float* resultMatrix, int numRows, int numCols) {
-    // Calculate the global row and column indices for this thread
-    int rowIndex = blockIdx.y * blockDim.y + threadIdx.y;
-    int colIndex = blockIdx.x * blockDim.x + threadIdx.x;
+namespace cuda_kernel {
 
-    // Check if this thread is within the matrix bounds
-    if (rowIndex < numRows && colIndex < numCols) {
-        // Calculate the linear index for the current element
-        int elementIndex = rowIndex * numCols + colIndex;
-        // Perform element-wise addition
-        resultMatrix[elementIndex] = matrixA[elementIndex] + matrixB[elementIndex];
+template <typename T>
+__global__ void addMatricesKernel(const T* matrixA, const T* matrixB, T* resultMatrix, int numRows, int numCols) {
+    int row = blockIdx.y * blockDim.y + threadIdx.y;
+    int col = blockIdx.x * blockDim.x + threadIdx.x;
+
+    if (row < numRows && col < numCols) {
+        int index = row * numCols + col;
+        resultMatrix[index] = matrixA[index] + matrixB[index];
     }
 }
 
-// Host function to set up and execute matrix addition on GPU
-void addMatricesOnGPU(const float* hostMatrixA, const float* hostMatrixB, float* hostResultMatrix, int numRows, int numCols) {
-    // Calculate total size of the matrices in bytes
-    size_t matrixSizeBytes = numRows * numCols * sizeof(float);
+template <typename T>
+__global__ void printDebugInfo(const T* matrixA, const T* matrixB, T* resultMatrix) {
+    if (threadIdx.x == 0 && blockIdx.x == 0) {
+        printf("GPU matrixA=%p\n", matrixA);
+        printf("GPU matrixB=%p\n", matrixB);
+        printf("GPU resultMatrix=%p\n", resultMatrix);
+    }
+}
 
-    // Declare pointers for device (GPU) memory
-    float* deviceMatrixA;
-    float* deviceMatrixB;
-    float* deviceResultMatrix;
+} // namespace cuda_kernel
 
-    // Allocate memory on the GPU
+template <typename T>
+void addMatricesOnGPU(const T* hostMatrixA, const T* hostMatrixB, T* hostResultMatrix, int numRows, int numCols) {
+    size_t matrixSizeBytes = numRows * numCols * sizeof(T);
+
+    T *deviceMatrixA, *deviceMatrixB, *deviceResultMatrix;
+
     CUDA_CHECK(cudaMalloc(&deviceMatrixA, matrixSizeBytes));
     CUDA_CHECK(cudaMalloc(&deviceMatrixB, matrixSizeBytes));
     CUDA_CHECK(cudaMalloc(&deviceResultMatrix, matrixSizeBytes));
@@ -39,8 +44,10 @@ void addMatricesOnGPU(const float* hostMatrixA, const float* hostMatrixB, float*
     dim3 numBlocks((numCols + threadsPerBlock.x - 1) / threadsPerBlock.x,
                    (numRows + threadsPerBlock.y - 1) / threadsPerBlock.y);
 
-    // Launch the CUDA kernel
-    addMatricesKernel<<<numBlocks, threadsPerBlock>>>(deviceMatrixA, deviceMatrixB, deviceResultMatrix, numRows, numCols);
+    cuda_kernel::addMatricesKernel<<<numBlocks, threadsPerBlock>>>(
+        deviceMatrixA, deviceMatrixB, deviceResultMatrix, numRows, numCols);
+
+    cuda_kernel::printDebugInfo<<<1, 1>>>(deviceMatrixA, deviceMatrixB, deviceResultMatrix);
 
     // Check for errors
     CUDA_CHECK(cudaGetLastError());
@@ -56,3 +63,7 @@ void addMatricesOnGPU(const float* hostMatrixA, const float* hostMatrixB, float*
     CUDA_CHECK(cudaFree(deviceMatrixB));
     CUDA_CHECK(cudaFree(deviceResultMatrix));
 }
+
+// Explicit instantiations
+template void addMatricesOnGPU<float>(const float*, const float*, float*, int, int);
+template void addMatricesOnGPU<double>(const double*, const double*, double*, int, int);
