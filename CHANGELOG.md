@@ -2,6 +2,34 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.2.3](https://github.com/x-pt/template/compare/v1.2.2..v1.2.3) - 2024-09-11
+
+### 🚀 Features
+
+- *(cuda)* Use generic for example - ([3f65611](https://github.com/x-pt/template/commit/3f656112b24010d7cd0d2dd691fcc183028b0ee3))
+
+### 🐛 Bug Fixes
+
+- *(cuda)* PTX JIT compiler library not found when using xmake - ([b41da2c](https://github.com/x-pt/template/commit/b41da2cac72bdaa478ae3bfd4f3f48a9d6474894))
+- *(cuda)* PTX JIT compiler library not found - ([94b0e5d](https://github.com/x-pt/template/commit/94b0e5d9e599aa6685bea50bc05636a39c0bf42f))
+
+### 🎨 Styling
+
+- *(cuda)* Split the cuda and cxx settings for clarity - ([283a176](https://github.com/x-pt/template/commit/283a1762cff714be0180f83c10eaf9053950a8b4))
+- *(cuda)* Add more comments - ([116437c](https://github.com/x-pt/template/commit/116437ce7682f16ba8e5dffda571aa524ce20d6f))
+- *(cuda)* Reformat the function/variable name and add some comments - ([11949fe](https://github.com/x-pt/template/commit/11949fe9e4a44217d3bf256cbbd5cfca4b3b9eb7))
+
+### 🧪 Testing
+
+- *(cuda)* Update the case - ([a31beb6](https://github.com/x-pt/template/commit/a31beb65178329d4678e8957caf285989c63dedf))
+- *(cuda)* Add more test cases - ([645975f](https://github.com/x-pt/template/commit/645975fab379a0fc9c9e20dde2a0da8f2b2ae438))
+- *(cxx)* Add more test cases - ([652df3f](https://github.com/x-pt/template/commit/652df3fbed6b78024270b1b8fdf021ac0300971a))
+
+### ⚙️ Miscellaneous Tasks
+
+- Rename python to py at root cookiecutter.json - ([94165bb](https://github.com/x-pt/template/commit/94165bb8554162e4562fed386f24262d0cf70db4))
+
+
 ## [1.2.2](https://github.com/x-pt/template/compare/v1.2.1..v1.2.2) - 2024-09-09
 
 ### 🚀 Features
