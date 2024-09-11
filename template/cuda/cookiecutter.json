@@ -7,7 +7,7 @@
     "email": "email@example.com",
     "github_username": "your-org-or-username",
 
-    "cxx_build_tool": ["xmake", "cmake"],
+    "cxx_build_tool": ["cmake", "xmake"],
     "cuda_standard_version": "17",
     "cxx_standard_version": "20",
 
