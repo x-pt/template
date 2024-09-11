@@ -11,7 +11,7 @@ init:
 build:
 {%- if cookiecutter.cxx_build_tool == "cmake" %}
 	@cmake -S . -B build
-	@cmake --build build
+	@cmake --build build --parallel
 {%- else %}
 	@xmake -y
 {%- endif %}
