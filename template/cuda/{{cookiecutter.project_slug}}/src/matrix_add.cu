@@ -14,15 +14,6 @@ __global__ void addMatricesKernel(const T* matrixA, const T* matrixB, T* resultM
     }
 }
 
-template <typename T>
-__global__ void printDebugInfo(const T* matrixA, const T* matrixB, T* resultMatrix) {
-    if (threadIdx.x == 0 && blockIdx.x == 0) {
-        printf("GPU matrixA=%p\n", matrixA);
-        printf("GPU matrixB=%p\n", matrixB);
-        printf("GPU resultMatrix=%p\n", resultMatrix);
-    }
-}
-
 } // namespace cuda_kernel
 
 template <typename T>
@@ -46,11 +37,6 @@ void addMatricesOnGPU(const T* hostMatrixA, const T* hostMatrixB, T* hostResultM
 
     cuda_kernel::addMatricesKernel<<<numBlocks, threadsPerBlock>>>(
         deviceMatrixA, deviceMatrixB, deviceResultMatrix, numRows, numCols);
-
-    cuda_kernel::printDebugInfo<<<1, 1>>>(deviceMatrixA, deviceMatrixB, deviceResultMatrix);
-
-    // Check for errors
-    CUDA_CHECK(cudaGetLastError());
 
     // Wait for GPU to finish
     CUDA_CHECK(cudaDeviceSynchronize());

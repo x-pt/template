@@ -8,10 +8,6 @@ namespace cuda_kernel {
 template <typename T>
 __global__ void addMatricesKernel(const T* matrixA, const T* matrixB, T* resultMatrix, int numRows, int numCols);
 
-// Debug kernel for printing matrices (if necessary)
-template <typename T>
-__global__ void printDebugInfo(const T* matrixA, const T* matrixB, T* resultMatrix);
-
 } // namespace cuda_kernel
 
 // Function to perform matrix addition on the GPU

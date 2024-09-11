@@ -7,6 +7,7 @@ set_languages("cxx17")
 
 -- Add CUDA support
 add_requires("cuda")
+set_values("cuda.arch", "80")
 
 -- Define the target for the library
 target("{{cookiecutter.package_name}}_lib")
