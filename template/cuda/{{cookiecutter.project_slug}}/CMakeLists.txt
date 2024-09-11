@@ -11,12 +11,14 @@ project({{cookiecutter.project_slug}}
 
 # ===================== Build Settings =====================
 
-# Set C++ and CUDA standards
+# Set CXX standards
 set(CMAKE_CXX_STANDARD {{cookiecutter.cxx_standard_version}})
-set(CMAKE_CUDA_STANDARD {{cookiecutter.cuda_standard_version}})
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
-set(CMAKE_CUDA_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_EXTENSIONS OFF)
+
+# Set CUDA standards
+set(CMAKE_CUDA_STANDARD {{cookiecutter.cuda_standard_version}})
+set(CMAKE_CUDA_STANDARD_REQUIRED ON)
 set(CMAKE_CUDA_EXTENSIONS OFF)
 set(CMAKE_CUDA_ARCHITECTURES 80)
 
