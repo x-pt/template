@@ -38,6 +38,9 @@ void addMatricesOnGPU(const T* hostMatrixA, const T* hostMatrixB, T* hostResultM
     cuda_kernel::addMatricesKernel<<<numBlocks, threadsPerBlock>>>(
         deviceMatrixA, deviceMatrixB, deviceResultMatrix, numRows, numCols);
 
+    // Check for errors
+    CUDA_CHECK(cudaGetLastError());
+
     // Wait for GPU to finish
     CUDA_CHECK(cudaDeviceSynchronize());
 
