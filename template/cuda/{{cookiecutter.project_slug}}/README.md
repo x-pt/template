@@ -19,7 +19,8 @@
     git clone https://github.com/{{cookiecutter.__gh_slug}}.git
     cd {{cookiecutter.project_slug}}
     make build
-    ./build/bin/{{cookiecutter.project_slug}}
+    make run
+    make test
     ```
 
 ## License
