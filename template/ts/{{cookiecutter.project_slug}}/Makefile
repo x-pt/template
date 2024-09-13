@@ -5,15 +5,15 @@ APP_NAME := {{cookiecutter.project_slug}}
 
 # Init the venv
 init:
-	@npm i
+	@pnpm i
 
 # Build wheel
 build:
-	@npm run build
+	@pnpm build
 
 # Test
 test:
-	@npm test
+	@pnpm test
 
 # Build image
 image:
