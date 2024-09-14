@@ -28,7 +28,7 @@
         "@commitlint/cz-commitlint": "^19.5.0",
         "@commitlint/types": "^19.5.0",
         "@types/jest": "^29.5.13",
-        "@types/node": "^22.5.4",
+        "@types/node": "^22.5.5",
         "@vercel/ncc": "^0.38.1",
         "husky": "^9.1.6",
         "inquirer": "^10.2.2",
