@@ -3,13 +3,11 @@
     "project_slug": "{{ cookiecutter.project_name | slugify }}",
     "package_name": "{{ cookiecutter.project_slug | replace('-', '_') }}",
     "project_desc": "A nice go project",
-    "full_name": "Firstname Lastname",
     "email": "email@example.com",
+    "full_name": "Firstname Lastname",
     "github_username": "your-org-or-username",
 
-
     "go_version": "1.22",
-
 
     "__gh_slug": "{{ cookiecutter.github_username }}/{{ cookiecutter.project_slug }}",
     "__prompts__": {
@@ -17,8 +15,8 @@
         "project_slug": "Generated project identifier (slug)",
         "package_name": "Generated package/module name",
         "project_desc": "Brief project description",
-        "github_username": "GitHub username or organization",
+        "email": "Author's email address",
         "full_name": "Author's full name",
-        "email": "Author's email address"
+        "github_username": "GitHub username or organization"
     }
 }
