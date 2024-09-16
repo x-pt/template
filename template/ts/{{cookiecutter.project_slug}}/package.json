@@ -1,6 +1,6 @@
 {
     "name": "{{cookiecutter.project_slug}}",
-    "version": "0.1.0",
+    "version": "{{cookiecutter.project_version}}",
     "description": "{{cookiecutter.project_desc}}",
     "author": "{{cookiecutter.full_name}}",
     "repository": {

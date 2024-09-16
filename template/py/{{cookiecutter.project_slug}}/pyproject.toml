@@ -4,7 +4,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "{{cookiecutter.project_slug}}"
-version = "0.0.1"
+version = "{{cookiecutter.project_version}}"
 description = "{{cookiecutter.project_desc}}"
 requires-python = ">={{cookiecutter.python_version}}"
 license = "MIT"

@@ -6,6 +6,7 @@ default_context:
     project_slug: example-py
     package_name: example_py
     project_desc: A nice example project
+    project_version: 0.0.1
 
     # Python
     python_version: 3.11

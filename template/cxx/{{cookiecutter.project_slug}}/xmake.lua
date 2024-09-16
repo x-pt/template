@@ -1,6 +1,6 @@
 -- Set project name and language
 set_project("{{cookiecutter.project_slug}}")
-set_version("0.0.1")
+set_version("{{cookiecutter.project_version}}")
 set_languages("c++{{cookiecutter.cxx_standard_version}}")
 
 -- Include directories

@@ -6,6 +6,7 @@ default_context:
     project_slug: example-cuda-cmake
     package_name: example_cuda_cmake
     project_desc: A nice example project
+    project_version: 0.0.1
 
     # C++
     cxx_build_tool: cmake

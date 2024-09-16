@@ -1,6 +1,6 @@
 -- Specify the project details
 set_project("{{cookiecutter.project_slug}}")
-set_version("0.0.1")
+set_version("{{cookiecutter.project_version}}")
 
 -- Specify languages
 set_languages("cxx17")

@@ -3,7 +3,7 @@ cmake_minimum_required(VERSION 3.25)
 
 # Define the project
 project({{cookiecutter.project_slug}}
-        VERSION 0.0.1
+        VERSION {{cookiecutter.project_version}}
         DESCRIPTION "{{cookiecutter.project_desc}}"
         HOMEPAGE_URL "https://github.com/{{cookiecutter.__gh_slug}}"
         LANGUAGES CXX

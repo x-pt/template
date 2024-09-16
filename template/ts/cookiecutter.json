@@ -3,6 +3,7 @@
     "project_slug": "{{ cookiecutter.project_name | slugify }}",
     "package_name": "{{ cookiecutter.project_slug | replace('-', '_') }}",
     "project_desc": "A nice typescript project",
+    "project_version": "0.0.1",
     "email": "email@example.com",
     "full_name": "Firstname Lastname",
     "github_username": "your-org-or-username",
