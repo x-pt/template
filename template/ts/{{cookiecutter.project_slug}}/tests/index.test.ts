@@ -28,119 +28,124 @@ describe("GitHub Action", () => {
     const mockWriteFile = fs.writeFile as jest.MockedFunction<typeof fs.writeFile>;
     const mockAxiosGet = axios.get as jest.MockedFunction<typeof axios.get>;
 
+    beforeAll(() => {
+        mockGetInput.mockReturnValue(".github/configs/setup-custom-action-by-ts.toml");
+    });
+
     beforeEach(() => {
         jest.resetAllMocks();
-        mockGetInput.mockReturnValue(".github/configs/setup-custom-action-by-ts.toml");
+        setupDefaultMocks();
+    });
+
+    const setupDefaultMocks = () => {
         mockReadFile.mockResolvedValue(mockConfig);
         mockAxiosGet.mockResolvedValue({ status: 200, data: {} });
-    });
+    };
 
-    it("should process text, count words, calculate sum and average correctly", async () => {
-        await run();
-
-        expect(mockSetOutput).toHaveBeenCalledWith("processed_text", "Hi world! Hi!");
-        expect(mockSetOutput).toHaveBeenCalledWith("word_count", 3);
-        expect(mockSetOutput).toHaveBeenCalledWith("sum", 15);
-        expect(mockSetOutput).toHaveBeenCalledWith("average", 3);
-    });
-
-    it("should handle missing configuration file gracefully", async () => {
-        mockReadFile.mockRejectedValue(new Error("File not found"));
-
-        await run();
-
-        expect(mockSetFailed).toHaveBeenCalledWith("Action failed with error: File not found");
-    });
-
-    it("should handle API request failures gracefully", async () => {
-        mockAxiosGet.mockRejectedValue(new Error("API error"));
-
-        await run();
-
-        expect(mockWarning).toHaveBeenCalledWith("Failed to make API request: API error");
-    });
-
-    it("should check API reachability correctly", async () => {
-        await run();
-
-        expect(mockAxiosGet).toHaveBeenCalledWith("https://api.example.com/data", { timeout: 10000 });
-        expect(mockInfo).toHaveBeenCalledWith("API https://api.example.com/data is reachable.");
-    });
-
-    it("should check API reachability correctly and warn on bad status", async () => {
-        mockAxiosGet.mockResolvedValue({ status: 500, data: {} });
-
-        await run();
-
-        expect(mockWarning).toHaveBeenCalledWith("API is not reachable, status code: 500");
-    });
-
-    it("should read from the input file and append text to the output file correctly", async () => {
+    const setupFileMocks = (inputContent: string) => {
         mockReadFile.mockImplementation((path) => {
             if (path === ".github/configs/setup-custom-action-by-ts.toml") {
                 return Promise.resolve(mockConfig);
             }
             if (path === "input.txt") {
-                return Promise.resolve("Original file content.");
+                return Promise.resolve(inputContent);
             }
             return Promise.reject(new Error("Unexpected file read"));
         });
+    };
 
-        await run();
+    describe("Text Processing", () => {
+        it("should process text, count words, calculate sum and average correctly", async () => {
+            await run();
 
-        expect(mockReadFile).toHaveBeenCalledWith(".github/configs/setup-custom-action-by-ts.toml", "utf-8");
-        expect(mockReadFile).toHaveBeenCalledWith("input.txt", "utf-8");
-        expect(mockWriteFile).toHaveBeenCalledWith("output.txt", "Original file content.\nGoodbye!", {
-            encoding: "utf-8",
-        });
-        expect(mockInfo).toHaveBeenCalledWith("Appended text to file: output.txt");
-    });
-
-    it("should handle file read errors gracefully", async () => {
-        mockReadFile.mockImplementation((path) => {
-            if (path === ".github/configs/setup-custom-action-by-ts.toml") {
-                return Promise.resolve(mockConfig);
-            }
-            if (path === "input.txt") {
-                return Promise.reject(new Error("Failed to read input file"));
-            }
-            return Promise.reject(new Error("Unexpected file read"));
+            expect(mockSetOutput.mock.calls).toMatchSnapshot();
         });
 
-        await run();
+        it("should handle empty input text", async () => {
+            mockReadFile.mockResolvedValue(`
+input_text = ""
+number_list = []
+`);
 
-        expect(mockSetFailed).toHaveBeenCalledWith(
-            "Action failed with error: File operation failed: Failed to read input file",
-        );
-    });
+            await run();
 
-    it("should handle file write errors gracefully", async () => {
-        mockReadFile.mockImplementation((path) => {
-            if (path === ".github/configs/setup-custom-action-by-ts.toml") {
-                return Promise.resolve(mockConfig);
-            }
-            if (path === "input.txt") {
-                return Promise.resolve("Original file content.");
-            }
-            return Promise.reject(new Error("Unexpected file read"));
+            expect(mockSetOutput.mock.calls).toMatchSnapshot();
         });
-        mockWriteFile.mockRejectedValue(new Error("Failed to write to output file"));
-
-        await run();
-
-        expect(mockSetFailed).toHaveBeenCalledWith(
-            "Action failed with error: File operation failed: Failed to write to output file",
-        );
     });
 
-    it("should use default values when config is empty", async () => {
-        mockReadFile.mockResolvedValue("");
+    describe("File Operations", () => {
+        it("should read from the input file and append text to the output file correctly", async () => {
+            setupFileMocks("Original file content.");
 
-        await run();
+            await run();
 
-        expect(mockSetOutput).toHaveBeenCalledWith("processed_text", "");
-        expect(mockSetOutput).toHaveBeenCalledWith("word_count", 0);
-        expect(mockSetOutput).toHaveBeenCalledWith("sum", 0);
-        expect(mockSetOutput).toHaveBeenCalledWith("average", 0);
+            expect(mockReadFile).toHaveBeenCalledWith("input.txt", "utf-8");
+            expect(mockWriteFile).toHaveBeenCalledWith("output.txt", "Original file content.\nGoodbye!", {
+                encoding: "utf-8",
+            });
+            expect(mockInfo).toHaveBeenCalledWith("Appended text to file: output.txt");
+        });
+
+        it("should handle missing input file gracefully", async () => {
+            mockReadFile.mockRejectedValue(new Error("File not found"));
+
+            await run();
+
+            expect(mockSetFailed).toHaveBeenCalledWith("Action failed with error: File not found");
+        });
+
+        it("should handle file write errors gracefully", async () => {
+            setupFileMocks("Original file content.");
+            mockWriteFile.mockRejectedValue(new Error("Failed to write to output file"));
+
+            await run();
+
+            expect(mockSetFailed).toHaveBeenCalledWith(
+                "Action failed with error: File operation failed: Failed to write to output file",
+            );
+        });
+    });
+
+    describe("API Operations", () => {
+        it("should check API reachability correctly", async () => {
+            await run();
+
+            expect(mockAxiosGet).toHaveBeenCalledWith("https://api.example.com/data", { timeout: 10000 });
+            expect(mockInfo).toHaveBeenCalledWith("API https://api.example.com/data is reachable.");
+        });
+
+        it("should handle API request failures gracefully", async () => {
+            mockAxiosGet.mockRejectedValue(new Error("API error"));
+
+            await run();
+
+            expect(mockWarning).toHaveBeenCalledWith("Failed to make API request: API error");
+        });
+
+        it("should warn on bad API status", async () => {
+            mockAxiosGet.mockResolvedValue({ status: 500, data: {} });
+
+            await run();
+
+            expect(mockWarning).toHaveBeenCalledWith("API is not reachable, status code: 500");
+        });
+    });
+
+    describe("Configuration Handling", () => {
+        it("should use default values when config is empty", async () => {
+            mockReadFile.mockResolvedValue("");
+
+            await run();
+
+            expect(mockSetOutput.mock.calls).toMatchSnapshot();
+        });
+
+        it("should handle missing configuration file gracefully", async () => {
+            mockReadFile.mockRejectedValue(new Error("Config file not found"));
+
+            await run();
+
+            expect(mockSetFailed).toHaveBeenCalledWith("Action failed with error: Config file not found");
+        });
     });
 });
