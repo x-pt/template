@@ -1,0 +1,64 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`GitHub Action Configuration Handling should use default values when config is empty 1`] = `
+[
+  [
+    "processed_text",
+    "",
+  ],
+  [
+    "word_count",
+    0,
+  ],
+  [
+    "sum",
+    0,
+  ],
+  [
+    "average",
+    0,
+  ],
+]
+`;
+
+exports[`GitHub Action Text Processing should handle empty input text 1`] = `
+[
+  [
+    "processed_text",
+    "",
+  ],
+  [
+    "word_count",
+    0,
+  ],
+  [
+    "sum",
+    0,
+  ],
+  [
+    "average",
+    0,
+  ],
+]
+`;
+
+exports[`GitHub Action Text Processing should process text, count words, calculate sum and average correctly 1`] = `
+[
+  [
+    "processed_text",
+    "Hi world! Hi!",
+  ],
+  [
+    "word_count",
+    3,
+  ],
+  [
+    "sum",
+    15,
+  ],
+  [
+    "average",
+    3,
+  ],
+]
+`;
