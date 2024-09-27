@@ -10,9 +10,8 @@ jobs:
     build-and-test:
         strategy:
             matrix:
-                os:
-                    - ubuntu-22.04
-                    - windows-2022
+                os: [ubuntu-22.04, windows-2022]
+
         name: {{ "${{ matrix.os }}" }}
         runs-on: {{ "${{ matrix.os }}" }}
         steps:
@@ -26,9 +25,9 @@ jobs:
                 id: cuda-toolkit
                 with:
                     log-file-suffix: {{ "${{ matrix.os }}" }}.txt
-                    cuda: 12.5.0
+                    cuda: '12.5.0'
                     method: 'network'
-                    sub-packages: '["nvcc", "cudart", "cublas"]
+                    sub-packages: '["nvcc", "cudart", "cublas"]'
 
             -   name: Build
                 run: make build
