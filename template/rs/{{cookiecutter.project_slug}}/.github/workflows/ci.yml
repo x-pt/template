@@ -7,43 +7,31 @@ on:
     pull_request:
     workflow_dispatch:
 
-{% raw %}
 jobs:
-    build-and-test:
-        name: python-${{ matrix.os }}
-
-        strategy:
-            matrix:
-                os:
-                    - ubuntu-latest
-                    - windows-latest
-                    - macos-latest
-
-            fail-fast: false
-
-        runs-on: ${{ matrix.os }}
-
+    ci:
+        runs-on: ubuntu-latest
         steps:
-            -   uses: actions/checkout@v4
+            - name: Checkout repository
+              uses: actions/checkout@v4
 
-            -   name: Set up uv
-                if: ${{ matrix.os == 'ubuntu-latest' || matrix.os == 'macos-latest' }}
-                run: curl -LsSf https://astral.sh/uv/install.sh | sh
+            - name: Install Rust toolchain
+              uses: dtolnay/rust-toolchain@stable
+              with:
+                  components: rustfmt, clippy
 
-            -   name: Set up uv
-                if: ${{ matrix.os == 'windows-latest' }}
-                run: irm https://astral.sh/uv/install.ps1 | iex
-                shell: powershell
+            - name: Cache Rust dependencies
+              uses: Swatinem/rust-cache@v2
 
-            -   name: Format
-                run: uvx ruff format --diff .
+            - name: Run tests
+              run: cargo test --all-features --workspace
 
-            -   name: Lint
-                run: uvx ruff check .
+            - name: Check formatting
+              run: cargo fmt --all --check
 
-            -   name: Build & Test
-                run: |
-                    uv sync
-                    uvx hatch build
-                    uvx hatch test
-{% endraw -%}
+            - name: Clippy check
+              run: cargo clippy --all-targets --all-features --workspace -- -D warnings
+
+            - name: Check documentation
+              env:
+                  RUSTDOCFLAGS: -D warnings
+              run: cargo doc --no-deps --document-private-items --all-features --workspace --examples
