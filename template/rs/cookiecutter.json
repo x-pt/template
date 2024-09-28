@@ -8,8 +8,6 @@
     "full_name": "Firstname Lastname",
     "github_username": "your-org-or-username",
 
-    "python_version": "3.10",
-
     "__gh_slug": "{{ cookiecutter.github_username }}/{{ cookiecutter.project_slug }}",
     "__prompts__": {
         "project_name": "Enter your project name",
