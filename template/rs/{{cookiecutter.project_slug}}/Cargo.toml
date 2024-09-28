@@ -1,0 +1,10 @@
+[package]
+name = "{{cookiecutter.project_slug}}"
+version = "{{cookiecutter.project_version}}"
+edition = "2021"
+description = "{{cookiecutter.project_desc}}"
+repository = "https://github.com/{{cookiecutter.__gh_slug}}"
+homepage = "https://github.com/{{cookiecutter.__gh_slug}}"
+license = "MIT OR Apache-2.0"
+
+[dependencies]
