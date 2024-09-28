@@ -1,0 +1,6 @@
+target-version = "py{{cookiecutter.python_version | replace('.', '')}}"
+line-length = 120
+
+[lint]
+select = ["E", "F", "W", "C", "N", "Q", "I"]
+ignore = []

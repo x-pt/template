@@ -1,0 +1,13 @@
+services:
+    {{cookiecutter.project_slug}}:
+        build: .
+        image: {{cookiecutter.project_slug}}
+        ports:
+            - 8000:8000
+
+networks:
+    {{cookiecutter.project_slug}}-net:
+        name: {{cookiecutter.project_slug}}-net
+        ipam:
+            config:
+                -   subnet: 172.16.238.0/24

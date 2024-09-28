@@ -1,0 +1,49 @@
+name: CI # Continuous Integration
+
+on:
+    push:
+        branches:
+            - main
+    pull_request:
+    workflow_dispatch:
+
+{% raw %}
+jobs:
+    build-and-test:
+        name: python-${{ matrix.os }}
+
+        strategy:
+            matrix:
+                os:
+                    - ubuntu-latest
+                    - windows-latest
+                    - macos-latest
+
+            fail-fast: false
+
+        runs-on: ${{ matrix.os }}
+
+        steps:
+            -   uses: actions/checkout@v4
+
+            -   name: Set up uv
+                if: ${{ matrix.os == 'ubuntu-latest' || matrix.os == 'macos-latest' }}
+                run: curl -LsSf https://astral.sh/uv/install.sh | sh
+
+            -   name: Set up uv
+                if: ${{ matrix.os == 'windows-latest' }}
+                run: irm https://astral.sh/uv/install.ps1 | iex
+                shell: powershell
+
+            -   name: Format
+                run: uvx ruff format --diff .
+
+            -   name: Lint
+                run: uvx ruff check .
+
+            -   name: Build & Test
+                run: |
+                    uv sync
+                    uvx hatch build
+                    uvx hatch test
+{% endraw -%}

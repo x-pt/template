@@ -1,0 +1,24 @@
+{
+    "project_name": "My Awesome Project",
+    "project_slug": "{{ cookiecutter.project_name | slugify }}",
+    "package_name": "{{ cookiecutter.project_slug | replace('-', '_') }}",
+    "project_desc": "A nice python project",
+    "project_version": "0.0.1",
+    "email": "email@example.com",
+    "full_name": "Firstname Lastname",
+    "github_username": "your-org-or-username",
+
+    "python_version": "3.10",
+
+    "__gh_slug": "{{ cookiecutter.github_username }}/{{ cookiecutter.project_slug }}",
+    "__prompts__": {
+        "project_name": "Enter your project name",
+        "project_slug": "Generated project identifier (slug)",
+        "package_name": "Generated package/module name",
+        "project_desc": "Brief project description",
+        "project_version": "Initial project version",
+        "email": "Author's email address",
+        "full_name": "Author's full name",
+        "github_username": "GitHub username or organization"
+    }
+}
