@@ -20,6 +20,11 @@
             "title": "Python Project",
             "description": "A cookiecutter template for a python project"
         },
+        "rs": {
+            "path": "./template/rs",
+            "title": "Rust Project",
+            "description": "A cookiecutter template for a rust project"
+        },
         "ts": {
             "path": "./template/ts",
             "title": "TypeScript Project",
