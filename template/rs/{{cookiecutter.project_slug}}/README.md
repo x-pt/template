@@ -1,4 +1,4 @@
-# {{project_name}}
+# {{cookiecutter.project_name}}
 
 [![CI](https://github.com/{{cookiecutter.__gh_slug}}/workflows/CI/badge.svg)](https://github.com/{{cookiecutter.__gh_slug}}/actions)
 [![Crates.io](https://img.shields.io/crates/v/{{cookiecutter.project_name}}.svg)](https://crates.io/crates/{{cookiecutter.project_name}})
@@ -73,11 +73,11 @@ Add `{{cookiecutter.project_slug}}` to your `Cargo.toml`:
 Here's a brief overview of basic usage:
 
 ```rust
-use {{project_name}};
+use {{cookiecutter.project_name}};
 
 fn main() {
     // Example usage
-    let result = {{project_name}}::do_something();
+    let result = {{cookiecutter.project_name}}::do_something();
     println!("{:?}", result);
 }
 ```
