@@ -1,28 +1,32 @@
-# {{cookiecutter.project_slug}}
+# {{project_name}}
 
 [![CI](https://github.com/{{cookiecutter.__gh_slug}}/workflows/CI/badge.svg)](https://github.com/{{cookiecutter.__gh_slug}}/actions)
-[![Coverage Status](https://coveralls.io/repos/github/{{cookiecutter.__gh_slug}}/badge.svg?branch=main)](https://coveralls.io/github/{{cookiecutter.__gh_slug}}?branch=main)
-[![PyPI version](https://badge.fury.io/py/{{cookiecutter.project_slug}}.svg)](https://badge.fury.io/py/{{cookiecutter.project_slug}})
-[![Python Versions](https://img.shields.io/pypi/pyversions/{{cookiecutter.project_slug}}.svg)](https://pypi.org/project/{{cookiecutter.project_slug}}/)
+[![Crates.io](https://img.shields.io/crates/v/{{cookiecutter.project_name}}.svg)](https://crates.io/crates/{{cookiecutter.project_name}})
+[![Documentation](https://docs.rs/{{cookiecutter.project_name}}/badge.svg)](https://docs.rs/{{cookiecutter.project_name}})
+[![License](https://img.shields.io/badge/license-MIT%2FApache--2.0-blue.svg)](README.md#license)
 
 ## Table of Contents
 
-- [Overview](#overview)
-- [Features](#features)
-- [Quick Start](#quick-start)
-- [Installation](#installation)
-- [Usage](#usage)
-- [Development](#development)
-- [Troubleshooting](#troubleshooting)
-- [Contributing](#contributing)
-- [License](#license)
-- [Changelog](#changelog)
-- [Contact](#contact)
-- [Acknowledgements](#acknowledgements)
+- [{{project\_name}}](#project_name)
+    - [Table of Contents](#table-of-contents)
+    - [Overview](#overview)
+    - [Features](#features)
+    - [Quick Start](#quick-start)
+    - [Installation](#installation)
+        - [Requirements](#requirements)
+        - [User Installation](#user-installation)
+    - [Usage](#usage)
+    - [Development](#development)
+    - [Troubleshooting](#troubleshooting)
+    - [Contributing](#contributing)
+    - [License](#license)
+    - [Changelog](#changelog)
+    - [Contact](#contact)
+    - [Acknowledgements](#acknowledgements)
 
 ## Overview
 
-`{{cookiecutter.project_slug}}` is a Python project designed to [brief description of the project's main purpose or functionality]. This project aims to [explain the primary goals or problems it solves].
+`{{cookiecutter.project_slug}}` is a Rust project designed to [brief description of the project's main purpose or functionality]. This project aims to [explain the primary goals or problems it solves].
 
 ## Features
 
@@ -33,43 +37,49 @@
 
 ## Quick Start
 
-```python
-import {{cookiecutter.project_slug}}
+```rust
+use {{cookiecutter.project_slug}};
 
-# Example usage
-result = {{cookiecutter.project_slug}}.do_something()
-print(result)
+fn main() {
+    // Example usage
+    let result = {{cookiecutter.project_slug}}::do_something();
+    println!("{:?}", result);
 
-# Add more examples showcasing key features
+    // Add more examples showcasing key features
+}
 ```
 
 ## Installation
 
 ### Requirements
-- Python {{cookiecutter.python_version}}+
+
+- Rust 1.81+
 - Dependencies:
-  - [Dependency 1]: [version] - [brief description or purpose]
-  - [Dependency 2]: [version] - [brief description or purpose]
-  - [Add more dependencies as needed]
+    - [Dependency 1]: [version] - [brief description or purpose]
+    - [Dependency 2]: [version] - [brief description or purpose]
+    - [Add more dependencies as needed]
 
 ### User Installation
-Install `{{cookiecutter.project_slug}}` using pip:
 
-```bash
-pip install {{cookiecutter.project_slug}}
+Add `{{cookiecutter.project_slug}}` to your `Cargo.toml`:
+
+```toml
+[dependencies]
+{{cookiecutter.project_slug}} = "0.1.0"
 ```
 
 ## Usage
 
 Here's a brief overview of basic usage:
 
-```python
-import {{cookiecutter.project_slug}}
+```rust
+use {{project_name}};
 
-# Example usage
-result = {{cookiecutter.project_slug}}.do_something()
-print(result)
-
+fn main() {
+    // Example usage
+    let result = {{project_name}}::do_something();
+    println!("{:?}", result);
+}
 ```
 
 For more detailed examples and explanations of key concepts, please refer to our comprehensive [Usage Guide](docs/usage.md).
