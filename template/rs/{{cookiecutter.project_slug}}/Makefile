@@ -1,28 +1,27 @@
-.PHONY: help build test ruff image clean
+.PHONY: help build test fmt clippy doc image clean
 .DEFAULT_GOAL := help
 
 APP_NAME := {{cookiecutter.project_slug}}
 
-# Init the venv
-init: sync
-	@uvx pre-commit install --hook-type commit-msg --hook-type pre-push
-
-# Sync the project with the venv
-sync:
-	@uv sync
-
-# Build wheel
+# Build the project
 build:
-	@uvx hatch build
+	@cargo build --release
 
-# Test
+# Run tests
 test:
-	@uvx hatch test
+	@cargo test
 
-# Ruff
-ruff:
-	@uvx ruff format .
-	@uvx ruff check . --fix
+# Format code
+fmt:
+	@cargo fmt
+
+# Run clippy
+clippy:
+	@cargo clippy -- -D warnings
+
+# Generate documentation
+doc:
+	@cargo doc --no-deps
 
 # Build image
 image:
@@ -38,7 +37,8 @@ compose-down:
 
 # Clean build artifacts
 clean:
-	@rm -rf build dist *.egg-info htmlcov .coverage coverage.xml coverage.lcov
+	@cargo clean
+	@rm -rf target
 	@docker compose -f ./compose.yml down -v
 	@docker image rm -f $(APP_NAME)
 
