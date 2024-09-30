@@ -7,43 +7,45 @@ on:
     pull_request:
     workflow_dispatch:
 
-{% raw %}
 jobs:
-    build-and-test:
-        name: python-${{ matrix.os }}
-
-        strategy:
-            matrix:
-                os:
-                    - ubuntu-latest
-                    - windows-latest
-                    - macos-latest
-
-            fail-fast: false
-
-        runs-on: ${{ matrix.os }}
-
+    lint:
+        runs-on: ubuntu-latest
         steps:
-            -   uses: actions/checkout@v4
+            -   name: Checkout repository
+                uses: actions/checkout@v4
 
-            -   name: Set up uv
-                if: ${{ matrix.os == 'ubuntu-latest' || matrix.os == 'macos-latest' }}
-                run: curl -LsSf https://astral.sh/uv/install.sh | sh
+            -   name: Set up UV Environment
+                uses: astral-sh/setup-uv@v3
+                with:
+                    version: "latest"
 
-            -   name: Set up uv
-                if: ${{ matrix.os == 'windows-latest' }}
-                run: irm https://astral.sh/uv/install.ps1 | iex
-                shell: powershell
-
-            -   name: Format
+            -   name: Format Code
                 run: uvx ruff format --diff .
 
-            -   name: Lint
+            -   name: Lint Code
                 run: uvx ruff check .
 
-            -   name: Build & Test
-                run: |
-                    uv sync
-                    uvx hatch build
-                    uvx hatch test
-{% endraw -%}
+    build-and-test:
+        runs-on: {{ "${{ matrix.os }}" }}
+        strategy:
+            matrix:
+                os: [ubuntu-latest, macos-latest, windows-latest]
+            fail-fast: false
+
+        steps:
+            -   name: Checkout repository
+                uses: actions/checkout@v4
+
+            -   name: Set up UV Environment
+                uses: astral-sh/setup-uv@v3
+                with:
+                    version: "latest"
+
+            -   name: Synchronize Dependencies
+                run: uv sync
+
+            -   name: Build Project
+                run: uvx hatch build
+
+            -   name: Run Tests
+                run: uvx hatch test
