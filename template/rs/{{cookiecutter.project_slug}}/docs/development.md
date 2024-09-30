@@ -1,6 +1,6 @@
-# Development Guide for {{cookiecutter.project_name}}
+# Development Guide for {{cookiecutter.project_slug}}
 
-Welcome to the development guide for `{{cookiecutter.project_name}}`!
+Welcome to the development guide for `{{cookiecutter.project_slug}}`!
 This document will walk you through setting up your development environment, running tests, building the project, and maintaining code quality.
 
 ## Table of Contents
@@ -19,7 +19,7 @@ This document will walk you through setting up your development environment, run
 
     ```bash
     git clone https://github.com/{{cookiecutter.__gh_slug}}.git
-    cd {{cookiecutter.project_name}}
+    cd {{cookiecutter.project_slug}}
     ```
 
 2. **Build the Project**: This command compiles the project and its dependencies:

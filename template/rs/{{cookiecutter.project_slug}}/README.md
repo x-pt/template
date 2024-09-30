@@ -1,8 +1,8 @@
-# {{cookiecutter.project_name}}
+# {{cookiecutter.project_slug}}
 
 [![CI](https://github.com/{{cookiecutter.__gh_slug}}/workflows/CI/badge.svg)](https://github.com/{{cookiecutter.__gh_slug}}/actions)
-[![Crates.io](https://img.shields.io/crates/v/{{cookiecutter.project_name}}.svg)](https://crates.io/crates/{{cookiecutter.project_name}})
-[![Documentation](https://docs.rs/{{cookiecutter.project_name}}/badge.svg)](https://docs.rs/{{cookiecutter.project_name}})
+[![Crates.io](https://img.shields.io/crates/v/{{cookiecutter.project_slug}}.svg)](https://crates.io/crates/{{cookiecutter.project_slug}})
+[![Documentation](https://docs.rs/{{cookiecutter.project_slug}}/badge.svg)](https://docs.rs/{{cookiecutter.project_slug}})
 [![License](https://img.shields.io/badge/license-MIT%2FApache--2.0-blue.svg)](README.md#license)
 
 ## Table of Contents
@@ -71,11 +71,11 @@ Add `{{cookiecutter.project_slug}}` to your `Cargo.toml`:
 Here's a brief overview of basic usage:
 
 ```rust
-use {{cookiecutter.project_name}};
+use {{cookiecutter.project_slug}};
 
 fn main() {
     // Example usage
-    let result = {{cookiecutter.project_name}}::do_something();
+    let result = {{cookiecutter.project_slug}}::do_something();
     println!("{:?}", result);
 }
 ```
