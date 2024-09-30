@@ -41,6 +41,11 @@ jobs:
                         config_file: .github/configs/template_inputs_go.yml
                         publish_dir: example-go
                         repo_name: x-pt/example-go
+                    -   name: rust example
+                        template_dir: template/rs
+                        config_file: .github/configs/template_inputs_rs.yml
+                        publish_dir: example-rs
+                        repo_name: x-pt/example-rs
                     -   name: typescript example
                         template_dir: template/ts
                         config_file: .github/configs/template_inputs_ts.yml
