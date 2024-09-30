@@ -2,6 +2,74 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.2.4](https://github.com/x-pt/template/compare/v1.2.3..v1.2.4) - 2024-09-30
+
+### 🚀 Features
+
+- *(cuda)* Simplify the output config using generator expression - ([de358ab](https://github.com/x-pt/template/commit/de358abd5b43573d1bcf1c99e773092d1bcc9fdd))
+- *(cxx)* Simplify the output config using generator expression - ([ffb2ea3](https://github.com/x-pt/template/commit/ffb2ea3546a616c81351e8d3b88d4d3c8e9db2b5))
+- *(cxx)* Make the cxx standard configurable - ([4a0b7d4](https://github.com/x-pt/template/commit/4a0b7d41148f5bc2f1fa309561f605539b7c9546))
+- *(rs)* Introduce husky-rs - ([e216c8c](https://github.com/x-pt/template/commit/e216c8c48684eea45bf43308ac4b9682997f6448))
+- *(rs)* Add crate_type config - ([4d76635](https://github.com/x-pt/template/commit/4d7663592fd15bf903f254aaf092687b59bb7ee0))
+- *(rs)* Remove something redundant - ([842c9eb](https://github.com/x-pt/template/commit/842c9eb0f4a545ed8e91a63103f9fa979229d6b3))
+- *(rs)* Add cookiecutter startup config - ([adcba84](https://github.com/x-pt/template/commit/adcba841727440504a5dd74274e318f4b71d4729))
+- *(rs)* Init - ([4ba71e7](https://github.com/x-pt/template/commit/4ba71e7ee00d0a6797676370f8c885a65e8f247b))
+- *(ts)* Add minimum node version - ([43dadca](https://github.com/x-pt/template/commit/43dadcaed4d4cb40e5ebed533fc299ed53d9b19c))
+- Add main.rs and lib.rs - ([7a72f95](https://github.com/x-pt/template/commit/7a72f959334a53acce856189f0d125bb23118cde))
+- Optimize the post process script - ([be32a09](https://github.com/x-pt/template/commit/be32a0957446d16b0abc6c5234561168efd673f5))
+- Update the project version prompt - ([61f01a5](https://github.com/x-pt/template/commit/61f01a51d0d5c33c21256ad39a629108b3a38b2c))
+- Add project_version config option - ([20d5de3](https://github.com/x-pt/template/commit/20d5de3898399b0adf7879144bc79995623ce4f9))
+
+### 🐛 Bug Fixes
+
+- *(cuda)* Error for Jimver/cuda-toolkit - ([11e6b34](https://github.com/x-pt/template/commit/11e6b34b0aef0869b3ade94ecac7272af2c1e054))
+- *(ts)* Add snapshots - ([968d153](https://github.com/x-pt/template/commit/968d1539338c05ca5b1b0baa7ed9d19da6266873))
+
+### 🚜 Refactor
+
+- *(cuda)* Use cmake as default - ([86de210](https://github.com/x-pt/template/commit/86de210798dddf2e5664059ffcfd622b2bd58aaf))
+- *(cxx)* Use cmake as default - ([ab98fa7](https://github.com/x-pt/template/commit/ab98fa73cfedd72ce364b0cfaf8f2be628fad8ed))
+
+### 📚 Documentation
+
+- *(rs)* Update the README.md and development.md - ([fd38885](https://github.com/x-pt/template/commit/fd38885485bca8fc2982e9e50cb4304f0071e686))
+- Update the README.md - ([97a3471](https://github.com/x-pt/template/commit/97a347121f75e43feb8ef96658aa2c67c4bd17ff))
+- Update the development.md - ([4e5fcbe](https://github.com/x-pt/template/commit/4e5fcbec2f04a450983671a1dcb3fcbc78523a6d))
+- Update the README.md - ([cd3f3b7](https://github.com/x-pt/template/commit/cd3f3b786bb88726be9c14bb4efc5e33463722ae))
+- Support rust boilerplate - ([d881289](https://github.com/x-pt/template/commit/d881289d2838bdfce41afbeb347a62accc9b1b56))
+- Update the cxx/cuda README.md - ([2638c2a](https://github.com/x-pt/template/commit/2638c2aca9af2b12b4365a7ecf30229f7a32ef87))
+
+### 🧪 Testing
+
+- *(ts)* Use the snapshot - ([9edcc99](https://github.com/x-pt/template/commit/9edcc99e99a225ec00cc9cebf8f0dbf7615bcbf9))
+
+### ⚙️ Miscellaneous Tasks
+
+- *(cuda)* Use network mode for Jimver/cuda-toolkit - ([401b959](https://github.com/x-pt/template/commit/401b95937a4ef9f187156c16c8b74e5f380d95e7))
+- *(cuda)* Use cuda 12.5.0 - ([3f5246b](https://github.com/x-pt/template/commit/3f5246bae93ddebe20d13d086d9b83aba9bcd8ca))
+- *(cuda)* Use cuda 11.8.0 - ([c1fd186](https://github.com/x-pt/template/commit/c1fd186143e687bab886de8b6ebc424de802353d))
+- *(cuda)* Rollback the version - ([0d60ef0](https://github.com/x-pt/template/commit/0d60ef0550ffbc67f3c8bf640cc45244b07eed91))
+- *(cuda)* Use the latest runner - ([c2bf9c2](https://github.com/x-pt/template/commit/c2bf9c2aa9ed0098deffd50ccd4ff3d758610496))
+- *(cuda)* Update the ci action version - ([f923c79](https://github.com/x-pt/template/commit/f923c798dd28d1f0a87cc8884a423f810d8cb0ba))
+- *(py)* Split lint and test jobs across platforms - ([836c72f](https://github.com/x-pt/template/commit/836c72fe19f1f73f8a4c67afa808878f9ecb022e))
+- *(rs)* Split lint and test jobs across platforms - ([1953eca](https://github.com/x-pt/template/commit/1953ecae6a430cd11a6febca3f02012cc6418751))
+- *(rs)* Update the github action deps - ([69c56a4](https://github.com/x-pt/template/commit/69c56a496a3a268feaaa75acb49389850a305c86))
+- *(rs)* Update the publish - ([64ee429](https://github.com/x-pt/template/commit/64ee429f56094053d3f9ff5e9f8e397abb847cae))
+- *(rs)* Add ci and cd - ([09859d8](https://github.com/x-pt/template/commit/09859d850eda073705762ca9e5e196f55bffdbd1))
+- *(ts)* Update the deps - ([f0f6b14](https://github.com/x-pt/template/commit/f0f6b145273474aec52bf2eaa3bcaa79aef99e30))
+- *(ts)* Update the deps - ([2841a20](https://github.com/x-pt/template/commit/2841a20aedcbabc54c36da6415f806e9ed3a7761))
+- *(ts)* Update the deps - ([2b57865](https://github.com/x-pt/template/commit/2b578652b3aa136b63eac5667323d9e4045fa026))
+- *(ts)* Update the deps - ([ef9438a](https://github.com/x-pt/template/commit/ef9438a6b29afc0b419c4883c77593fc13d195fa))
+- *(ts)* Update the deps - ([d22c0a7](https://github.com/x-pt/template/commit/d22c0a7dc0d04a8dfbf49db3dc52c651c4ff238b))
+- *(ts)* Update the deps - ([9c9286a](https://github.com/x-pt/template/commit/9c9286ae4db08e6e91a616bd45e4571db7761cb1))
+- *(ts)* Update the deps - ([a1c152f](https://github.com/x-pt/template/commit/a1c152fdbd26814233cd6d62498bfdc094948927))
+- *(ts)* Update the deps - ([c94785d](https://github.com/x-pt/template/commit/c94785d610732d10120189dd48cb459434c6f23c))
+- Add example deployment for rust - ([d946066](https://github.com/x-pt/template/commit/d9460665447d942633a8844ea448f650f60382fb))
+- Update the pre-commit - ([be96647](https://github.com/x-pt/template/commit/be9664778d455ac30f294403b28fd1723606656c))
+- Re-sort the configuration - ([6af067d](https://github.com/x-pt/template/commit/6af067d76c8ea6a290641bce7d0840e733df50e0))
+- Add parallel for cmake - ([dd15b97](https://github.com/x-pt/template/commit/dd15b974e20d2f544c9b9c4d3013e67e2deaa040))
+
+
 ## [1.2.3](https://github.com/x-pt/template/compare/v1.2.2..v1.2.3) - 2024-09-11
 
 ### 🚀 Features
