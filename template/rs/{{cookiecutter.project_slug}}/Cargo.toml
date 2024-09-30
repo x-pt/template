@@ -8,3 +8,6 @@ homepage = "https://github.com/{{cookiecutter.__gh_slug}}"
 license = "MIT OR Apache-2.0"
 
 [dependencies]
+
+[dev-dependencies]
+husky-rs = "0.1.0"
