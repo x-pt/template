@@ -7,22 +7,20 @@
 
 ## Table of Contents
 
-- [{{project\_name}}](#project_name)
-    - [Table of Contents](#table-of-contents)
-    - [Overview](#overview)
-    - [Features](#features)
-    - [Quick Start](#quick-start)
-    - [Installation](#installation)
-        - [Requirements](#requirements)
-        - [User Installation](#user-installation)
-    - [Usage](#usage)
-    - [Development](#development)
-    - [Troubleshooting](#troubleshooting)
-    - [Contributing](#contributing)
-    - [License](#license)
-    - [Changelog](#changelog)
-    - [Contact](#contact)
-    - [Acknowledgements](#acknowledgements)
+- [Overview](#overview)
+- [Features](#features)
+- [Quick Start](#quick-start)
+- [Installation](#installation)
+    - [Requirements](#requirements)
+    - [User Installation](#user-installation)
+- [Usage](#usage)
+- [Development](#development)
+- [Troubleshooting](#troubleshooting)
+- [Contributing](#contributing)
+- [License](#license)
+- [Changelog](#changelog)
+- [Contact](#contact)
+- [Acknowledgements](#acknowledgements)
 
 ## Overview
 
