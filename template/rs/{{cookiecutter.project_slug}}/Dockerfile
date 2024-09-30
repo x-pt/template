@@ -1,44 +1,33 @@
-# Base image for building the virtual environment
-FROM python:{{cookiecutter.python_version}}-bookworm AS builder
+# Stage 1: Build the Rust project using the official Rust image
+FROM rust:1-bookworm as builder
 
-ENV PATH="/root/.cargo/bin:$PATH" \
-    UV_INDEX_URL="https://mirrors.cernet.edu.cn/pypi/web/simple" \
-    PIP_INDEX_URL="https://mirrors.cernet.edu.cn/pypi/web/simple"
+# Install required dependencies for building
+RUN apt-get update && apt-get install -y \
+    pkg-config \
+    libssl-dev \
+    build-essential \
+    && rm -rf /var/lib/apt/lists/*
 
-# Install uv and tools
-RUN curl -LsSf https://astral.sh/uv/install.sh | sh
-
+# Set the working directory inside the container
 WORKDIR /app
 
-COPY pyproject.toml .
-
-# Create and install dependencies in the virtual environment
-RUN uv sync
-
-# Separate stage for validation (build and test)
-FROM builder AS validator
-
-WORKDIR /app
+# Copy the project files into the container
 COPY . .
 
-# Run build and test as part of the validation
-RUN make build && make test
+# Build the project in release mode
+RUN cargo build --release
 
-# Final image for running the application
-FROM python:{{cookiecutter.python_version}}-slim-bookworm
+# Stage 2: Create a minimal image using distroless for running the app
+FROM gcr.io/distroless/cc-debian12
 
-LABEL author="{{cookiecutter.full_name}}"
-
-ENV PATH="/app/.venv/bin:$PATH" \
-    PYTHONDONTWRITEBYTECODE=1 \
-    PYTHONUNBUFFERED=1
-
+# Create app directory
 WORKDIR /app
 
-# Copy the virtual environment and application code
-COPY --from=builder /app/.venv /app/.venv
-COPY src ./src
+# Copy the built executable from the builder stage
+COPY --from=builder /app/target/release/{{ cookiecutter.project_slug }} /app/
 
-HEALTHCHECK --start-period=30s CMD python -c "import requests; requests.get('http://localhost:8000', timeout=2)"
+# Expose the port (for example, 8080)
+EXPOSE 8080
 
-CMD ["python", "src/{{cookiecutter.package_name}}/app.py"]
+# Run the binary
+CMD ["./{{ cookiecutter.project_slug }}"]

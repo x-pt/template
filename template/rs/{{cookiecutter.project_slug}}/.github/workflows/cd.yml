@@ -6,8 +6,7 @@ on:
             - '[v]?[0-9]+.[0-9]+.[0-9]+'
 
 jobs:
-
-{% if cookiecutter.crate_type == "bin" %}
+{%- if cookiecutter.crate_type == "bin" %}
     publish:
         name: Publishing for {{ "${{ matrix.job.os }}" }}
         runs-on: {{ "${{ matrix.job.os }}" }}
@@ -51,11 +50,11 @@ jobs:
             -   name: Package final binary
                 run: |
                     cd target/{{ "${{ matrix.job.target }}" }}/release
-                    BINARY_NAME={{project-name}}{{ "${{ matrix.job.binary-postfix }}" }}
+                    BINARY_NAME={{cookiecutter.project_slug}}{{ "${{ matrix.job.binary-postfix }}" }}
                     GCC_PREFIX=$( [ "{{ "${{ matrix.job.target }}" }}" == "aarch64-unknown-linux-gnu" ] && echo "aarch64-linux-gnu-" || echo "" )
                     "$GCC_PREFIX"strip $BINARY_NAME
 
-                    RELEASE_NAME={{project-name}}-${GITHUB_REF/refs\/tags\//}-{{ "${{ matrix.job.os-name }}" }}-{{ "${{ matrix.job.architecture }}" }}
+                    RELEASE_NAME={{cookiecutter.project_slug}}-${GITHUB_REF/refs\/tags\//}-{{ "${{ matrix.job.os-name }}" }}-{{ "${{ matrix.job.architecture }}" }}
                     tar czvf $RELEASE_NAME.tar.gz $BINARY_NAME
                     shasum -a 256 $RELEASE_NAME.tar.gz > $RELEASE_NAME.sha256
 
@@ -63,13 +62,11 @@ jobs:
                 uses: softprops/action-gh-release@v1
                 with:
                     files: |
-                        target/{{ "${{ matrix.job.target }}" }}/release/{{project-name}}-*.tar.gz
-                        target/{{ "${{ matrix.job.target }}" }}/release/{{project-name}}-*.sha256
+                        target/{{ "${{ matrix.job.target }}" }}/release/{{cookiecutter.project_slug}}-*.tar.gz
+                        target/{{ "${{ matrix.job.target }}" }}/release/{{cookiecutter.project_slug}}-*.sha256
                 env:
                     GITHUB_TOKEN: {{ "${{ secrets.GITHUB_TOKEN }}" }}
-
-{% endif %}
-
+{%- endif %}
     publish-cargo:
         name: Publishing to Cargo
         runs-on: ubuntu-latest
