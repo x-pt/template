@@ -29,12 +29,6 @@ Source = "https://github.com/{{cookiecutter.__gh_slug}}"
 [tool.hatch.build.targets.wheel]
 packages = ["src/{{cookiecutter.package_name}}"]
 
-[tool.hatch.build.targets.sdist]
-include = [
-    "/src",
-    "/tests",
-]
-
 [tool.pytest.ini_options]
 minversion = "6.0"
 addopts = [
