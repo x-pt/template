@@ -6,10 +6,11 @@ build-backend = "hatchling.build"
 name = "{{cookiecutter.project_slug}}"
 version = "{{cookiecutter.project_version}}"
 description = "{{cookiecutter.project_desc}}"
+readme = "README.md"
 requires-python = ">={{cookiecutter.python_version}}"
 license = "MIT"
 authors = [
-    { name = "{{cookiecutter.full_name}}" },
+    { name = "{{cookiecutter.full_name}}", email = "{{cookiecutter.email}}" },
 ]
 classifiers = [
     "Development Status :: 4 - Beta",
@@ -20,11 +21,6 @@ dependencies = [
     "pytest-cov>=5.0",
 ]
 
-[project.optional-dependencies]
-dev = [
-    "ruff>=0.5.0",
-]
-
 [project.urls]
 Documentation = "https://github.com/{{cookiecutter.__gh_slug}}#readme"
 Issues = "https://github.com/{{cookiecutter.__gh_slug}}/issues"
@@ -33,15 +29,21 @@ Source = "https://github.com/{{cookiecutter.__gh_slug}}"
 [tool.hatch.build.targets.wheel]
 packages = ["src/{{cookiecutter.package_name}}"]
 
+[tool.hatch.build.targets.sdist]
+include = [
+    "/src",
+    "/tests",
+]
+
 [tool.pytest.ini_options]
 minversion = "6.0"
 addopts = [
-    "-ra", # show all captured stdout/stderr
-    "-q", # quiet
-    "--cov={{cookiecutter.project_slug}}", # report coverage of {{cookiecutter.project_slug}}
-    "--cov-report=term-missing", # show missing coverage
-    "--cov-report=html", # generate html coverage report
-    "--cov-report=lcov", # generate lcov coverage report
+    "-ra",
+    "-q",
+    "--cov={{cookiecutter.project_slug}}",
+    "--cov-report=term-missing",
+    "--cov-report=html",
+    "--cov-report=lcov",
 ]
 testpaths = ["tests"]
 python_files = ["test_*.py", "*_test.py"]
@@ -55,7 +57,9 @@ source_pkgs = ["{{cookiecutter.package_name}}"]
 branch = true
 parallel = true
 omit = [
-    "*/.venv/*"
+    "*/.venv/*",
+    "*/tests/*",
+    "*/site-packages/*",
 ]
 
 [tool.coverage.paths]
@@ -64,12 +68,16 @@ tests = ["tests", "*/{{cookiecutter.project_slug}}/tests"]
 
 [tool.coverage.report]
 exclude_lines = [
-    "no cov",
     "if __name__ == .__main__.:",
+    "if self.debug:",
     "if TYPE_CHECKING:",
+    "no cov",
+    "raise NotImplementedError",
+    "pass",
+    "pragma: no cover",
 ]
 show_missing = true  # Show missing lines in the report
 precision = 2  # Number of decimal places to use when rounding
 
-[tool.uv.pip]
-index-url = "https://mirrors.cernet.edu.cn/pypi/web/simple"
+# [tool.uv.pip]
+# index-url = "https://mirrors.cernet.edu.cn/pypi/web/simple"
