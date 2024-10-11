@@ -1,6 +1,6 @@
 repos:
     -   repo: https://github.com/pre-commit/pre-commit-hooks
-        rev: v4.6.0
+        rev: v5.0.0
         hooks:
             -   id: check-added-large-files
             -   id: check-case-conflict
@@ -12,8 +12,8 @@ repos:
                 args: [ --fix=lf ]
             -   id: trailing-whitespace
     -   repo: https://github.com/commitizen-tools/commitizen
-        rev: v3.29.0
+        rev: v3.29.1
         hooks:
             -   id: commitizen
             -   id: commitizen-branch
-                stages: [ push ]
+                stages: [ pre-push ]
