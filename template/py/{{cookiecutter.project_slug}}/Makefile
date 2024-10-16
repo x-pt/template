@@ -19,6 +19,10 @@ build:
 test:
 	@uvx hatch test
 
+# Allure report
+allure:
+	@allure serve allure-results
+
 # Ruff
 ruff:
 	@uvx ruff format .

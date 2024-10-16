@@ -19,6 +19,7 @@ classifiers = [
 dependencies = [
     "pytest>=8.0",
     "pytest-cov>=5.0",
+    "allure-pytest>=2.13.5",
 ]
 
 [project.urls]
@@ -38,6 +39,7 @@ addopts = [
     "--cov-report=term-missing",
     "--cov-report=html",
     "--cov-report=lcov",
+    "--alluredir=allure-results",
 ]
 testpaths = ["tests"]
 python_files = ["test_*.py", "*_test.py"]
