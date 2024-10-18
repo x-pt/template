@@ -2,6 +2,7 @@
 .idea
 .vscode
 .DS_Store
+allure-results
 
 ### Python template
 # Byte-compiled / optimized / DLL files
