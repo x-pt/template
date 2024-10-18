@@ -9,10 +9,6 @@ repos:
             -   id: mixed-line-ending
                 args: [ --fix=lf ]
             -   id: trailing-whitespace
-    -   repo: https://github.com/crate-ci/typos
-        rev: v1.24.6
-        hooks:
-            -   id: typos
     -   repo: https://github.com/commitizen-tools/commitizen
         rev: v3.29.1
         hooks:
