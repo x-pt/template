@@ -6,6 +6,7 @@ APP_PATH=.
 
 # init
 init:
+	@mkdir -p bin
 	@go mod tidy; go get -u ./...
 
 # build image
@@ -18,7 +19,7 @@ run:
 
 # build
 build:
-	@mkdir -p bin && go build -trimpath -ldflags="-w -s" -o bin/ $(APP_PATH)
+	@go build -trimpath -ldflags="-w -s" -o bin/ $(APP_PATH)
 
 # test
 test:
