@@ -6,7 +6,6 @@ APP_PATH=.
 
 # init
 init:
-	@mkdir -p bin
 	@go mod tidy; go get -u ./...
 
 # build image
