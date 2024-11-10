@@ -10,7 +10,7 @@ repos:
                 args: [ --fix=lf ]
             -   id: trailing-whitespace
     -   repo: https://github.com/commitizen-tools/commitizen
-        rev: v3.29.1
+        rev: v3.30.1
         hooks:
             -   id: commitizen
             -   id: commitizen-branch
