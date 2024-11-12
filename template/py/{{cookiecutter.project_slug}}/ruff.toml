@@ -12,4 +12,9 @@ select = [
     "UP", # pyupgrade
     "ARG001", # unused arguments in functions
 ]
-ignore = []
+
+ignore = [
+    "E501", # line too long
+    "B008", # do not perform function calls in argument defaults
+    "B904", # Allow raising exceptions without from e, for HTTPException
+]
