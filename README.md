@@ -51,11 +51,3 @@ We welcome contributions! Please see our [CONTRIBUTING.md](CONTRIBUTING.md) for 
 ## License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE.md) file for details.
-
-## Acknowledgements
-
-We gratefully acknowledge support from [JetBrains](https://www.jetbrains.com/community/opensource/#support).
-
-<a href="https://www.jetbrains.com/community/opensource/#support">
-    <img src="https://resources.jetbrains.com/storage/products/company/brand/logos/jb_beam.png" alt="JetBrains Logo" width="256" height="256"/>
-</a>
