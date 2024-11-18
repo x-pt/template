@@ -11,6 +11,9 @@ project({{cookiecutter.project_slug}}
 
 # ===================== Build Settings =====================
 
+# Add custom cmake modules path
+list(APPEND CMAKE_MODULE_PATH ${CMAKE_SOURCE_DIR}/cmake)
+
 # Set C++ standards
 set(CMAKE_CXX_STANDARD {{cookiecutter.cxx_standard_version}})
 set(CMAKE_CXX_STANDARD_REQUIRED ON)

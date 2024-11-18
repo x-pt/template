@@ -1,23 +1,31 @@
 import os
+import shutil
 import subprocess
 
-def remove_file_if_exists(file_path):
-    if os.path.exists(file_path):
-        os.remove(file_path)
+
+def remove_path_if_exists(path):
+    if os.path.exists(path):
+        if os.path.isfile(path):
+            os.remove(path)
+        elif os.path.isdir(path):
+            shutil.rmtree(path)
+
 
 cxx_build_tool = "{{cookiecutter.cxx_build_tool}}"
 
 cmake_root = "CMakeLists.txt"
 cmake_test = "tests/CMakeLists.txt"
+cmake_custom = "cmake"
 xmake_root = "xmake.lua"
 xmake_test = "tests/xmake.lua"
 
 if cxx_build_tool == "cmake":
-    remove_file_if_exists(xmake_root)
-    remove_file_if_exists(xmake_test)
+    remove_path_if_exists(xmake_root)
+    remove_path_if_exists(xmake_test)
 elif cxx_build_tool == "xmake":
-    remove_file_if_exists(cmake_root)
-    remove_file_if_exists(cmake_test)
+    remove_path_if_exists(cmake_root)
+    remove_path_if_exists(cmake_test)
+    remove_path_if_exists(cmake_custom)
 else:
     raise ValueError(f"Unknown cxx_build_tool: {cxx_build_tool}")
 
