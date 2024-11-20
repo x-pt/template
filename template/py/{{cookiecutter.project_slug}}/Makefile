@@ -13,7 +13,7 @@ sync:
 
 # Build wheel
 build:
-	@uvx hatch build
+	@uv build
 
 # Test
 test:
@@ -27,6 +27,10 @@ allure:
 ruff:
 	@uvx ruff format .
 	@uvx ruff check . --fix
+
+# Type check
+type:
+	@uvx mypy .
 
 # Build image
 image:

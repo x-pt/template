@@ -75,5 +75,26 @@ exclude_lines = [
 show_missing = true  # Show missing lines in the report
 precision = 2  # Number of decimal places to use when rounding
 
-# [tool.uv.pip]
-# index-url = "https://mirrors.cernet.edu.cn/pypi/web/simple"
+[tool.mypy]
+# Enable strict mode for comprehensive type checking
+strict = true
+python_version = "{{cookiecutter.python_version}}"
+
+# Error reporting settings
+pretty = true              # Beautify output for better readability
+show_error_codes = true    # Display error codes for easier troubleshooting
+show_error_context = true  # Show context for errors to aid debugging
+
+# Ignore missing type hints for third-party libraries
+ignore_missing_imports = true
+
+# Exclude specific paths or files from type checking
+exclude = [
+    "tests/",
+    "setup.py",
+]
+
+# Relax type-checking rules for test files (e.g., allow functions without type annotations)
+[[tool.mypy.overrides]]
+module = "tests.*"
+disallow_untyped_defs = false
