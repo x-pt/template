@@ -47,6 +47,7 @@ file(GLOB_RECURSE SOURCES CONFIGURE_DEPENDS
         ${SRC_DIR}/*.cpp
         ${SRC_DIR}/*.cu
 )
+list(FILTER SOURCES EXCLUDE REGEX ".*main\\.cpp$")
 file(GLOB_RECURSE HEADERS CONFIGURE_DEPENDS
         ${INCLUDE_DIR}/*.h
 )

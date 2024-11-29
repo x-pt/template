@@ -1,5 +1,5 @@
 -- Add Google Test package
-add_requires("gtest")
+add_requires("gtest", {configs = {main = true}})
 
 -- Add test target
 target("{{cookiecutter.project_slug}}-tests")
@@ -8,7 +8,6 @@ target("{{cookiecutter.project_slug}}-tests")
     add_files("*.cpp")
     add_deps("{{cookiecutter.package_name}}_lib")
     add_packages("gtest", "cuda")
-    add_links("cudart", "cublas")
 
     -- Define test run command
     -- after_build(function (target)

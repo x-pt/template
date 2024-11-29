@@ -13,7 +13,7 @@ build:
 	@cmake -S . -B build
 	@cmake --build build --parallel
 {%- else %}
-	@xmake -y
+	@XMAKE_ROOT=y xmake
 {%- endif %}
 
 # run
