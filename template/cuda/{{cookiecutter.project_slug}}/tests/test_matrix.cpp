@@ -1,4 +1,5 @@
 #include <gtest/gtest.h>
+
 #include <vector>
 
 #include "matrix_add.h"
@@ -13,22 +14,16 @@ protected:
     static constexpr int kDefaultMatrixElements = kDefaultMatrixSize * kDefaultMatrixSize;
 
     // Helper function to create a matrix from initializer list
-    std::vector<T> createMatrix(std::initializer_list<T> values) {
-        return std::vector<T>(values);
-    }
+    std::vector<T> createMatrix(std::initializer_list<T> values) { return std::vector<T>(values); }
 
     // Helper function to verify matrix calculation results
     static void verifyResult(const std::vector<T>& result, const std::vector<T>& expected) {
         // Check matrix size
-        ASSERT_EQ(result.size(), expected.size())
-            << "Result matrix size does not match expected matrix size";
+        ASSERT_EQ(result.size(), expected.size()) << "Result matrix size does not match expected matrix size";
 
         // Compare elements with near-equality
         for (size_t i = 0; i < expected.size(); i++) {
-            EXPECT_NEAR(result[i], expected[i], 1e-5)
-                << "Mismatch at index " << i
-                << ": expected " << expected[i]
-                << ", got " << result[i];
+            EXPECT_NEAR(result[i], expected[i], 1e-5) << "Mismatch at index " << i << ": expected " << expected[i] << ", got " << result[i];
         }
     }
 };
@@ -108,13 +103,7 @@ TYPED_TEST_P(MatrixOperationsTest, NonSquareMatrixMultiplication) {
 }
 
 // Register test cases
-REGISTER_TYPED_TEST_SUITE_P(
-    MatrixOperationsTest,
-    SquareMatrixAddition,
-    SquareMatrixMultiplication,
-    NonSquareMatrixAddition,
-    NonSquareMatrixMultiplication
-);
+REGISTER_TYPED_TEST_SUITE_P(MatrixOperationsTest, SquareMatrixAddition, SquareMatrixMultiplication, NonSquareMatrixAddition, NonSquareMatrixMultiplication);
 
 // Specify test types
 using TestTypes = testing::Types<float, double>;

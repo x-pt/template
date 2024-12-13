@@ -22,11 +22,6 @@ set(CMAKE_CUDA_ARCHITECTURES 80)
 
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
-# Set architecture for macOS (if applicable)
-if(APPLE)
-    set(CMAKE_OSX_ARCHITECTURES "arm64")
-endif()
-
 # Build type configuration
 if(NOT CMAKE_BUILD_TYPE)
     set(CMAKE_BUILD_TYPE Release)

@@ -1,5 +1,5 @@
 #include "cuda_utils.h"  // Custom CUDA utilities for error checking, etc.
-#include "matrix_add.h"   // Header file for this matrix addition module
+#include "matrix_add.h"  // Header file for this matrix addition module
 
 // Namespace to encapsulate CUDA kernel functions
 namespace cuda_kernel {
@@ -25,7 +25,7 @@ __global__ void addMatricesKernel(const T* matrixA, const T* matrixB, T* resultM
     }
 }
 
-} // namespace cuda_kernel
+}  // namespace cuda_kernel
 
 // C++ Function: Handles matrix addition on the GPU
 // Transfers matrices from the host (CPU) to the device (GPU), performs the computation,
@@ -45,8 +45,8 @@ void addMatricesOnGPU(const T* hostMatrixA, const T* hostMatrixB, T* hostResultM
     T *deviceMatrixA, *deviceMatrixB, *deviceResultMatrix;
 
     // Allocate memory on the device (GPU)
-    CUDA_CHECK(cudaMalloc(&deviceMatrixA, matrixSizeBytes));  // Allocate memory for matrix A
-    CUDA_CHECK(cudaMalloc(&deviceMatrixB, matrixSizeBytes));  // Allocate memory for matrix B
+    CUDA_CHECK(cudaMalloc(&deviceMatrixA, matrixSizeBytes));       // Allocate memory for matrix A
+    CUDA_CHECK(cudaMalloc(&deviceMatrixB, matrixSizeBytes));       // Allocate memory for matrix B
     CUDA_CHECK(cudaMalloc(&deviceResultMatrix, matrixSizeBytes));  // Allocate memory for the result matrix
 
     // Copy input matrices from host (CPU) to device (GPU)
@@ -59,8 +59,7 @@ void addMatricesOnGPU(const T* hostMatrixA, const T* hostMatrixB, T* hostResultM
                    (numRows + threadsPerBlock.y - 1) / threadsPerBlock.y);  // Calculate number of blocks required
 
     // Launch the CUDA kernel to add the matrices on the device
-    cuda_kernel::addMatricesKernel<<<numBlocks, threadsPerBlock>>>(
-        deviceMatrixA, deviceMatrixB, deviceResultMatrix, numRows, numCols);
+    cuda_kernel::addMatricesKernel<<<numBlocks, threadsPerBlock>>>(deviceMatrixA, deviceMatrixB, deviceResultMatrix, numRows, numCols);
 
     // Check for kernel launch errors
     CUDA_CHECK(cudaGetLastError());

@@ -1,0 +1,52 @@
+---
+# Base Style and Modern Practices
+BasedOnStyle: Google                       # Based on Google style guidelines
+Standard: c++17                            # Use C++17 standard
+Language: Cpp                              # Explicitly specify C++
+
+# Code Layout
+ColumnLimit: 180                           # Recommended max line length
+IndentWidth: 4                             # 4-space indentation
+UseTab: Never                              # Always use spaces instead of tabs
+InsertNewlineAtEOF: true                   # Ensure newline at end of file
+
+# Code Structure
+BreakBeforeBraces: Attach                  # Attach braces to code block
+AllowShortFunctionsOnASingleLine: Inline   # Allow short functions on single line
+AllowShortIfStatementsOnASingleLine: Never # Prevent single-line if statements
+AllowShortLoopsOnASingleLine: false        # Prevent single-line loops
+BreakBeforeBinaryOperators: NonAssignment  # Break before non-assignment operators
+BreakBeforeTernaryOperators: true          # Break before ternary operators
+BreakConstructorInitializers: BeforeColon  # Break before initializer colon
+BreakInheritanceList: BeforeColon          # Break inheritance list before colon
+
+# Language Features
+IndentCaseLabels: true                     # Indent switch case labels
+NamespaceIndentation: Inner                # Indent inside namespaces
+AccessModifierOffset: -4                   # Offset for access modifiers
+CompactNamespaces: false                   # Keep namespaces readable
+FixNamespaceComments: true                 # Properly format namespace comments
+
+# Pointers and References
+DerivePointerAlignment: false              # Manually set pointer alignment
+PointerAlignment: Left                     # Left-align pointers and references
+
+# Spacing and Alignment
+SpaceBeforeParens: ControlStatements       # Spaces before parentheses in control statements
+SpacesInParensOptions:
+    InEmptyParentheses: false              # No spaces in empty parentheses
+SpacesInSquareBrackets: false              # No extra spaces in square brackets
+SpacesBeforeTrailingComments: 2            # Two spaces before trailing comments
+SpaceBeforeCtorInitializerColon: true      # Space before constructor initializer colon
+SpaceBeforeInheritanceColon: true          # Space before inheritance colon
+SpaceAroundPointerQualifiers: Default      # Consistent space around pointer qualifiers
+
+# Comments and Includes
+SortIncludes: CaseSensitive                # Sort includes in case-sensitive manner
+AlignTrailingComments:
+    Kind: Always                           # Strictly align trailing comments
+ReflowComments: true                       # Reflow comments to fit column limit
+
+# Initialization and Constructors
+SpaceBeforeRangeBasedForLoopColon: true    # Space before range-based for loop colon
+SpacesInContainerLiterals: false           # No extra spaces in container literals
