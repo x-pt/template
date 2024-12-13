@@ -5,6 +5,7 @@ set_languages("c++{{cookiecutter.cxx_standard_version}}")
 
 -- Include directories
 add_includedirs("include")
+add_requires("spdlog 1.15.0")
 
 includes("third_party")
 
@@ -12,6 +13,7 @@ includes("third_party")
 target("{{cookiecutter.package_name}}_lib")
     set_targetdir("build/lib")
     set_kind("static")
+    add_packages("spdlog")
     add_files("src/*.cpp")
     add_headerfiles("include/*.h")
     add_deps("httplib", "cxxopts")
