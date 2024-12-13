@@ -6,12 +6,15 @@ set_languages("c++{{cookiecutter.cxx_standard_version}}")
 -- Include directories
 add_includedirs("include")
 
+includes("third_party")
+
 -- Add targets
 target("{{cookiecutter.package_name}}_lib")
     set_targetdir("build/lib")
     set_kind("static")
     add_files("src/*.cpp")
     add_headerfiles("include/*.h")
+    add_deps("httplib", "cxxopts")
 
 target("{{cookiecutter.project_slug}}")
     set_targetdir("build/bin")

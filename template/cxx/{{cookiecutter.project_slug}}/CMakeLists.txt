@@ -55,10 +55,15 @@ file(GLOB_RECURSE HEADERS CONFIGURE_DEPENDS
 
 # ===== Library Targets =====
 add_library(${PROJECT_NAME}_lib ${SOURCES} ${HEADERS})
+target_link_libraries(${PROJECT_NAME}_lib
+        PUBLIC
+        spdlog::spdlog
+        httplib
+        cxxopts
+)
 target_include_directories(${PROJECT_NAME}_lib
         PUBLIC
         $<BUILD_INTERFACE:${INCLUDE_DIR}>
-        spdlog::spdlog
 )
 
 # ===== Executable Targets =====
