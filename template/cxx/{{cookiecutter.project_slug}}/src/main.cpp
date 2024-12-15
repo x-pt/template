@@ -2,8 +2,8 @@
 
 #include <iostream>
 
-#include "cxxopts.hpp"
-#include "httplib.h"
+#include "cxxopts/cxxopts.hpp"
+#include "httplib/httplib.h"
 
 int main(int argc, char* argv[]) {
     try {

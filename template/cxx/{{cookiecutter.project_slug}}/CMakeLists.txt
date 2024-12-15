@@ -9,100 +9,114 @@ project(
     LANGUAGES CXX
 )
 
-# ===== Custom Modules =====
-# Extend CMake module path for additional custom modules.
-list(APPEND CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/cmake")
+# ===== Project-wide Configuration =====
+# Extend CMake module path for custom modules
+list(APPEND CMAKE_MODULE_PATH ${CMAKE_SOURCE_DIR}/cmake)
 
-# ===== Build Settings =====
-# Specify C++ standard and other build configurations.
+# C++ Standard and Compilation Settings
 set(CMAKE_CXX_STANDARD {{cookiecutter.cxx_standard_version}})
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_EXTENSIONS OFF)
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
-# Set default build type to Release if not specified.
+# Default build type with configuration
 if(NOT CMAKE_BUILD_TYPE)
-    set(CMAKE_BUILD_TYPE "Release")
+    set(CMAKE_BUILD_TYPE "Release" CACHE STRING "Choose the type of build" FORCE)
 endif()
 
-# Configure output directories for generated binaries and libraries.
+# Standardized output directories with generator expressions
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY "$<1:${CMAKE_BINARY_DIR}/bin>")
 set(CMAKE_LIBRARY_OUTPUT_DIRECTORY "$<1:${CMAKE_BINARY_DIR}/lib>")
 set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY "$<1:${CMAKE_BINARY_DIR}/lib>")
 
-# ===== Dependencies =====
+# ===== Dependency Management =====
 include(FetchContent)
 
-# Dependency: spdlog (logging library)
-find_package(spdlog 1.15.0 QUIET)
-if(NOT spdlog_FOUND)
-    FetchContent_Declare(
-        spdlog
-        GIT_REPOSITORY "https://github.com/gabime/spdlog.git"
-        GIT_TAG "v1.15.0"
-        GIT_SHALLOW TRUE
+FetchContent_Declare(
+    spdlog
+    GIT_REPOSITORY "https://github.com/gabime/spdlog.git"
+    GIT_TAG "v1.15.0"
+    GIT_SHALLOW TRUE
+)
+FetchContent_MakeAvailable(spdlog)
+
+# ===== Source File Discovery =====
+# Centralized source file discovery with better organization
+set(PROJECT_SOURCE_DIRS
+    ${CMAKE_SOURCE_DIR}/src
+    ${CMAKE_SOURCE_DIR}/include
+    ${CMAKE_SOURCE_DIR}/third_party
+)
+
+# Advanced file discovery with more robust configuration
+foreach(DIR ${PROJECT_SOURCE_DIRS})
+    file(GLOB_RECURSE CURRENT_HEADERS
+        CONFIGURE_DEPENDS
+        ${DIR}/*.h
+        ${DIR}/*.hpp
+        ${DIR}/*.hxx
     )
-    FetchContent_MakeAvailable(spdlog)
-endif()
+    file(GLOB_RECURSE CURRENT_SOURCES
+        CONFIGURE_DEPENDS
+        ${DIR}/*.cpp
+        ${DIR}/*.cxx
+        ${DIR}/*.cc
+    )
 
-# Add third-party libraries directory if applicable.
-add_subdirectory(third_party)
+    list(APPEND PROJECT_HEADERS ${CURRENT_HEADERS})
+    list(APPEND PROJECT_SOURCES ${CURRENT_SOURCES})
+endforeach()
 
-# Example of adding more required libraries (commented out).
-# find_package(MPI REQUIRED)
-# find_package(XXX REQUIRED)
+# Remove duplicates to prevent potential compilation issues
+list(REMOVE_DUPLICATES PROJECT_HEADERS)
+list(REMOVE_DUPLICATES PROJECT_SOURCES)
 
-# ===== Source Configuration =====
-# Define source and include directories for the project.
-set(SRC_DIR ${CMAKE_SOURCE_DIR}/src)
-set(INCLUDE_DIR ${CMAKE_SOURCE_DIR}/include)
-
-# Recursively find all source and header files in respective directories.
-file(GLOB_RECURSE SOURCES CONFIGURE_DEPENDS
-    ${SRC_DIR}/*.cpp
+# ===== Library Target =====
+# Create modular library with comprehensive configurations
+add_library(${PROJECT_NAME}_lib STATIC
+    ${PROJECT_HEADERS}
+    ${PROJECT_SOURCES}
 )
-file(GLOB_RECURSE HEADERS CONFIGURE_DEPENDS
-    ${INCLUDE_DIR}/*.h
-)
 
-# ===== Library Targets =====
-# Create a library target for project sources and headers.
-add_library(${PROJECT_NAME}_lib ${SOURCES} ${HEADERS})
-
-# Link library with required dependencies.
+# Intelligent library linking and include management
 target_link_libraries(${PROJECT_NAME}_lib
     PUBLIC
-    spdlog::spdlog   # Logging library
-    httplib          # HTTP/HTTPS library (example, ensure this is available)
-    cxxopts          # Command-line parsing library (example)
+    spdlog::spdlog
 )
 
-# Set include directories for the library.
+# Advanced include directory management
 target_include_directories(${PROJECT_NAME}_lib
     PUBLIC
-    $<BUILD_INTERFACE:${INCLUDE_DIR}>
+    $<BUILD_INTERFACE:${CMAKE_SOURCE_DIR}/include>
+    $<BUILD_INTERFACE:${CMAKE_SOURCE_DIR}/third_party>
 )
 
-# ===== Compiler Options =====
-# Compiler-specific options for warnings and standards compliance.
+# ===== Compiler-Specific Optimizations =====
+# Robust compiler detection and configuration
 if(MSVC)
     target_compile_options(${PROJECT_NAME}_lib PRIVATE
         /W4           # Higher warning level
-        /permissive-  # Enforce strict standard conformance
+        /permissive-  # Strict standard conformance
+        /utf-8        # UTF-8 source and execution character sets
     )
-else()
+elseif(CMAKE_CXX_COMPILER_ID MATCHES "Clang|GNU")
     target_compile_options(${PROJECT_NAME}_lib PRIVATE
         -Wall         # Enable all warnings
         -Wextra       # Additional warnings
         -Werror       # Treat warnings as errors
+        -Wpedantic    # Enforce strict ISO C++ standards
     )
 endif()
 
-# ===== Executable Targets =====
-# Define the main executable and link it with the library.
-add_executable(${PROJECT_NAME} ${SRC_DIR}/main.cpp)
-target_link_libraries(${PROJECT_NAME} PRIVATE ${PROJECT_NAME}_lib)
+# ===== Executable Target =====
+add_executable(${PROJECT_NAME}
+    ${CMAKE_SOURCE_DIR}/src/main.cpp
+)
 
-# ===== Tests =====
-# Add subdirectory for test-related configurations.
+target_link_libraries(${PROJECT_NAME}
+    PRIVATE
+    ${PROJECT_NAME}_lib
+)
+
+# ===== Testing =====
 add_subdirectory(tests)

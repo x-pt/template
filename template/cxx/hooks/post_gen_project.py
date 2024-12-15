@@ -18,22 +18,18 @@ test_main = "tests/test_main.cpp"
 cmake_root = "CMakeLists.txt"
 cmake_test = "tests/CMakeLists.txt"
 cmake_custom = "cmake"
-cmake_third = "third_party/CMakeLists.txt"
 
 xmake_root = "xmake.lua"
 xmake_test = "tests/xmake.lua"
-xmake_third = "third_party/xmake.lua"
 
 if cxx_build_tool == "cmake":
     remove_path_if_exists(xmake_root)
     remove_path_if_exists(xmake_test)
-    remove_path_if_exists(xmake_third)
     remove_path_if_exists(test_main)
 elif cxx_build_tool == "xmake":
     remove_path_if_exists(cmake_root)
     remove_path_if_exists(cmake_test)
     remove_path_if_exists(cmake_custom)
-    remove_path_if_exists(cmake_third)
 else:
     raise ValueError(f"Unknown cxx_build_tool: {cxx_build_tool}")
 

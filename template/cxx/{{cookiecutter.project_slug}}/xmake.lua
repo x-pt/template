@@ -6,18 +6,18 @@ set_languages("c++{{cookiecutter.cxx_standard_version}}")
 -- Dependencies
 add_requires("spdlog 1.15.0")       -- Add spdlog as a required dependency
 
--- Include third-party libraries
-includes("third_party")
-
 -- Define Library Target
 target("{{cookiecutter.package_name}}_lib")
-    set_kind("static")                -- Build as a static library
-    set_targetdir("build/lib")        -- Specify output directory
-    add_includedirs("include")        -- Include project's header files
-    add_files("src/*.cpp")            -- Add project source files
-    add_headerfiles("include/*.h")    -- Add project's header files
-    add_packages("spdlog")            -- Link spdlog headers and library
-    add_deps("httplib", "cxxopts")    -- Use httplib and cxxopts from third_party
+    set_kind("static")                               -- Build as a static library
+    set_targetdir("build/lib")                       -- Specify output directory
+    add_includedirs("include")                       -- Include project's header files
+    add_includedirs("third_party")                   -- Include project's header files
+    add_files("src/*.cpp")                           -- Add project source files
+    add_headerfiles("include/*.h")                   -- Add project's header files
+    add_headerfiles("include/*.hpp")                 -- Add project's header files
+    add_headerfiles("third_party/*.h")               -- Add project's header files
+    add_headerfiles("third_party/*.hpp")             -- Add project's header files
+    add_packages("spdlog")                           -- Link spdlog headers and library
 
 -- Define Executable Target
 target("{{cookiecutter.project_slug}}")
