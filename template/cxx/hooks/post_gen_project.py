@@ -13,8 +13,6 @@ def remove_path_if_exists(path):
 
 cxx_build_tool = "{{cookiecutter.cxx_build_tool}}"
 
-test_main = "tests/test_main.cpp"
-
 cmake_root = "CMakeLists.txt"
 cmake_test = "tests/CMakeLists.txt"
 cmake_custom = "cmake"
@@ -25,7 +23,6 @@ xmake_test = "tests/xmake.lua"
 if cxx_build_tool == "cmake":
     remove_path_if_exists(xmake_root)
     remove_path_if_exists(xmake_test)
-    remove_path_if_exists(test_main)
 elif cxx_build_tool == "xmake":
     remove_path_if_exists(cmake_root)
     remove_path_if_exists(cmake_test)
