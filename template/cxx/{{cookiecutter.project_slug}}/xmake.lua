@@ -12,7 +12,7 @@ target("{{cookiecutter.package_name}}_lib")
     set_targetdir("build/lib")                       -- Specify output directory
     add_includedirs("include", {public = true})      -- Include project's header files
     add_includedirs("third_party", {public = true})  -- Include project's header files
-    add_files("src/*.cpp")                           -- Add project source files
+    add_files("src/*.cpp|main.cpp")                  -- Add project source files, but exclude main.cpp
     add_headerfiles("include/**/*.h")                -- Add project's header files
     add_headerfiles("include/**/*.hpp")              -- Add project's header files
     add_headerfiles("third_party/**/*.h")            -- Add project's header files

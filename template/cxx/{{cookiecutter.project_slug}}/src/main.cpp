@@ -1,5 +1,4 @@
 #include <spdlog/spdlog.h>
-
 #include <iostream>
 
 #include "cxxopts/cxxopts.hpp"
@@ -8,16 +7,22 @@
 int main(int argc, char* argv[]) {
     try {
         // Define the options
-        cxxopts::Options options("MyProgram", "A brief description of the program");
+        cxxopts::Options options("MyProgram", "A simple HTTP server with command-line options");
 
-        options.add_options()("h,help", "Print usage information")("n,name", "Name of the user", cxxopts::value<std::string>())("v,verbose", "Enable verbose mode");
+        // Add command-line options
+        options.add_options()
+            ("h,help", "Print usage information")
+            ("m,mode", "Server mode", cxxopts::value<std::string>()->default_value(""))
+            ("n,name", "Name of the user", cxxopts::value<std::string>())
+            ("v,verbose", "Enable verbose mode")
+            ("p,port", "Server port", cxxopts::value<int>()->default_value("8080"));
 
         // Parse the arguments
         auto result = options.parse(argc, argv);
 
         // Handle help option
         if (result.count("help")) {
-            spdlog::info(options.help());
+            std::cout << options.help() << std::endl;
             return 0;
         }
 
@@ -35,16 +40,36 @@ int main(int argc, char* argv[]) {
             spdlog::debug("Verbose mode is enabled.");
         }
 
-        // Start a simple server using cpp-httplib
-        httplib::Server svr;
+        // Check if server mode is specified
+        std::string mode = result["mode"].as<std::string>();
+        if (mode == "server") {
+            // Get port from command-line or use default
+            int port = result["port"].as<int>();
 
-        svr.Get("/", [](const httplib::Request&, httplib::Response& res) {
-            res.set_content("Hello, World!", "text/plain");
-            spdlog::info("Handled request at /");
-        });
+            // Start a simple server using cpp-httplib
+            httplib::Server svr;
 
-        spdlog::info("Starting server on http://localhost:8080");
-        svr.listen("localhost", 8080);
+            // Root route
+            svr.Get("/", [](const httplib::Request&, httplib::Response& res) {
+                res.set_content("Hello, World!", "text/plain");
+                spdlog::info("Handled request at /");
+            });
+
+            // Health check route
+            svr.Get("/health", [](const httplib::Request&, httplib::Response& res) {
+                res.set_content("Server is running", "text/plain");
+                spdlog::info("Health check performed");
+            });
+
+            spdlog::info("Starting server on http://localhost:{}", port);
+            if (!svr.listen("localhost", port)) {
+                spdlog::error("Failed to start server on port {}", port);
+                return 1;
+            }
+        } else if (!mode.empty()) {
+            spdlog::error("Invalid mode. Use --mode server to start the HTTP server.");
+            return 1;
+        }
 
     } catch (const cxxopts::exceptions::exception& e) {
         spdlog::error("Error parsing options: {}", e.what());
