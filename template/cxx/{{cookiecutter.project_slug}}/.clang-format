@@ -1,52 +1,51 @@
 ---
-# Base Style and Modern Practices
+# Base Style
 BasedOnStyle: Google                       # Based on Google style guidelines
-Standard: c++17                            # Use C++17 standard
 Language: Cpp                              # Explicitly specify C++
+Standard: c++17                            # Use C++17 standard
 
 # Code Layout
-ColumnLimit: 180                           # Recommended max line length
+ColumnLimit: 180                           # Recommended maximum line length
 IndentWidth: 4                             # 4-space indentation
-UseTab: Never                              # Always use spaces instead of tabs
 InsertNewlineAtEOF: true                   # Ensure newline at end of file
+UseTab: Never                              # Exclusively use spaces for indentation
 
 # Code Structure
-BreakBeforeBraces: Attach                  # Attach braces to code block
-AllowShortFunctionsOnASingleLine: Inline   # Allow short functions on single line
 AllowShortIfStatementsOnASingleLine: Never # Prevent single-line if statements
+AllowShortFunctionsOnASingleLine: Inline   # Allow short functions on single line
 AllowShortLoopsOnASingleLine: false        # Prevent single-line loops
+BreakBeforeBraces: Attach                  # Attach braces to code block
 BreakBeforeBinaryOperators: NonAssignment  # Break before non-assignment operators
 BreakBeforeTernaryOperators: true          # Break before ternary operators
-BreakConstructorInitializers: BeforeColon  # Break before initializer colon
+BreakConstructorInitializers: BeforeColon  # Break constructor initializers before colon
 BreakInheritanceList: BeforeColon          # Break inheritance list before colon
+InsertBraces: true                         # Automatically insert braces for clarity
 
 # Language Features
-IndentCaseLabels: true                     # Indent switch case labels
-NamespaceIndentation: Inner                # Indent inside namespaces
 AccessModifierOffset: -4                   # Offset for access modifiers
 CompactNamespaces: false                   # Keep namespaces readable
 FixNamespaceComments: true                 # Properly format namespace comments
+IndentCaseLabels: true                     # Indent switch case labels
+NamespaceIndentation: All                  # Indent inside namespaces
 
 # Pointers and References
 DerivePointerAlignment: false              # Manually set pointer alignment
 PointerAlignment: Left                     # Left-align pointers and references
 
 # Spacing and Alignment
-SpaceBeforeParens: ControlStatements       # Spaces before parentheses in control statements
+SpaceAroundPointerQualifiers: Default      # Consistent space around pointer qualifiers
+SpaceBeforeParens: ControlStatements       # Space before parentheses in control statements
+SpaceBeforeCtorInitializerColon: true      # Space before constructor initializer colon
+SpaceBeforeInheritanceColon: true          # Space before inheritance colon
+SpaceBeforeRangeBasedForLoopColon: true    # Space before range-based for loop colon
+SpacesBeforeTrailingComments: 2            # Two spaces before trailing comments
+SpacesInContainerLiterals: false           # No extra spaces in container literals
 SpacesInParensOptions:
     InEmptyParentheses: false              # No spaces in empty parentheses
 SpacesInSquareBrackets: false              # No extra spaces in square brackets
-SpacesBeforeTrailingComments: 2            # Two spaces before trailing comments
-SpaceBeforeCtorInitializerColon: true      # Space before constructor initializer colon
-SpaceBeforeInheritanceColon: true          # Space before inheritance colon
-SpaceAroundPointerQualifiers: Default      # Consistent space around pointer qualifiers
 
 # Comments and Includes
-SortIncludes: CaseSensitive                # Sort includes in case-sensitive manner
 AlignTrailingComments:
     Kind: Always                           # Strictly align trailing comments
 ReflowComments: true                       # Reflow comments to fit column limit
-
-# Initialization and Constructors
-SpaceBeforeRangeBasedForLoopColon: true    # Space before range-based for loop colon
-SpacesInContainerLiterals: false           # No extra spaces in container literals
+SortIncludes: CaseSensitive                # Sort includes in case-sensitive manner
