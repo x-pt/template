@@ -14,12 +14,15 @@ UseTab: Never                              # Exclusively use spaces for indentat
 AllowShortIfStatementsOnASingleLine: Never # Prevent single-line if statements
 AllowShortFunctionsOnASingleLine: Inline   # Allow short functions on single line
 AllowShortLoopsOnASingleLine: false        # Prevent single-line loops
+BinPackArguments: false
+BinPackParameters: OnePerLine
 BreakBeforeBraces: Attach                  # Attach braces to code block
 BreakBeforeBinaryOperators: NonAssignment  # Break before non-assignment operators
 BreakBeforeTernaryOperators: true          # Break before ternary operators
 BreakConstructorInitializers: BeforeColon  # Break constructor initializers before colon
 BreakInheritanceList: BeforeColon          # Break inheritance list before colon
 InsertBraces: true                         # Automatically insert braces for clarity
+PackConstructorInitializers: Never
 
 # Language Features
 AccessModifierOffset: -4                   # Offset for access modifiers
