@@ -1,0 +1,79 @@
+Checks: >
+    -*,  # Disable all checks by default
+    bugprone-*,
+    readability-*,
+    performance-*,
+    modernize-*,
+    cppcoreguidelines-*,
+    clang-analyzer-*,
+    portability-*,
+    security-*,
+    misc-*,
+    google-*,
+
+CheckOptions:
+    # Naming conventions
+    -   key: readability-identifier-naming.ClassCase
+        value: CamelCase
+    -   key: readability-identifier-naming.StructCase
+        value: CamelCase
+    -   key: readability-identifier-naming.EnumCase
+        value: CamelCase
+    -   key: readability-identifier-naming.MethodCase
+        value: lower_case
+    -   key: readability-identifier-naming.FunctionCase
+        value: lower_case
+    -   key: readability-identifier-naming.VariableCase
+        value: lower_case
+    -   key: readability-identifier-naming.ParameterCase
+        value: lower_case
+    -   key: readability-identifier-naming.MemberCase
+        value: m_camelBack
+    -   key: readability-identifier-naming.StaticMemberCase
+        value: s_camelBack
+    -   key: readability-identifier-naming.GlobalVariableCase
+        value: g_lower_case
+    -   key: readability-identifier-naming.NamespaceCase
+        value: lower_case
+
+    # Function complexity
+    -   key: readability-function-cognitive-complexity.Threshold
+        value: 35
+
+    # Bug detection
+    -   key: bugprone-argument-comment
+        value: 1
+    -   key: bugprone-branch-clone
+        value: 1
+    -   key: bugprone-use-after-move
+        value: 1
+
+    # Modern practices
+    -   key: modernize-use-nullptr.NullMacros
+        value: 'NULL'
+    -   key: modernize-use-auto
+        value: 1
+    -   key: modernize-avoid-bind
+        value: 1
+
+    # Core guidelines
+    -   key: cppcoreguidelines-no-malloc
+        value: 1
+    -   key: cppcoreguidelines-pro-type-cstyle-cast
+        value: 1
+    -   key: cppcoreguidelines-special-member-functions
+        value: 1
+
+    # Security
+    -   key: security-undefined-bool-conversion
+        value: 1
+    -   key: security-implicit-int-float-conversion
+        value: 1
+
+    # Performance
+    -   key: performance-unnecessary-copy-initialization
+        value: 1
+    -   key: performance-for-range-copy
+        value: 1
+    -   key: performance-move-const-arg
+        value: 1
