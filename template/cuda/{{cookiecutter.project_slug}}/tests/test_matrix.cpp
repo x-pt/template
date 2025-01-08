@@ -26,6 +26,19 @@ protected:
             EXPECT_NEAR(result[i], expected[i], 1e-5) << "Mismatch at index " << i << ": expected " << expected[i] << ", got " << result[i];
         }
     }
+
+    // SetUp method to print CUDA versions before each test
+    void SetUp() override {
+        int runtime_version, driver_version;
+
+        cudaRuntimeGetVersion(&runtime_version);
+        std::cout << "CUDA Runtime Version: "
+                  << runtime_version / 1000 << "." << (runtime_version % 1000) / 10 << std::endl;
+
+        cudaDriverGetVersion(&driver_version);
+        std::cout << "CUDA Driver Version: "
+                  << driver_version / 1000 << "." << (driver_version % 1000) / 10 << std::endl;
+    }
 };
 
 // Register type-parameterized test suite
