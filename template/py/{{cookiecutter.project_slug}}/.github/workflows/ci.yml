@@ -42,10 +42,10 @@ jobs:
                     version: "latest"
 
             -   name: Synchronize Dependencies
-                run: uv sync
+                run: make init
 
             -   name: Build Project
-                run: uvx hatch build
+                run: make build
 
             -   name: Run Tests
-                run: uvx hatch test
+                run: make test
