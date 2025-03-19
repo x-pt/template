@@ -37,7 +37,7 @@ Source = "https://github.com/{{cookiecutter.__gh_slug}}"
 packages = ["src/{{cookiecutter.package_name}}"]
 
 [tool.pytest.ini_options]
-minversion = "6.0"
+minversion = "8.1"
 addopts = [
     "-ra",
     "-q",
@@ -47,8 +47,11 @@ addopts = [
     "--cov-report=lcov",
     "--alluredir=allure-results",
 ]
+consider_namespace_packages=true # Enable this to allow using the same filename in different test directories without needing __init__.py in each one
+pythonpath = ["src", "."]
 testpaths = ["tests"]
 python_files = ["test_*.py", "*_test.py"]
+python_classes = ["Test*"]
 python_functions = ["test_*"]
 markers = [
     "integration: marks tests as integration tests (deselect with '-m \"not integration\"')",
