@@ -1,0 +1,26 @@
+{
+    "name": "CUDA C++",
+    "build": {
+        "dockerfile": "Dockerfile"
+    },
+    "customizations": {
+        "vscode": {
+            "extensions": [
+                "ms-vscode.cpptools",
+                "ms-vscode.cmake-tools",
+                "cheshirekow.cmake-format",
+                "xaver.clang-format",
+                "nvidia.nsight-vscode-edition"
+            ]
+        }
+    },
+    "remoteUser": "vscode",
+    // Add capabilities for NVIDIA GPU access if running locally with Docker
+    "runArgs": ["--gpus", "all", "--cap-add=SYS_PTRACE"],
+    "features": {
+      "ghcr.io/devcontainers/features/common-utils:2": {
+        "installZsh": "false",
+        "installOhMyZsh": "false"
+      }
+    }
+}

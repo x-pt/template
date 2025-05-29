@@ -14,6 +14,8 @@ Visit our [website](https://x-pt.github.io) for more details.
 - **CI/CD Integration**: Pre-configured GitHub Actions workflows for automated testing and deployment.
 - **Pre-configured Linters**: Integrated with some tools to maintain code quality.
 - **Docker Support**: Ready-to-use Dockerfile and Docker Compose setup for easy containerization.
+- **License Selection**: Choose from MIT, Apache-2.0, or a proprietary license during project generation.
+- **Dev Container Support**: Includes pre-configured Dev Containers for a consistent, containerized development environment with VS Code.
 - **Customizable Templates**: Modify to fit your project’s specific needs with minimal effort.
 
 ## Getting Started

@@ -7,11 +7,13 @@
     "email": "email@example.com",
     "full_name": "Firstname Lastname",
     "github_username": "your-org-or-username",
+    "license": ["MIT", "Apache-2.0", "None (Proprietary)"],
 
     "node_version": "20",
 
     "__gh_slug": "{{ cookiecutter.github_username }}/{{ cookiecutter.project_slug }}",
     "__prompts__": {
+        "license": "Choose a license for your project",
         "project_name": "Enter your project name",
         "project_slug": "Generated project identifier (slug)",
         "package_name": "Generated package/module name",

@@ -1,0 +1,14 @@
+{
+    "name": "Python {{cookiecutter.python_version}}",
+    "image": "mcr.microsoft.com/devcontainers/python:{{cookiecutter.python_version}}-bullseye",
+    "customizations": {
+        "vscode": {
+            "extensions": [
+                "ms-python.python",
+                "ms-python.black-formatter",
+                "ms-python.ruff"
+            ]
+        }
+    },
+    "postCreateCommand": "pip install --user -e .[dev,test]"
+}

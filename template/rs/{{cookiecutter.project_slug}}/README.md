@@ -4,7 +4,7 @@
 [![CI](https://github.com/{{cookiecutter.__gh_slug}}/workflows/CI/badge.svg)](https://github.com/{{cookiecutter.__gh_slug}}/actions)
 [![Crates.io](https://img.shields.io/crates/v/{{cookiecutter.project_slug}}.svg)](https://crates.io/crates/{{cookiecutter.project_slug}})
 [![Documentation](https://docs.rs/{{cookiecutter.project_slug}}/badge.svg)](https://docs.rs/{{cookiecutter.project_slug}})
-[![License](https://img.shields.io/badge/license-MIT%2FApache--2.0-blue.svg)](README.md#license)
+{{ VENDORED_LICENSE_BADGE }}
 
 ## Table of Contents
 
@@ -97,12 +97,7 @@ We welcome contributions! Please see our [Contributing Guide](CONTRIBUTING.md) f
 
 ## License
 
-This project is licensed under either of:
-
-- Apache License, Version 2.0 ([LICENSE-APACHE](LICENSE-APACHE) or http://www.apache.org/licenses/LICENSE-2.0)
-- MIT license ([LICENSE-MIT](LICENSE-MIT) or http://opensource.org/licenses/MIT)
-
-at your option.
+This project is licensed under the {{ VENDORED_LICENSE_NAME }} - see the [LICENSE](LICENSE) file for details.
 
 ## Changelog
 

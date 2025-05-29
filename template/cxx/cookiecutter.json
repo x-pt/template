@@ -9,10 +9,12 @@
     "github_username": "your-org-or-username",
 
     "cxx_build_tool": ["cmake", "xmake"],
+    "license": ["MIT", "Apache-2.0", "None (Proprietary)"],
     "cxx_standard_version": "20",
 
     "__gh_slug": "{{ cookiecutter.github_username }}/{{ cookiecutter.project_slug }}",
     "__prompts__": {
+        "license": "Choose a license for your project",
         "project_name": "Enter your project name",
         "project_slug": "Generated project identifier (slug)",
         "package_name": "Generated package/module name",

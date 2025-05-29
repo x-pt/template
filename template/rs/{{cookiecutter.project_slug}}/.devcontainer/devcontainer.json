@@ -1,0 +1,16 @@
+{
+    "name": "Rust",
+    "image": "mcr.microsoft.com/devcontainers/rust:latest",
+    "customizations": {
+        "vscode": {
+            "extensions": [
+                "rust-lang.rust-analyzer",
+                "serayuzgur.crates",
+                "tamasfe.even-better-toml"
+            ]
+        }
+    },
+    "features": {
+      "ghcr.io/devcontainers/features/sshd:1": {}
+    }
+}

@@ -7,6 +7,7 @@ default_context:
     package_name: example_ts
     project_desc: A nice example project
     project_version: 0.0.1
+    license: "MIT"
 
     # Node
     node_version: 20

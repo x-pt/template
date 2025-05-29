@@ -1,0 +1,15 @@
+{
+    "name": "TypeScript Node {{cookiecutter.node_version}}",
+    "image": "mcr.microsoft.com/devcontainers/typescript-node:{{cookiecutter.node_version}}-bullseye",
+    "customizations": {
+        "vscode": {
+            "extensions": [
+                "biomejs.biome",
+                "dbaeumer.vscode-eslint" 
+            ]
+        }
+    },
+    // Assuming pnpm is common in this project based on workflow files.
+    // If not, change to "npm install" or "yarn install".
+    "postCreateCommand": "pnpm install"
+}

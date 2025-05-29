@@ -1,0 +1,20 @@
+{
+    "name": "C++",
+    "image": "mcr.microsoft.com/devcontainers/cpp:latest",
+    "customizations": {
+        "vscode": {
+            "extensions": [
+                "ms-vscode.cpptools",
+                "ms-vscode.cmake-tools",
+                "cheshirekow.cmake-format",
+                "xaver.clang-format"
+            ]
+        }
+    },
+    "features": {
+      "ghcr.io/devcontainers/features/common-utils:2": {
+        "installZsh": "false",
+        "installOhMyZsh": "false"
+      }
+    }
+}

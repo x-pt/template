@@ -7,3 +7,4 @@ default_context:
     package_name: example_rs
     project_desc: A nice example project
     project_version: 0.0.1
+    license: "MIT"
