@@ -1,37 +1,56 @@
-.PHONY: help build test image clean
+.PHONY: help init build run test fmt fmt-check lint image compose-up compose-down clean
 .DEFAULT_GOAL := help
 
 APP_NAME := {{cookiecutter.project_slug}}
 
-# Init the venv
+# Initialize the project and install dependencies
 init:
-	@pnpm i
+	@pnpm install
 
-# Build wheel
+# Build the TypeScript application
 build:
 	@pnpm build
 
-# Test
+# Run the built TypeScript application
+run:
+	@$(MAKE) build && node dist/index.js
+
+# Run tests using the configured test runner (Jest)
 test:
 	@pnpm test
 
-# Build image
+# Format source code using Biome
+fmt:
+	@pnpm biome format --write .
+
+# Check TypeScript code formatting and linting using Biome (for CI)
+fmt-check:
+	@echo "Checking TypeScript code with Biome..."
+	@pnpm exec biome check .
+
+# Lint source code using Biome (via pnpm script)
+lint:
+	@pnpm lint
+
+# Build Docker image
 image:
 	@docker image build -t $(APP_NAME) .
 
-# Start a compose service
+# Start services defined in compose.yml
 compose-up:
 	@docker compose -f ./compose.yml -p $(APP_NAME) up -d
 
-# Shutdown a compose service
+# Stop and remove services defined in compose.yml
 compose-down:
 	@docker compose -f ./compose.yml down
 
-# Clean build artifacts
+# Clean build artifacts, dependencies, and Docker assets
 clean:
-	@rm -rf build dist *.egg-info htmlcov .coverage coverage.xml coverage.lcov coverage
-	@docker compose -f ./compose.yml down -v
-	@docker image rm -f $(APP_NAME)
+	@echo "Cleaning TypeScript build artifacts and dependencies..."
+	@rm -rf node_modules dist lib coverage .nyc_output
+	@echo "Cleaning Docker images..."
+	@docker compose -f ./compose.yml down -v --rmi local 2>/dev/null || true
+	@docker image rm -f $(APP_NAME) 2>/dev/null || true
 
 # Show help
 help:

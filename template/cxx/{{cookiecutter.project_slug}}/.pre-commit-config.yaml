@@ -5,12 +5,18 @@ repos:
         rev: v5.0.0
         hooks:
             -   id: check-merge-conflict
+            -   id: check-json
             -   id: check-toml
             -   id: check-yaml
             -   id: end-of-file-fixer
             -   id: mixed-line-ending
                 args: [ --fix=lf ]
             -   id: trailing-whitespace
+    -   repo: https://github.com/pre-commit/mirrors-clang-format
+        rev: v18.1.0 # Use a recent, stable version
+        hooks:
+            -   id: clang-format
+                args: ["-i", "--style=file"] # Run in-place, use .clang-format
     -   repo: https://github.com/commitizen-tools/commitizen
         rev: v3.30.1
         hooks:

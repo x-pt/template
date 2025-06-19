@@ -1,42 +1,63 @@
 name: CI # Continuous Integration
 
 on:
-    push:
-        branches:
-            - main
-    pull_request:
+  push:
+    branches:
+      - main
+  pull_request:
 
 jobs:
-    build-and-test:
-        strategy:
-            matrix:
-                os: [ubuntu-22.04, windows-2022]
+  lint-check:
+    name: Lint and Format Check
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
 
-        name: {{ "${{ matrix.os }}" }}
-        runs-on: {{ "${{ matrix.os }}" }}
-        steps:
-            -   uses: actions/checkout@v4
 {% if cookiecutter.cxx_build_tool == "xmake" %}
-            -   uses: xmake-io/github-action-setup-xmake@v1
-                with:
-                    xmake-version: latest
+      - name: Setup XMake
+        uses: xmake-io/github-action-setup-xmake@v1
+        with:
+          xmake-version: latest
 {% endif %}
-            -   uses: Jimver/cuda-toolkit@v0.2.19
-                id: cuda-toolkit
-                with:
-                    cuda: '12.6.2'
-                    method: 'local'
-{% raw %}
-            -   name: Check CUDA
-                run: |
-                    echo "Installed cuda version is: ${{steps.cuda-toolkit.outputs.cuda}}"
-                    echo "Cuda install location: ${{steps.cuda-toolkit.outputs.CUDA_PATH}}"
-                    nvcc -V
-{% endraw %}
-            -   name: Build
-                run: make build
 
-            -   name: Test
-                run: |
-                    make run
-                    make test
+      - name: Initialize Project (Setup Pre-commit)
+        run: make init
+
+      - name: Check Formatting and Linting (via pre-commit)
+        run: pre-commit run --all-files --show-diff-on-failure
+
+  build-and-test:
+    name: Build and Test on {{ '${{ matrix.os }}' }}
+    runs-on: {{ '${{ matrix.os }}' }}
+    strategy:
+      matrix:
+        os: [ubuntu-latest] # Limiting to Ubuntu for CUDA CI simplicity
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup CUDA Toolkit
+        uses: Jimver/cuda-toolkit@v0.2.11
+        with:
+          cuda-version: '11.8.0'
+          # Optional: add components if needed, e.g., components: 'nvcc_11.8,cublas_11.8'
+
+{% if cookiecutter.cxx_build_tool == "xmake" %}
+      - name: Setup XMake
+        uses: xmake-io/github-action-setup-xmake@v1
+        with:
+          xmake-version: latest
+{% endif %}
+
+      - name: Initialize Project
+        run: make init
+
+      - name: Build Project
+        run: make build
+
+      - name: Run Tests
+        run: make test
+
+      - name: Smoke Test (Run Application)
+        run: make run

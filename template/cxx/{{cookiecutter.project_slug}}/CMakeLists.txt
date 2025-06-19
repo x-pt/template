@@ -18,6 +18,7 @@ set(CMAKE_CXX_STANDARD {{cookiecutter.cxx_standard_version}})
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_EXTENSIONS OFF)
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
+set(CMAKE_POSITION_INDEPENDENT_CODE ON) # Build with PIC for all targets where applicable
 
 # Default build type with configuration
 if(NOT CMAKE_BUILD_TYPE)
@@ -73,10 +74,11 @@ list(REMOVE_DUPLICATES PROJECT_SOURCES)
 
 # ===== Library Target =====
 # Create modular library with comprehensive configurations
-add_library(${PROJECT_NAME}_lib STATIC
+add_library(${PROJECT_NAME}_lib {{ cookiecutter.library_type | upper }}
     ${PROJECT_HEADERS}
     ${PROJECT_SOURCES}
 )
+set_target_properties(${PROJECT_NAME}_lib PROPERTIES POSITION_INDEPENDENT_CODE ON)
 
 # Intelligent library linking and include management
 target_link_libraries(${PROJECT_NAME}_lib

@@ -11,6 +11,7 @@
     "cxx_build_tool": ["cmake", "xmake"],
     "cuda_standard_version": "17",
     "cxx_standard_version": "20",
+    "library_type": ["static", "shared"],
 
     "__gh_slug": "{{ cookiecutter.github_username }}/{{ cookiecutter.project_slug }}",
     "__prompts__": {
@@ -21,6 +22,10 @@
         "project_version": "Initial project version",
         "email": "Author's email address",
         "full_name": "Author's full name",
-        "github_username": "GitHub username or organization"
+        "github_username": "GitHub username or organization",
+        "cxx_build_tool": "Choose C++/CUDA build tool (cmake or xmake)",
+        "cuda_standard_version": "Enter CUDA standard version (e.g., 11, 14, 17)",
+        "cxx_standard_version": "Enter C++ standard version (e.g., 17, 20, 23)",
+        "library_type": "Choose library type for the main project library (static or shared)"
     }
 }

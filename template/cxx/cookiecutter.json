@@ -10,6 +10,7 @@
 
     "cxx_build_tool": ["cmake", "xmake"],
     "cxx_standard_version": "20",
+    "library_type": ["static", "shared"],
 
     "__gh_slug": "{{ cookiecutter.github_username }}/{{ cookiecutter.project_slug }}",
     "__prompts__": {
@@ -20,7 +21,10 @@
         "project_version": "Initial project version",
         "email": "Author's email address",
         "full_name": "Author's full name",
-        "github_username": "GitHub username or organization"
+        "github_username": "GitHub username or organization",
+        "cxx_build_tool": "Choose C++ build tool (cmake or xmake)",
+        "cxx_standard_version": "Enter C++ standard version (e.g., 17, 20, 23)",
+        "library_type": "Choose library type (static or shared)"
     },
     "_copy_without_render": [
         "third_party"

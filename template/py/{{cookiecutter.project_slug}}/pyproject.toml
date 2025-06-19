@@ -33,6 +33,9 @@ Documentation = "https://github.com/{{cookiecutter.__gh_slug}}#readme"
 Issues = "https://github.com/{{cookiecutter.__gh_slug}}/issues"
 Source = "https://github.com/{{cookiecutter.__gh_slug}}"
 
+[project.scripts]
+{{cookiecutter.project_slug}} = "{{cookiecutter.package_name}}.app:run_server"
+
 [tool.hatch.build.targets.wheel]
 packages = ["src/{{cookiecutter.package_name}}"]
 

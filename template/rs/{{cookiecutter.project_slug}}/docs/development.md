@@ -1,89 +1,146 @@
 # Development Guide for {{cookiecutter.project_slug}}
 
 Welcome to the development guide for `{{cookiecutter.project_slug}}`!
-This document will walk you through setting up your development environment, running tests, building the project, and maintaining code quality.
+This document will walk you through setting up your development environment, building the project, running tests, and other common development tasks using the provided `Makefile`.
 
 ## Table of Contents
 
 - [Setting Up the Development Environment](#setting-up-the-development-environment)
     - [Prerequisites](#prerequisites)
     - [Installation Steps](#installation-steps)
-- [Running Tests](#running-tests)
+- [Code Formatting and Linting](#code-formatting-and-linting)
 - [Building the Project](#building-the-project)
-- [Code Style and Linting](#code-style-and-linting)
-- [Generating Documentation](#generating-documentation)
+- [Running Tests](#running-tests)
+- [Running the Application](#running-the-application)
+- [Other Development Commands](#other-development-commands)
+- [Project Structure](#project-structure)
+- [Contributing](#contributing)
 
 ## Setting Up the Development Environment
 
-1. **Clone the Repository**: Start by cloning the project repository to your local machine and navigate to the project directory:
+### Prerequisites
 
+Before you begin, ensure you have the following installed:
+
+*   **Rust:** Install the latest stable version from [rust-lang.org](https://www.rust-lang.org/tools/install). This will provide `cargo`, `rustc`, and `rustfmt`.
+*   **`make` utility:** Required to use the Makefile for common tasks. This is typically pre-installed on Linux and macOS. Windows users might need to install it (e.g., via Chocolatey, MSYS2, or WSL).
+*   **`pre-commit`:** For managing Git hooks. Install via `pip install pre-commit` or `uv pip install pre-commit`. (Note: `make init` will set up the hooks as defined in `.pre-commit-config.yaml`).
+
+### Installation Steps
+
+1.  **Clone the Repository**:
+    Start by cloning the project repository to your local machine and navigate to the project directory:
     ```bash
     git clone https://github.com/{{cookiecutter.__gh_slug}}.git
     cd {{cookiecutter.project_slug}}
     ```
 
-2. **Build the Project**: This command compiles the project and its dependencies:
-
+2.  **Initialize the Project**:
+    This command is crucial. It fetches Rust dependencies using `cargo fetch` and sets up pre-commit Git hooks as defined in `.pre-commit-config.yaml`.
     ```bash
-    make build
+    make init
     ```
+    This step ensures your environment has the necessary dependencies downloaded and that code quality checks are run automatically before each commit.
 
-## Running Tests
+## Code Formatting and Linting
 
-Tests are crucial to ensure the stability of the project. To run all tests, use the following command:
+To maintain code quality and consistency, we use `rustfmt` for formatting and `clippy` for linting. These tools are managed via `make` targets and pre-commit hooks.
 
-```bash
-make test
-```
-
-This command will compile the code and run all tests, ensuring all components work as expected.
-
-[Consider adding specific details on the structure of tests, testing strategy, or how to add new tests.]
+-   **Format Rust code:**
+    Uses `cargo fmt --all` to format your code according to the project's style guidelines.
+    ```bash
+    make fmt
+    ```
+-   **Check formatting (for CI):**
+    Checks if the code is formatted correctly via `cargo fmt --all --check`. This is useful for CI pipelines.
+    ```bash
+    make fmt-check
+    ```
+-   **Lint Rust code:**
+    Runs `cargo clippy --all-targets --all-features -- -D warnings` to analyze your code for potential issues and enforce best practices.
+    ```bash
+    make lint
+    ```
+These checks (or a subset) are also enforced by pre-commit hooks installed via `make init`, which run on staged files before you commit.
 
 ## Building the Project
 
-To build the project in release mode, use:
+To build the project in release mode (optimized executable):
 
 ```bash
 make build
 ```
+This command runs `cargo build --release` and will generate an optimized executable in the `target/release/` directory. For debug builds, you can run `cargo build` directly.
 
-This command will generate an optimized executable in the `target/release` directory.
+## Running Tests
 
-## Code Style and Linting
-
-Maintaining consistent code style is essential. We use `rustfmt` for formatting and `clippy` for linting.
-
-To format your code, run:
+Tests are crucial to ensure the stability and correctness of the project. To run all tests:
 
 ```bash
-make fmt
+make test
 ```
+This command runs `cargo test`. The default template includes minimal tests, but you should add more to cover your project's functionality. Test files are typically located in the `tests/` directory or as module tests within your source files.
 
-To run the linter:
+## Running the Application
+
+To build (if necessary) and run the compiled application in release mode:
 
 ```bash
-make clippy
+make run
 ```
+The default application generated by this template prints "Hello, world!". You can modify `src/main.rs` to change this behavior.
 
-These commands will automatically check and optionally fix any code style issues according to the project's style guide.
+## Other Development Commands
 
-## Generating Documentation
+The `Makefile` provides several other useful targets:
 
-To generate the project documentation, run:
+-   **Generate Documentation:**
+    Creates the documentation for your project and its dependencies.
+    ```bash
+    make doc
+    ```
+    The output will be in `target/doc/`.
 
-```bash
-make doc
-```
+-   **Clean Build Artifacts:**
+    Removes the `target/` directory (which contains all build artifacts, caches, and documentation) and cleans up any Docker-related resources defined in `compose.yml`.
+    ```bash
+    make clean
+    ```
 
-This will create the documentation for your project and its dependencies.
+-   **Manage Docker Compose services (if defined in `compose.yml`):**
+    ```bash
+    make compose-up  # Start services in detached mode
+    make compose-down # Stop and remove services
+    ```
 
-## Cleaning Up
+-   **Build Docker image:**
+    Builds a Docker image for the application as defined in the `Dockerfile`.
+    ```bash
+    make image
+    ```
 
-To clean up build artifacts and other generated files, you can use:
+-   **View All Makefile Targets:**
+    Lists all available `make` commands with their descriptions.
+    ```bash
+    make help
+    ```
 
-```bash
-make clean
-```
+## Project Structure
 
-This will remove the `target` directory and clean up any Docker-related resources.
+A brief overview of the project's directory structure:
+
+-   `src/`: Contains the main application code (e.g., `main.rs`, `lib.rs`).
+-   `tests/`: Contains integration tests.
+-   `docs/`: Contains detailed documentation.
+-   `target/`: Created by Cargo, contains build artifacts, dependencies, and documentation. (Ignored by Git).
+-   `Cargo.toml`: The manifest file for Rust's package manager, Cargo. Defines project metadata, dependencies, etc.
+-   `Makefile`: Defines common development tasks.
+-   `README.md`: Overview and basic instructions.
+
+## Contributing
+
+Please refer to the main `CONTRIBUTING.md` file for guidelines on how to contribute to this project.
+
+---
+
+By following this guide, you'll be well on your way to contributing to `{{cookiecutter.project_slug}}`. Thank you for your efforts!

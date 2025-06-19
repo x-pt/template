@@ -10,10 +10,7 @@
 
 - [Overview](#overview)
 - [Features](#features)
-- [Quick Start](#quick-start)
-- [Installation](#installation)
-- [Usage](#usage)
-- [Development](#development)
+- [Development Setup](#development-setup)
 - [Troubleshooting](#troubleshooting)
 - [Contributing](#contributing)
 - [License](#license)
@@ -23,71 +20,87 @@
 
 ## Overview
 
-`{{cookiecutter.project_slug}}` is a TypeScript project designed to [brief description of the project's main purpose or functionality]. This project aims to [explain the primary goals or problems it solves].
+`{{cookiecutter.project_slug}}` is a TypeScript project: {{cookiecutter.project_desc}}.
+This template includes a default runnable application that prints a welcome message ("Hello, {{cookiecutter.project_slug}}! ..."). You can run it using `make run` after setting up the development environment.
 
 ## Features
 
-- **Feature 1**: [Detailed description of feature 1 and its benefits]
-- **Feature 2**: [Detailed description of feature 2 and its benefits]
-- **Feature 3**: [Detailed description of feature 3 and its benefits]
-- [Add more features as needed]
+- **Modern TypeScript**: Uses current TypeScript features and best practices.
+- **PNPM & Biome**: Utilizes PNPM for package management and Biome for formatting/linting.
+- **Makefile Automation**: Common tasks automated with `make`.
+- **Ready for CI/CD**: Includes GitHub Actions workflows for CI, CD, and release processes.
+- **Containerized**: Comes with a `Dockerfile` for easy containerization.
+- _[Add your specific project features here]_
 
-## Quick Start
+## Development Setup
 
-```typescript
-import { doSomething } from '{{cookiecutter.project_slug}}';
+To set up the project for local development and start contributing:
 
-// Example usage
-const result = doSomething();
-console.log(result);
+1.  **Prerequisites:**
+    *   Node.js `{{cookiecutter.node_version}}` or later (as defined in `package.json`).
+    *   PNPM (e.g., version 9.x or as specified in CI - install via `npm install -g pnpm`).
+    *   `make` utility.
 
-// Add more examples showcasing key features
-```
+2.  **Clone the repository:**
+    ```bash
+    git clone https://github.com/{{cookiecutter.__gh_slug}}.git
+    cd {{cookiecutter.project_slug}}
+    ```
 
-## Installation
+3.  **Initialize the project:**
+    This command will install dependencies using `pnpm` and set up Git hooks via Husky (as defined in `package.json`).
+    ```bash
+    make init
+    ```
 
-### Requirements
-- Node.js {{cookiecutter.node_version}}+
-- Dependencies:
-  - [Dependency 1]: [version] - [brief description or purpose]
-  - [Dependency 2]: [version] - [brief description or purpose]
-  - [Add more dependencies as needed]
+4.  **Common development tasks:**
+    *   **Format TypeScript code (with Biome):**
+        Applies formatting rules to the codebase.
+        ```bash
+        make fmt
+        ```
+    *   **Check formatting and linting (with Biome, for CI):**
+        This target is used in CI to ensure code is formatted and linted.
+        ```bash
+        make fmt-check
+        ```
+    *   **Lint TypeScript code (with Biome, applies fixes):**
+        Checks for code quality issues and applies safe fixes.
+        ```bash
+        make lint
+        ```
+    *   **Build the project (compile TS and package with NCC):**
+        The output will be in the `dist` directory.
+        ```bash
+        make build
+        ```
+    *   **Run tests (with Jest):**
+        Executes the test suite.
+        ```bash
+        make test
+        ```
+    *   **Run the application:**
+        This executes the compiled application from the `dist` directory, which prints "Hello, {{cookiecutter.project_slug}}! ...".
+        ```bash
+        make run
+        ```
+        You can also run the compiled application directly after building: `node dist/index.js`
+    *   **Clean build artifacts and dependencies:**
+        Removes `node_modules`, `dist`, `lib`, and other build/test artifacts.
+        ```bash
+        make clean
+        ```
+    *   **View all available `make` targets:**
+        Displays help for all Makefile targets.
+        ```bash
+        make help
+        ```
 
-### User Installation
-Install `{{cookiecutter.project_slug}}` using npm:
-
-```bash
-npm install {{cookiecutter.project_slug}}
-```
-
-Or using yarn:
-
-```bash
-yarn add {{cookiecutter.project_slug}}
-```
-
-## Usage
-
-Here's a brief overview of basic usage:
-
-```typescript
-import { doSomething } from '{{cookiecutter.project_slug}}';
-
-// Example usage
-const result = doSomething();
-console.log(result);
-
-```
-
-For more detailed examples and explanations of key concepts, please refer to our comprehensive [Usage Guide](docs/usage.md).
-
-## Development
-
-For information on setting up the development environment, running tests, and contributing to the project, please refer to our [Development Guide](docs/development.md).
+For more detailed information on the development process, project structure, or advanced usage, please refer to the [Development Guide](docs/development.md) and [Usage Guide](docs/usage.md).
 
 ## Troubleshooting
 
-If you encounter any issues while using `{{cookiecutter.project_slug}}`, please check our [Troubleshooting Guide](docs/troubleshooting.md) for common problems and their solutions. If you can't find a solution to your problem, please [open an issue](https://github.com/{{cookiecutter.__gh_slug}}/issues) on our GitHub repository.
+If you encounter any issues, please check our [Troubleshooting Guide](docs/troubleshooting.md) for common problems and their solutions. If you can't find a solution, please [open an issue](https://github.com/{{cookiecutter.__gh_slug}}/issues) on our GitHub repository.
 
 ## Contributing
 
@@ -98,7 +111,7 @@ We welcome contributions! Please see our [Contributing Guide](CONTRIBUTING.md) f
 This project is licensed under either of:
 
 - Apache License, Version 2.0 ([LICENSE-APACHE](LICENSE-APACHE) or http://www.apache.org/licenses/LICENSE-2.0)
-- MIT license ([LICENSE-MIT](LICENSE-MIT) or http://opensource.org/licenses/MIT)
+- MIT License ([LICENSE-MIT](LICENSE-MIT) or http://opensource.org/licenses/MIT)
 
 at your option.
 
@@ -108,8 +121,8 @@ For a detailed history of changes to this project, please refer to our [CHANGELO
 
 ## Contact
 
-[Provide information on how to contact the maintainers or where to ask questions]
+[Provide information on how to contact the maintainers or where to ask questions, e.g., link to GitHub Discussions or a mailing list.]
 
 ## Acknowledgements
 
-[Acknowledge contributors, inspirations, or resources used in the project]
+[Acknowledge contributors, inspirations, or resources used in the project.]

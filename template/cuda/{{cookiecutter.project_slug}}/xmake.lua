@@ -11,7 +11,7 @@ add_requires("cuda")
 -- Define the target for the library
 target("{{cookiecutter.package_name}}_lib")
     set_targetdir("build/lib")
-    set_kind("static")
+    set_kind("{{ cookiecutter.library_type }}") -- Can be "static" or "shared"
     set_policy("build.cuda.devlink", true)
     add_includedirs("include", {public = true})
     add_files("src/**.cpp", "src/**.cu")

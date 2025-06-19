@@ -1,4 +1,4 @@
-.PHONY: help init build image
+.PHONY: help init build run test lint-check clean image
 .DEFAULT_GOAL := help
 
 APP_NAME := {{cookiecutter.project_slug}}
@@ -13,16 +13,46 @@ build:
 	@cmake -S . -B build
 	@cmake --build build --parallel
 {%- else %}
-	@XMAKE_ROOT=y xmake
+	@XMAKE_ROOT=y xmake build -y
 {%- endif %}
 
 # run
 run:
-	@./build/bin/$(APP_NAME)
+{%- if cookiecutter.cxx_build_tool == "cmake" %}
+	@echo "Running $(APP_NAME) (CMake build)..."
+	@./build/bin/$(APP_NAME) $(ARGS)
+{%- else %}
+	@echo "Running $(APP_NAME) (XMake build)..."
+	@XMAKE_ROOT=y xmake run $(APP_NAME) $(ARGS)
+{%- endif %}
 
-# test
-test:
-	@./build/bin/$(APP_NAME)-tests
+# Run tests
+test: build # Ensure project is built before testing
+{%- if cookiecutter.cxx_build_tool == "cmake" %}
+	@echo "Running CUDA tests (GoogleTest executable via CMake build)..."
+	@./build/bin/{{cookiecutter.project_slug}}-tests $(ARGS)
+{%- else %}
+	@echo "Running CUDA tests (GoogleTest executable via XMake build)..."
+	@XMAKE_ROOT=y xmake run {{cookiecutter.project_slug}}-tests $(ARGS)
+{%- endif %}
+
+# Run pre-commit checks on all files
+lint-check:
+	@echo "Running pre-commit checks..."
+	@pre-commit run --all-files
+
+# Clean build artifacts
+clean:
+{%- if cookiecutter.cxx_build_tool == "cmake" %}
+	@echo "Cleaning CMake build directory..."
+	@rm -rf build
+{%- else %}
+	@echo "Cleaning XMake artifacts..."
+	@XMAKE_ROOT=y xmake clean
+{%- endif %}
+	@echo "Cleaning Docker images..."
+	@docker compose -f ./compose.yml down -v --rmi local 2>/dev/null || true
+	@docker image rm -f $(APP_NAME) 2>/dev/null || true
 
 # build image
 image:

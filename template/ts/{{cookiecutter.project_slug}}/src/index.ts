@@ -1,102 +1,73 @@
-import * as fs from "node:fs/promises";
-import * as core from "@actions/core";
-import axios from "axios";
-import * as toml from "toml";
+// src/index.ts
+// This is the main entry point for the application.
+// It demonstrates command-line argument parsing using 'yargs' and modular code structure.
 
-interface Config {
-    input_text?: string;
-    find_word?: string;
-    replace_word?: string;
-    number_list?: number[];
-    input_file?: string;
-    output_file?: string;
-    append_text?: string;
-    api_url?: string;
+import yargs from 'yargs';
+import { hideBin } from 'yargs/helpers'; // Utility to hide node and script name from argv
+import { generateGreeting } from './greeting'; // Import from local module
+
+// Define an interface for the expected shape of parsed arguments for type safety.
+interface Arguments {
+    name: string;
+    verbose: boolean;
+    // Add other expected arguments here
+    [x: string]: unknown; // Allow for other arguments not explicitly defined
 }
 
-async function checkAPIReachability(apiUrl: string): Promise<void> {
-    try {
-        const response = await axios.get(apiUrl, { timeout: 10000 });
-        if (response.status < 200 || response.status >= 300) {
-            core.warning(`API is not reachable, status code: ${response.status}`);
-        } else {
-            core.info(`API ${apiUrl} is reachable.`);
-        }
-    } catch (error) {
-        core.warning(`Failed to make API request: ${error instanceof Error ? error.message : String(error)}`);
+/**
+ * Main asynchronous function to run the application.
+ * It configures yargs for command-line argument parsing,
+ * processes the arguments, and then prints a greeting.
+ */
+async function main(): Promise<void> {
+    // Configure yargs to parse command-line arguments.
+    // 'hideBin(process.argv)' removes the first two elements (node executable, script path)
+    // from the arguments array, so yargs only sees the actual script arguments.
+    const argv = await yargs(hideBin(process.argv))
+        .option('name', { // Define a 'name' option
+            alias: 'n', // Short alias '-n'
+            type: 'string', // Expected type
+            description: 'Your name for the greeting',
+            default: 'World', // Default value if not provided
+        })
+        .option('verbose', { // Define a 'verbose' option
+            alias: 'v', // Short alias '-v'
+            type: 'boolean', // Expected type
+            description: 'Run with verbose logging',
+            default: false, // Default value if not provided
+        })
+        .help() // Enable the default --help option
+        .alias('help', 'h') // Alias -h for --help
+        .version(false) // Disable yargs' default --version flag as we might add a custom one.
+        // .strict() // Uncomment to enable strict mode (error on unknown options)
+        .parseAsync() as Arguments; // Parse arguments and cast to our interface
+
+    // If verbose mode is enabled, print the parsed arguments.
+    if (argv.verbose) {
+        console.log('Verbose mode enabled. Arguments received:');
+        // Use JSON.stringify for a clean print of the argv object.
+        console.log(JSON.stringify(argv, null, 2));
+    }
+
+    // Generate the greeting message using the imported function and the 'name' argument.
+    const message = generateGreeting(argv.name);
+    console.log(message); // Print the greeting.
+
+    // Provide a hint if the default name was used.
+    if (argv.name === 'World') {
+        console.info("\nHint: Try running with '--name YourName' or '-n YourName' to personalize the greeting.");
     }
 }
 
-async function readAndAppendToFile(inputFile: string, outputFile: string, appendText: string): Promise<void> {
-    try {
-        const content = await fs.readFile(inputFile, "utf-8");
-        const modifiedContent = `${content}\n${appendText}`;
-        await fs.writeFile(outputFile, modifiedContent, { encoding: "utf-8" });
-        core.info(`Appended text to file: ${outputFile}`);
-    } catch (error) {
-        throw new Error(`File operation failed: ${error instanceof Error ? error.message : String(error)}`);
-    }
-}
-
-function processText(
-    text: string,
-    findWord: string,
-    replaceWord: string,
-): {
-    processedText: string;
-    wordCount: number;
-} {
-    const processedText = text.replace(new RegExp(findWord, "g"), replaceWord);
-    const wordCount = processedText.trim() === "" ? 0 : processedText.trim().split(/\s+/).length;
-    return { processedText, wordCount };
-}
-
-function calculateNumberStats(numbers: number[]): { sum: number; average: number } {
-    const sum = numbers.reduce((acc, num) => acc + num, 0);
-    const average = numbers.length > 0 ? sum / numbers.length : 0;
-    return { sum, average };
-}
-
-export async function run(): Promise<void> {
-    try {
-        const configPath = core.getInput("config_path") || ".github/configs/setup-custom-action-by-ts.toml";
-        const configContent = await fs.readFile(configPath, "utf-8");
-        const config: Config = toml.parse(configContent);
-
-        const {
-            input_text = "",
-            find_word = "",
-            replace_word = "",
-            number_list = [],
-            input_file = "",
-            output_file = "",
-            append_text = "",
-            api_url = "",
-        } = config;
-
-        if (api_url) {
-            await checkAPIReachability(api_url);
-        }
-
-        if (input_file && output_file && append_text) {
-            await readAndAppendToFile(input_file, output_file, append_text);
-        }
-
-        const { processedText, wordCount } = processText(input_text, find_word, replace_word);
-        const { sum, average } = calculateNumberStats(number_list);
-
-        core.setOutput("processed_text", processedText);
-        core.setOutput("word_count", wordCount);
-        core.setOutput("sum", sum);
-        core.setOutput("average", average);
-    } catch (error) {
-        core.setFailed(`Action failed with error: ${error instanceof Error ? error.message : String(error)}`);
-    }
-}
-
-if (!process.env.JEST_WORKER_ID) {
-    run().catch((error) => {
-        console.error("Unhandled error:", error);
-        process.exit(1);
+// Execute the main function.
+// The 'JEST_WORKER_ID' environment variable is typically set by Jest when running tests.
+// This check prevents the main function from automatically executing during test runs,
+// allowing tests to call main() or other functions explicitly if needed.
+if (process.env.JEST_WORKER_ID === undefined) {
+    main().catch(error => {
+        // Catch and log any unhandled errors from the main function.
+        console.error('An unexpected error occurred in the application:');
+        console.error(error);
+        process.exit(1); // Exit with a non-zero status code to indicate failure.
     });
 }

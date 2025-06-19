@@ -8,18 +8,56 @@ on:
     workflow_dispatch:
 
 jobs:
-    build:
+    lint-check:
+        name: Lint and Format Check
         runs-on: ubuntu-latest
         steps:
-            -   uses: actions/checkout@v4
+            - name: Checkout code
+              uses: actions/checkout@v4
 
-            -   name: Set up Go
-                uses: actions/setup-go@v5
-                with:
-                    go-version: 'stable'
+            - name: Set up Go
+              uses: actions/setup-go@v5
+              with:
+                go-version-file: 'go.mod' # Use go.mod to determine version
+                cache: true # Enable caching for Go modules
 
-            -   name: Build
-                run: make init && make build
+            - name: Initialize Project
+              run: make init
 
-            -   name: Test
-                run: make test
+            - name: Run Linters
+              run: make lint # Runs golangci-lint
+
+            - name: Check Formatting
+              run: make fmt-check # Checks gofmt
+
+    build-and-test:
+        name: Build and Test
+        runs-on: ubuntu-latest # Can be expanded to a matrix if needed
+        strategy:
+          matrix:
+            # Example: Test against multiple Go versions
+            # go-version: [ '1.21.x', '1.22.x' ]
+            # For now, stick to the version from go.mod for simplicity
+            go-version: [ 'stable' ] # 'stable' will use a recent stable version
+        steps:
+            - name: Checkout code
+              uses: actions/checkout@v4
+
+            - name: Set up Go
+              uses: actions/setup-go@v5
+              with:
+                go-version: {% raw %}${{ matrix.go-version }}{% endraw %} # Use matrix version
+                # go-version-file: 'go.mod' # Alternative: use go.mod for version
+                cache: true # Enable caching for Go modules
+
+            - name: Initialize Project
+              run: make init
+
+            - name: Build Project
+              run: make build
+
+            - name: Run Tests
+              run: make test
+
+            - name: Smoke Test (Run Application)
+              run: make run

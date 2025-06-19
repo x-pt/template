@@ -8,44 +8,54 @@ on:
     workflow_dispatch:
 
 jobs:
-    lint:
+    lint-check:
+        name: Lint and Format Check
         runs-on: ubuntu-latest
         steps:
-            -   name: Checkout repository
-                uses: actions/checkout@v4
+            - name: Checkout repository
+              uses: actions/checkout@v4
 
-            -   name: Set up UV Environment
-                uses: astral-sh/setup-uv@v5
-                with:
-                    version: "latest"
+            - name: Set up UV Environment
+              uses: astral-sh/setup-uv@v5
+              with:
+                version: "latest" # Or specific version if needed
+                # Caching is typically enabled by default with setup-uv
 
-            -   name: Format Code
-                run: uvx ruff format --diff .
+            - name: Initialize Project
+              run: make init # Installs deps and pre-commit hooks
 
-            -   name: Lint Code
-                run: uvx ruff check .
+            - name: Check Formatting
+              run: make fmt-check # Uses ruff format --check
+
+            - name: Run Linters
+              run: make lint # Uses ruff check --fix and mypy
 
     build-and-test:
-        runs-on: {{ "${{ matrix.os }}" }}
+        name: Build and Test on {{ '${{ matrix.os }}' }}
+        runs-on: {{ '${{ matrix.os }}' }}
         strategy:
             matrix:
                 os: [ubuntu-latest, macos-latest, windows-latest]
+                # Can add Python version matrix here if needed
             fail-fast: false
-
         steps:
-            -   name: Checkout repository
-                uses: actions/checkout@v4
+            - name: Checkout repository
+              uses: actions/checkout@v4
 
-            -   name: Set up UV Environment
-                uses: astral-sh/setup-uv@v5
-                with:
-                    version: "latest"
+            - name: Set up UV Environment
+              uses: astral-sh/setup-uv@v5
+              with:
+                version: "latest"
+                # Caching enabled by default
 
-            -   name: Synchronize Dependencies
-                run: make init
+            - name: Initialize Project (Install Dependencies)
+              run: make init # Ensures uv sync --dev
 
-            -   name: Build Project
-                run: make build
+            - name: Build Project
+              run: make build
 
-            -   name: Run Tests
-                run: make test
+            - name: Run Tests
+              run: make test
+
+            - name: Smoke Test (Run Application)
+              run: make run

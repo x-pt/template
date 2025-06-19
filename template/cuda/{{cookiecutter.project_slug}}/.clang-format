@@ -15,7 +15,7 @@ AllowShortIfStatementsOnASingleLine: Never # Prevent single-line if statements
 AllowShortFunctionsOnASingleLine: Inline   # Allow short functions on single line
 AllowShortLoopsOnASingleLine: false        # Prevent single-line loops
 BinPackArguments: false
-BinPackParameters: OnePerLine
+BinPackParameters: true
 BreakBeforeBraces: Attach                  # Attach braces to code block
 BreakBeforeBinaryOperators: NonAssignment  # Break before non-assignment operators
 BreakBeforeTernaryOperators: true          # Break before ternary operators

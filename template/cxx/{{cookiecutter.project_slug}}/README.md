@@ -4,25 +4,67 @@
 [![CI](https://github.com/{{cookiecutter.__gh_slug}}/workflows/CI/badge.svg)](https://github.com/{{cookiecutter.__gh_slug}}/actions)
 [![Coverage Status](https://coveralls.io/repos/github/{{cookiecutter.__gh_slug}}/badge.svg?branch=main)](https://coveralls.io/github/{{cookiecutter.__gh_slug}}?branch=main)
 
-## Installation
+## Development Setup
 
-### Build
+To set up the project for local development:
 
-- Ensure you have a C++ compiler installed (e.g., `g++`, `clang++`).
+1.  **Prerequisites:**
+    *   Ensure you have a C++ compiler installed (e.g., `g++`, `clang++`).
+    *   Install pre-commit: `pip install pre-commit` (or `uv pip install pre-commit`).
 {% if cookiecutter.cxx_build_tool == 'cmake' %}
-- Install [CMake](https://cmake.org/install/) and any necessary dependencies.
+    *   Install [CMake](https://cmake.org/install/).
 {% else %}
-- Install [XMake](https://xmake.io/#/guide/installation) and any necessary dependencies.
+    *   Install [XMake](https://xmake.io/#/guide/installation).
 {% endif %}
-- Clone the repository:
 
-    ```sh
+2.  **Clone the repository:**
+    ```bash
     git clone https://github.com/{{cookiecutter.__gh_slug}}.git
     cd {{cookiecutter.project_slug}}
-    make build
-    make run
-    make test
     ```
+
+3.  **Initialize the project:**
+    This command will set up pre-commit hooks.
+    ```bash
+    make init
+    ```
+
+4.  **Common development tasks:**
+    *   **Check formatting and linting (with pre-commit):**
+        ```bash
+        make lint-check
+        ```
+    *   **Build the project (executable and library):**
+        This builds the main executable and `{{cookiecutter.project_slug}}_lib`.
+        ```bash
+        make build
+        ```
+
+        #### Building the Project Library
+
+        This project also compiles `{{cookiecutter.project_slug}}_lib` as a library.
+        During project generation (or by editing `cookiecutter.json` and re-running project generation scripts if you have them), you can choose the `library_type` to be `static` or `shared`.
+        The compiled library will be located in the `build/lib/` directory (for CMake) or relevant XMake output paths.
+
+    *   **Run tests:**
+        This command builds (if not already built) and runs the GoogleTest executable (e.g., `./build/bin/{{cookiecutter.project_slug}}-tests`). You can pass GoogleTest arguments via `ARGS`.
+        ```bash
+        make test
+        make test ARGS="--gtest_filter=MyTestSuite.*"
+        ```
+    *   **Run the application:**
+        By default, this prints "Hello, World!". You can also run it in server mode (if applicable to your app's logic): `make run ARGS="--mode server"`
+        ```bash
+        make run
+        ```
+    *   **Clean build artifacts:**
+        ```bash
+        make clean
+        ```
+    *   **View all available `make` targets:**
+        ```bash
+        make help
+        ```
 
 ## License
 

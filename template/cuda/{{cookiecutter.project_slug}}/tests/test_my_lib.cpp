@@ -1,5 +1,7 @@
 #include "gtest/gtest.h"
-#include "my_lib.h"
+#include <vector> // For std::vector
+#include "matrix_add.h" // For addMatricesOnGPU
+#include "my_lib.h" // For existing arithmetic tests
 
 // Group: Add Function Tests
 TEST(AddTest, HandlesZeroInputs) {
@@ -58,4 +60,25 @@ TEST(DivideTest, HandlesPositiveInputs) {
 
 TEST(DivideTest, HandlesNegativeInputs) {
     EXPECT_NEAR(divide(-10.0, 2.0), -5.0, 1e-5);
+}
+
+// Group: CUDA Function Tests
+TEST(MatrixAddGPUTest, HandlesBasicAddition) {
+    const int rows = 2;
+    const int cols = 2;
+    const int N = rows * cols;
+
+    std::vector<float> h_A = {1.0f, 2.0f, 3.0f, 4.0f};
+    std::vector<float> h_B = {5.0f, 6.0f, 7.0f, 8.0f};
+    std::vector<float> h_C_result(N);
+    std::vector<float> h_C_expected = {6.0f, 8.0f, 10.0f, 12.0f};
+
+    // Call the CUDA function to add matrices on the GPU
+    addMatricesOnGPU(h_A.data(), h_B.data(), h_C_result.data(), rows, cols);
+
+    // Verify the result
+    ASSERT_EQ(h_C_result.size(), h_C_expected.size());
+    for (size_t i = 0; i < h_C_expected.size(); ++i) {
+        EXPECT_NEAR(h_C_result[i], h_C_expected[i], 1e-5f);
+    }
 }

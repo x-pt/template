@@ -25,6 +25,8 @@
 
 `{{cookiecutter.project_slug}}` is a Python project designed to [brief description of the project's main purpose or functionality]. This project aims to [explain the primary goals or problems it solves].
 
+This template includes a default runnable application: a simple HTTP server. You can start it using `make run` after setting up the development environment as described below.
+
 ## Features
 
 - **Feature 1**: [Detailed description of feature 1 and its benefits]
@@ -75,9 +77,58 @@ print(result)
 
 For more detailed examples and explanations of key concepts, please refer to our comprehensive [Usage Guide](docs/usage.md).
 
-## Development
+## Development Setup
 
-For information on setting up the development environment, running tests, and contributing to the project, please refer to our [Development Guide](docs/development.md).
+To set up the project for local development:
+
+1.  **Clone the repository:**
+    ```bash
+    git clone https://github.com/{{cookiecutter.__gh_slug}}.git
+    cd {{cookiecutter.project_slug}}
+    ```
+
+2.  **Initialize the project:**
+    This command will set up the Python virtual environment using `uv`, install all dependencies (including development dependencies), and set up pre-commit hooks.
+    ```bash
+    make init
+    ```
+
+3.  **Common development tasks:**
+    *   **Format code:**
+        ```bash
+        make fmt
+        ```
+    *   **Check formatting (for CI):**
+        ```bash
+        make fmt-check
+        ```
+    *   **Lint and type-check code:**
+        ```bash
+        make lint
+        ```
+    *   **Build the project (wheels and sdist):**
+        ```bash
+        make build
+        ```
+    *   **Run tests:**
+        ```bash
+        make test
+        ```
+    *   **Run the sample application:**
+        The default application is a simple HTTP server.
+        ```bash
+        make run
+        ```
+    *   **Clean build artifacts:**
+        ```bash
+        make clean
+        ```
+    *   **View all available `make` targets:**
+        ```bash
+        make help
+        ```
+
+For more detailed information on the development process, running specific tests, or contributing, please refer to our [Development Guide](docs/development.md).
 
 ## Troubleshooting
 

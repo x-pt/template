@@ -7,40 +7,62 @@ on:
     pull_request:
     workflow_dispatch:
 
-{% raw %}
 jobs:
-    build-and-test:
-        name: Node.js-${{ matrix.node }} on ${{ matrix.os }}
+    lint-check:
+        name: Lint and Format Check
+        runs-on: ubuntu-latest
+        steps:
+            - name: Checkout code
+              uses: actions/checkout@v4
 
+            - name: Setup PNPM
+              uses: pnpm/action-setup@v4
+              with:
+                version: 9 # Or your desired pnpm version
+
+            - name: Set up Node.js
+              uses: actions/setup-node@v4
+              with:
+                node-version: 20 # Specify a consistent Node version for linting
+                cache: "pnpm"
+
+            - name: Initialize Project (Install Dependencies)
+              run: make init # Runs pnpm install
+
+            - name: Check Code Quality (Lint & Format)
+              run: make fmt-check # Runs biome check .
+
+    build-and-test:
+        name: Build and Test (Node.js {% raw %}${{ matrix.node }}{% endraw %} on {% raw %}${{ matrix.os }}{% endraw %})
+        runs-on: {% raw %}${{ matrix.os }}{% endraw %}
         strategy:
             matrix:
-                node: [ 20, 22 ]
-                os:
-                    - ubuntu-latest
-                    - windows-latest
-                    - macos-latest
-
+                node: [ '20.x', '22.x' ] # Use .x for latest patch versions
+                os: [ubuntu-latest, windows-latest, macos-latest]
             fail-fast: false
-
-        runs-on: ${{ matrix.os }}
-
         steps:
-            -   uses: actions/checkout@v4
-            -   uses: pnpm/action-setup@v4
-                with:
-                    version: 9
+            - name: Checkout code
+              uses: actions/checkout@v4
 
-            -   name: Set up Node.js
-                uses: actions/setup-node@v4
-                with:
-                    node-version: ${{ matrix.node }}
-                    # cache: "pnpm"
+            - name: Setup PNPM
+              uses: pnpm/action-setup@v4
+              with:
+                version: 9 # Or your desired pnpm version
 
-            -   name: Build
-                run: |
-                    pnpm i
-                    pnpm build
+            - name: Set up Node.js
+              uses: actions/setup-node@v4
+              with:
+                    node-version: {% raw %}${{ matrix.node }}{% endraw %}
+                cache: "pnpm"
 
-            -   name: Test
-                run: pnpm test
-{% endraw %}
+            - name: Initialize Project (Install Dependencies)
+              run: make init # Runs pnpm install
+
+            - name: Build Project
+              run: make build
+
+            - name: Run Tests
+              run: make test
+
+            - name: Smoke Test (Run Application)
+              run: make run

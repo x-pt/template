@@ -8,7 +8,7 @@ add_requires("spdlog")       -- Add spdlog as a required dependency
 
 -- Define Library Target
 target("{{cookiecutter.package_name}}_lib")
-    set_kind("static")                               -- Build as a static library
+    set_kind("{{ cookiecutter.library_type }}")      -- Build as a static or shared library
     set_targetdir("build/lib")                       -- Specify output directory
     add_includedirs("include", {public = true})      -- Include project's header files
     add_includedirs("third_party", {public = true})  -- Include project's header files

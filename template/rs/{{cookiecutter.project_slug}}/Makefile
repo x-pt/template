@@ -1,25 +1,41 @@
-.PHONY: help build test fmt clippy doc image clean
+.PHONY: help init build run test fmt fmt-check lint doc image compose-up compose-down clean
 .DEFAULT_GOAL := help
 
 APP_NAME := {{cookiecutter.project_slug}}
 
-# Build the project
+# Initialize the project, fetch dependencies, and install pre-commit hooks
+init:
+	@echo "Fetching Rust dependencies..."
+	@cargo fetch
+	@echo "Installing pre-commit hooks..."
+	@pre-commit install --hook-type commit-msg --hook-type pre-push
+
+# Build the Rust project in release mode
 build:
 	@cargo build --release
 
-# Run tests
+# Run the Rust application (release build)
+run:
+	@cargo run --release
+
+# Run Rust tests
 test:
 	@cargo test
 
-# Format code
+# Format Rust source code using cargo fmt
 fmt:
 	@cargo fmt
 
-# Run clippy
-clippy:
-	@cargo clippy -- -D warnings
+# Check Rust code formatting (for CI)
+fmt-check:
+	@echo "Checking Rust code formatting..."
+	@cargo fmt --all --check
 
-# Generate documentation
+# Lint Rust source code using Clippy
+lint:
+	@cargo clippy --all-targets --all-features -- -D warnings
+
+# Generate Rust documentation
 doc:
 	@cargo doc --no-deps
 
@@ -35,12 +51,13 @@ compose-up:
 compose-down:
 	@docker compose -f ./compose.yml down
 
-# Clean build artifacts
+# Clean build artifacts and Docker assets
 clean:
+	@echo "Cleaning Rust build artifacts..."
 	@cargo clean
-	@rm -rf target
-	@docker compose -f ./compose.yml down -v
-	@docker image rm -f $(APP_NAME)
+	@echo "Cleaning Docker images..."
+	@docker compose -f ./compose.yml down -v --rmi local 2>/dev/null || true
+	@docker image rm -f $(APP_NAME) 2>/dev/null || true
 
 # Show help
 help:

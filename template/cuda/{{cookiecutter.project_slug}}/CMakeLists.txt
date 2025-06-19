@@ -48,7 +48,7 @@ file(GLOB_RECURSE HEADERS CONFIGURE_DEPENDS
 )
 
 # Library target
-add_library(${PROJECT_NAME}_lib ${SOURCES} ${HEADERS})
+add_library(${PROJECT_NAME}_lib {{ cookiecutter.library_type | upper }} ${SOURCES} ${HEADERS})
 target_include_directories(${PROJECT_NAME}_lib
         PUBLIC
         $<BUILD_INTERFACE:${INCLUDE_DIR}>

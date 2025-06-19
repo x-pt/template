@@ -5,6 +5,7 @@ repos:
         rev: v5.0.0
         hooks:
             -   id: check-merge-conflict
+            -   id: check-json
             -   id: check-toml
             -   id: check-yaml
             -   id: end-of-file-fixer
@@ -17,3 +18,10 @@ repos:
             -   id: commitizen
             -   id: commitizen-branch
                 stages: [ pre-push ]
+    -   repo: https://github.com/doublify/pre-commit-rust
+        rev: v1.0 # Ensure this version is suitable or find the latest tag
+        hooks:
+            -   id: fmt
+                args: [--all] # Format all workspace members
+            -   id: clippy
+                args: [--all-targets, --all-features, --, -D, warnings] # Match Makefile lint
