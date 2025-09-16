@@ -5,7 +5,7 @@ APP_NAME := {{cookiecutter.project_slug}}
 
 # Init the venv
 init: sync
-	@uv run pre-commit install --hook-type commit-msg --hook-type pre-push
+	@uvx prek install --hook-type commit-msg --hook-type pre-commit --hook-type pre-push
 
 # Sync the project with the venv
 sync:
@@ -17,7 +17,7 @@ build:
 
 # Test
 test:
-	@uv run pytest
+	@uvx pytest
 
 # Allure report
 allure:
@@ -25,12 +25,12 @@ allure:
 
 # Ruff
 ruff:
-	@uv run ruff format .
-	@uv run ruff check . --fix
+	@uvx ruff format .
+	@uvx ruff check . --fix
 
 # Type check
 type:
-	@uv run mypy .
+	@uvx mypy .
 
 # Build image
 image:

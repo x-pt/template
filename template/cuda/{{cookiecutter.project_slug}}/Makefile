@@ -5,7 +5,7 @@ APP_NAME := {{cookiecutter.project_slug}}
 
 # init
 init:
-	@pre-commit install --hook-type commit-msg --hook-type pre-push
+	@prek install --hook-type commit-msg --hook-type pre-commit --hook-type pre-push
 
 # compile and build
 build:

@@ -3,7 +3,7 @@
 
 # init
 init:
-	@pre-commit install --hook-type commit-msg --hook-type pre-push
+	@prek install --skip template/ --hook-type commit-msg --hook-type pre-commit --hook-type pre-push
 
 # Update the changelog
 cliff:

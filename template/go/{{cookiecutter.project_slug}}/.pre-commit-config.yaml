@@ -2,7 +2,7 @@ fail_fast: true
 
 repos:
     -   repo: https://github.com/pre-commit/pre-commit-hooks
-        rev: v5.0.0
+        rev: v6.0.0
         hooks:
             -   id: check-merge-conflict
             -   id: check-toml
@@ -12,12 +12,12 @@ repos:
                 args: [ --fix=lf ]
             -   id: trailing-whitespace
     -   repo: https://github.com/commitizen-tools/commitizen
-        rev: v3.30.1
+        rev: v4.9.1
         hooks:
             -   id: commitizen
             -   id: commitizen-branch
                 stages: [ pre-push ]
     -   repo: https://github.com/golangci/golangci-lint
-        rev: v1.60.3
+        rev: v2.4.0
         hooks:
             -   id: golangci-lint
