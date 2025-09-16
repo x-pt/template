@@ -59,5 +59,5 @@ def test_divide(a, b, expected):
     ],
 )
 def test_divide_by_zero(a, b):
-    with pytest.raises(ValueError, match="Division by zero is not allowed."):
+    with pytest.raises(ValueError, match=r"Division by zero is not allowed."):
         divide(a, b)
