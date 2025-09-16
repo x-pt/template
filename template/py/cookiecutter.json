@@ -8,7 +8,7 @@
     "full_name": "Firstname Lastname",
     "github_username": "your-org-or-username",
 
-    "python_version": "3.10",
+    "python_version": "3.13",
 
     "__gh_slug": "{{ cookiecutter.github_username }}/{{ cookiecutter.project_slug }}",
     "__prompts__": {

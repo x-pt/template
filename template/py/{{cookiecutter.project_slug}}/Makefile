@@ -17,7 +17,7 @@ build:
 
 # Test
 test:
-	@uvx pytest
+	@uv run pytest
 
 # Allure report
 allure:
