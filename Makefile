@@ -1,9 +1,13 @@
-.PHONY: help cliff
+.PHONY: help cliff gen-config
 .DEFAULT_GOAL := help
 
 # init
 init:
 	@prek install --skip template/ --hook-type commit-msg --hook-type pre-commit --hook-type pre-push
+
+# Generate cookiecutter.json from common definition
+gen-config:
+	@python scripts/generate_cookiecutter_json.py
 
 # Update the changelog
 cliff:

@@ -22,7 +22,5 @@
         "full_name": "Author's full name",
         "github_username": "GitHub username or organization"
     },
-    "_copy_without_render": [
-        "third_party"
-    ]
+    "_copy_without_render": ["third_party"]
 }
